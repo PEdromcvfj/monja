@@ -1,0 +1,15 @@
+{
+  "rewrites": [
+    { "source": "/en", "destination": "/index-en.html" },
+    { "source": "/es", "destination": "/index-es.html" },
+    { "source": "/fr", "destination": "/index-fr.html" },
+    { "source": "/de", "destination": "/index-de.html" },
+    { "source": "/it", "destination": "/index-it.html" },
+    { "source": "/desconto", "destination": "/desconto.html" },
+    { "source": "/en/desconto", "destination": "/desconto-en.html" },
+    { "source": "/es/desconto", "destination": "/desconto-es.html" },
+    { "source": "/fr/desconto", "destination": "/desconto-fr.html" },
+    { "source": "/de/desconto", "destination": "/desconto-de.html" },
+    { "source": "/it/desconto", "destination": "/desconto-it.html" }
+  ]
+}
