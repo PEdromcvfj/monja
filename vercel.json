@@ -10,7 +10,19 @@
     { "source": "/es/desconto", "destination": "/desconto-es.html" },
     { "source": "/fr/desconto", "destination": "/desconto-fr.html" },
     { "source": "/de/desconto", "destination": "/desconto-de.html" },
-    { "source": "/it/desconto", "destination": "/desconto-it.html" }
+    { "source": "/it/desconto", "destination": "/desconto-it.html" },
+
+    { "source": "/homem", "destination": "/homem.html" },
+    { "source": "/homem/en", "destination": "/homem-en.html" },
+    { "source": "/homem/es", "destination": "/homem-es.html" },
+    { "source": "/homem/fr", "destination": "/homem-fr.html" },
+    { "source": "/homem/de", "destination": "/homem-de.html" },
+    { "source": "/homem/it", "destination": "/homem-it.html" },
+    { "source": "/homem/desconto", "destination": "/homem-desconto.html" },
+    { "source": "/homem/en/desconto", "destination": "/homem-desconto-en.html" },
+    { "source": "/homem/es/desconto", "destination": "/homem-desconto-es.html" },
+    { "source": "/homem/fr/desconto", "destination": "/homem-desconto-fr.html" },
+    { "source": "/homem/de/desconto", "destination": "/homem-desconto-de.html" },
+    { "source": "/homem/it/desconto", "destination": "/homem-desconto-it.html" }
   ]
 }
-

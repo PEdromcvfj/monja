@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadeau exclusif · 500 Rituels Ancestraux</title>
+  <meta name="theme-color" content="#B8632F" />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            cream:    { DEFAULT: '#FAF5EA', soft: '#F6F1E6', deep: '#EFE7D5' },
+            musgo:    { DEFAULT: '#2E3A2C', light: '#3A4A36', deep: '#26301F' },
+            ink:      { DEFAULT: '#2A2520', soft: '#4a4239' },
+            gold:     { DEFAULT: '#C08A3E', dark: '#B8862F', light: '#D8A85A' },
+            terracota:{ DEFAULT: '#B8632F', dark: '#9f4f22' },
+            salvia:   { DEFAULT: '#7C8A66', light: '#9aa885' },
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    body { background-color: #FAF5EA; }
+    .shadow-soft { box-shadow: 0 16px 44px -18px rgba(58,74,54,.28); }
+    .glow-gold   { box-shadow: 0 0 0 1px rgba(192,138,62,.20), 0 16px 42px -20px rgba(192,138,62,.35); }
+    @keyframes pulse-cta { 0%,100% { transform: scale(1); } 50% { transform: scale(1.025); } }
+    .pulse-cta { animation: pulse-cta 2.4s ease-in-out infinite; }
+  </style>
+</head>
+
+<body class="font-sans text-ink antialiased bg-cream">
+
+  <!-- Barra de urgência -->
+  <div class="bg-terracota text-cream text-center text-sm sm:text-base font-semibold px-4 py-3">
+    Ne rafraîchissez pas et ne fermez pas cette page — cette offre ne réapparaîtra plus !
+  </div>
+
+  <main class="max-w-2xl mx-auto px-6 py-12 text-center">
+
+    <!-- Foto da Mestra -->
+    <div class="flex justify-center mb-6">
+      <img src="mestre-templo.png" alt="Maître Pema"
+           class="w-24 h-24 rounded-full object-cover border-4 border-gold/40 glow-gold" />
+    </div>
+
+    <!-- Título -->
+    <h1 class="font-serif font-bold text-4xl sm:text-5xl text-musgo leading-tight mb-5">
+      Félicitations !<br>
+      Vous avez gagné un <em class="italic font-600">cadeau exclusif</em>
+    </h1>
+
+    <!-- Subtítulo -->
+    <p class="text-lg text-ink/85 font-medium leading-relaxed max-w-xl mx-auto mb-9">
+      Vous avez été sélectionnée parmi les <strong class="text-terracota">100 visiteuses tirées au sort</strong>
+      pour recevoir une réduction spéciale sur le guide <strong class="text-terracota">500 Rituels Ancestraux</strong>.
+      Cette offre est unique et ne réapparaîtra plus.
+    </p>
+
+    <!-- Caixa de benefícios -->
+    <div class="bg-salvia/15 border border-salvia/30 rounded-2xl p-7 sm:p-9 text-left mb-10">
+      <p class="font-serif italic text-2xl text-musgo text-center mb-6">Ce que vous allez recevoir :</p>
+      <ul class="space-y-4 text-ink/90 font-medium">
+        <li class="flex gap-3"><span class="text-musgo flex-none mt-0.5">✓</span> <span>📖 <strong class="text-ink">500 Rituels Ancestraux</strong> — le guide numérique complet</span></li>
+        <li class="flex gap-3"><span class="text-musgo flex-none mt-0.5">✓</span> <span>🌿 Des rituels pour les 4 piliers : santé, relations, énergie et prospérité</span></li>
+        <li class="flex gap-3"><span class="text-musgo flex-none mt-0.5">✓</span> <span>🗓️ <strong class="text-ink">Bonus :</strong> Calendrier des 4 Piliers</span></li>
+        <li class="flex gap-3"><span class="text-musgo flex-none mt-0.5">✓</span> <span>🎧 <strong class="text-ink">Bonus :</strong> Audios de Respiration guidés par Maître Pema</span></li>
+        <li class="flex gap-3"><span class="text-musgo flex-none mt-0.5">✓</span> <span>🌼 <strong class="text-ink">Bonus :</strong> Guide des Herbes Sacrées</span></li>
+        <li class="flex gap-3"><span class="text-musgo flex-none mt-0.5">✓</span> <span>📱 Accès immédiat et à vie — lisez sur votre téléphone ou imprimez</span></li>
+        <li class="flex gap-3"><span class="text-musgo flex-none mt-0.5">✓</span> <span>🛡️ Garantie inconditionnelle de 7 jours</span></li>
+      </ul>
+    </div>
+
+    <!-- Preço -->
+    <div class="mb-7">
+      <span class="text-ink/45 text-2xl line-through align-middle mr-3" data-price-old>R$ 49,90</span>
+      <span class="font-serif text-6xl text-terracota font-bold align-middle" data-price-new>R$ 29,90</span>
+    </div>
+
+    <!-- CTA -->
+    <a href="#" data-checkout
+       class="pulse-cta inline-block w-full bg-gold hover:bg-gold-dark text-ink font-bold text-lg sm:text-xl px-8 py-5 rounded-full glow-gold transition-transform hover:scale-[1.02] active:scale-95">
+      Garantir mon accès — Seulement <span data-price-new>R$ 29,90</span> →
+    </a>
+
+    <p class="mt-5 text-sm text-ink/60 font-medium">Accès instantané · 100 % de satisfaction garantie</p>
+
+    <p class="mt-10 font-serif italic text-gold-dark text-lg">
+      « Le voyage de mille pas commence par un seul geste. » — Maître Pema
+    </p>
+
+  </main>
+
+  <script>
+    /* ===========================================================
+       CONFIGURAÇÃO — EDITE AQUI
+       =========================================================== */
+    // 🔗 URL do checkout do Stripe para a OFERTA COM DESCONTO (troque pela sua).
+    const STRIPE_CHECKOUT_DESCONTO = "https://buy.stripe.com/dRm00b79Q2x04w00bI4gg0x";
+
+    // 💰 Preços da oferta de saída
+    const PRECO_DE  = "€ 29,90";
+    const PRECO_POR = "€ 19,90";
+    /* =========================================================== */
+
+    document.querySelectorAll('[data-checkout]').forEach(function (el) {
+      el.setAttribute('href', STRIPE_CHECKOUT_DESCONTO);
+      el.setAttribute('rel', 'noopener');
+    });
+    document.querySelectorAll('[data-price-old]').forEach(function (el) { el.textContent = PRECO_DE; });
+    document.querySelectorAll('[data-price-new]').forEach(function (el) { el.textContent = PRECO_POR; });
+  </script>
+</body>
+</html>
