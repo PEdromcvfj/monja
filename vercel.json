@@ -12,17 +12,17 @@
     { "source": "/de/desconto", "destination": "/desconto-de.html" },
     { "source": "/it/desconto", "destination": "/desconto-it.html" },
 
-    { "source": "/homem", "destination": "/homem.html" },
-    { "source": "/homem/en", "destination": "/homem-en.html" },
-    { "source": "/homem/es", "destination": "/homem-es.html" },
-    { "source": "/homem/fr", "destination": "/homem-fr.html" },
-    { "source": "/homem/de", "destination": "/homem-de.html" },
-    { "source": "/homem/it", "destination": "/homem-it.html" },
-    { "source": "/homem/desconto", "destination": "/homem-desconto.html" },
-    { "source": "/homem/en/desconto", "destination": "/homem-desconto-en.html" },
-    { "source": "/homem/es/desconto", "destination": "/homem-desconto-es.html" },
-    { "source": "/homem/fr/desconto", "destination": "/homem-desconto-fr.html" },
-    { "source": "/homem/de/desconto", "destination": "/homem-desconto-de.html" },
-    { "source": "/homem/it/desconto", "destination": "/homem-desconto-it.html" }
+    { "source": "/h", "destination": "/homem.html" },
+    { "source": "/h/en", "destination": "/homem-en.html" },
+    { "source": "/h/es", "destination": "/homem-es.html" },
+    { "source": "/h/fr", "destination": "/homem-fr.html" },
+    { "source": "/h/de", "destination": "/homem-de.html" },
+    { "source": "/h/it", "destination": "/homem-it.html" },
+    { "source": "/h/desconto", "destination": "/homem-desconto.html" },
+    { "source": "/h/en/desconto", "destination": "/homem-desconto-en.html" },
+    { "source": "/h/es/desconto", "destination": "/homem-desconto-es.html" },
+    { "source": "/h/fr/desconto", "destination": "/homem-desconto-fr.html" },
+    { "source": "/h/de/desconto", "destination": "/homem-desconto-de.html" },
+    { "source": "/h/it/desconto", "destination": "/homem-desconto-it.html" }
   ]
 }
