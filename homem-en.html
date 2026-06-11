@@ -219,6 +219,29 @@
   <link rel="dns-prefetch" href="https://scripts.converteai.net">
   <link rel="dns-prefetch" href="https://images.converteai.net">
   <link rel="dns-prefetch" href="https://license.vturb.com">
+  <!-- =====================  METRICAS  ===================== -->
+  <!-- GA4-SLOT -->
+  <!-- Vercel Web Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
+  <!-- Rastreamento de cliques nos botoes de compra -->
+  <script>
+    (function(){
+      function track(name, data){
+        try{ if(typeof window.gtag==='function'){ window.gtag('event', name, data); } }catch(e){}
+        try{ if(window.va){ window.va('event', { name: name, data: data }); } }catch(e){}
+      }
+      document.addEventListener('click', function(e){
+        var t = e.target; if(!t || !t.closest) return;
+        var a = t.closest('[data-checkout], a[href*="stripe.com"]');
+        if(!a) return;
+        track('checkout_click', {
+          page_path: location.pathname,
+          link_url: a.getAttribute('href') || '',
+          button_text: (a.textContent||'').trim().slice(0,80)
+        });
+      }, true);
+    })();
+  </script>
 </head>
 
 <body class="font-sans text-ink antialiased bg-cream selection:bg-gold/40 selection:text-ink">
