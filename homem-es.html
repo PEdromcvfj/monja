@@ -210,6 +210,15 @@
     .bb-2 { background: radial-gradient(120% 90% at 75% 12%, #C2702F, #8f4a22); }
     .bb-3 { background: radial-gradient(120% 90% at 75% 12%, #7C8A66, #56643f); }
   </style>
+  <!-- VTurb: pre-carregamento (velocidade) -->
+  <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+  <link rel="preload" href="https://scripts.converteai.net/c368f599-b51e-48b5-ab09-bdf942240f7c/players/6a2b2f19c7a04b5a3db142cf/v4/player.js" as="script">
+  <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+  <link rel="preload" href="https://cdn.converteai.net/c368f599-b51e-48b5-ab09-bdf942240f7c/6a2b2f12e2fcee65f7f19a1d/main.m3u8" as="fetch">
+  <link rel="dns-prefetch" href="https://cdn.converteai.net">
+  <link rel="dns-prefetch" href="https://scripts.converteai.net">
+  <link rel="dns-prefetch" href="https://images.converteai.net">
+  <link rel="dns-prefetch" href="https://license.vturb.com">
 </head>
 
 <body class="font-sans text-ink antialiased bg-cream selection:bg-gold/40 selection:text-ink">
@@ -239,6 +248,15 @@
       <h1 class="font-serif font-600 text-4xl sm:text-6xl leading-tight text-balance mb-5 text-cream-soft">
         500 Rituales Ancestrales
       </h1>
+      <!-- Player de video (VSL) -->
+      <div class="mb-7 max-w-2xl mx-auto">
+        <vturb-smartplayer id="vid-6a2b2f19c7a04b5a3db142cf" style="display: block; margin: 0 auto; width: 100%;"></vturb-smartplayer>
+        <script type="text/javascript">var s=document.createElement("script");s.src="https://scripts.converteai.net/c368f599-b51e-48b5-ab09-bdf942240f7c/players/6a2b2f19c7a04b5a3db142cf/v4/player.js",s.async=!0,document.head.appendChild(s);</script>
+      </div>
+      <!-- Botao de compra abaixo do video -->
+      <div class="mb-2">
+        <a href="#" data-checkout class="inline-block w-full sm:w-auto bg-gold hover:bg-gold-dark text-ink font-semibold text-lg px-10 py-4 rounded-full glow-gold transition-transform hover:scale-[1.02] active:scale-95">Quiero empezar →</a>
+      </div>
 
       <!-- Posicionamento principal (os quatro pilares) -->
       <p class="font-serif text-xl sm:text-2xl text-gold-glow leading-snug text-balance max-w-2xl mx-auto mb-5">
@@ -722,57 +740,6 @@
     </div>
   </section>
 
-  <!-- =======================================================
-       9. DEPOIMENTOS
-  ======================================================== -->
-  <section class="py-16 sm:py-24 px-6 bg-cream-soft">
-    <div class="max-w-5xl mx-auto">
-      <div class="text-center max-w-2xl mx-auto mb-12 reveal">
-        <p class="uppercase tracking-[0.2em] text-terracota text-xs font-semibold mb-3">Relatos de quienes ya viven los rituales</p>
-        <h2 class="font-serif font-bold text-3xl sm:text-4xl text-musgo leading-tight text-balance">
-          Mujeres que reencontraron el equilibrio
-        </h2>
-      </div>
-
-      <div class="grid sm:grid-cols-3 gap-6">
-        <figure class="bg-cream rounded-2xl p-7 shadow-card border border-salvia/25 reveal">
-          <div class="text-gold-dark text-lg mb-3">★★★★★</div>
-          <blockquote class="text-ink/80 leading-relaxed italic">
-            “Hacía años que no dormía una noche entera. El ritual de la noche cambió
-            eso en una semana. Mi salud y mi humor lo agradecen.”
-          </blockquote>
-          <figcaption class="mt-5 flex items-center gap-3">
-            <img src="https://placehold.co/48x48/EFE7D5/2E3A2C?text=M" alt="" class="w-12 h-12 rounded-full border border-salvia/30" loading="lazy" />
-            <div><p class="font-semibold text-musgo">Marta R.</p></div>
-          </figcaption>
-        </figure>
-
-        <figure class="bg-cream rounded-2xl p-7 shadow-card border border-salvia/25 reveal">
-          <div class="text-gold-dark text-lg mb-3">★★★★★</div>
-          <blockquote class="text-ink/80 leading-relaxed italic">
-            “Los rituales de relación me reacercaron a mi esposo. Volvimos a conversar
-            con calma. En casa el ambiente se volvió mucho más ligero.”
-          </blockquote>
-          <figcaption class="mt-5 flex items-center gap-3">
-            <img src="https://placehold.co/48x48/EFE7D5/2E3A2C?text=C" alt="" class="w-12 h-12 rounded-full border border-salvia/30" loading="lazy" />
-            <div><p class="font-semibold text-musgo">Claudia M.</p></div>
-          </figcaption>
-        </figure>
-
-        <figure class="bg-cream rounded-2xl p-7 shadow-card border border-salvia/25 reveal">
-          <div class="text-gold-dark text-lg mb-3">★★★★★</div>
-          <blockquote class="text-ink/80 leading-relaxed italic">
-            “Empecé por los rituales de prosperidad y energía. Me siento con más ánimo y,
-            sin forzar, las oportunidades empezaron a aparecer.”
-          </blockquote>
-          <figcaption class="mt-5 flex items-center gap-3">
-            <img src="https://placehold.co/48x48/EFE7D5/2E3A2C?text=R" alt="" class="w-12 h-12 rounded-full border border-salvia/30" loading="lazy" />
-            <div><p class="font-semibold text-musgo">Rosángela F.</p></div>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
 
   <!-- =======================================================
        10. FAQ (ACORDEÃO)
@@ -949,7 +916,7 @@
   <!-- =======================================================
        CTA FLUTUANTE (mobile) — aparece ao rolar
   ======================================================== -->
-  <div id="sticky-cta" class="fixed bottom-0 inset-x-0 z-40 p-3 bg-cream/95 backdrop-blur border-t border-salvia/30 shadow-[0_-8px_30px_-10px_rgba(58,74,54,.35)] translate-y-full transition-transform duration-300 sm:hidden">
+  <div id="sticky-cta" class="fixed bottom-0 inset-x-0 z-40 p-3 bg-cream/95 backdrop-blur border-t border-salvia/30 shadow-[0_-8px_30px_-10px_rgba(58,74,54,.35)] transition-transform duration-300">
     <a href="#" data-checkout
        class="flex items-center justify-between gap-3 bg-gold hover:bg-gold-dark text-ink font-semibold px-5 py-3.5 rounded-full">
       <span>Asegurar mi acceso</span>
@@ -1018,22 +985,6 @@
       els.forEach(function (e) { io.observe(e); });
     })();
 
-    // CTA flutuante: mostra após sair do hero
-    (function () {
-      var sticky = document.getElementById('sticky-cta');
-      var hero = document.querySelector('header');
-      if (!sticky || !hero) return;
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            sticky.classList.add('translate-y-full');
-          } else {
-            sticky.classList.remove('translate-y-full');
-          }
-        });
-      }, { threshold: 0 });
-      io.observe(hero);
-    })();
 
     // Pop-up de saída (exit-intent) — aparece uma vez por sessão
     (function () {
