@@ -223,9 +223,18 @@
   <!-- GA4-SLOT -->
   <!-- Vercel Web Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
-  <!-- Rastreamento de cliques nos botoes de compra -->
+  <!-- Rastreamento de cliques + atribuicao por video (UTM -> Stripe) -->
   <script>
     (function(){
+      function getRef(){
+        try{
+          var p = new URLSearchParams(location.search);
+          var r = p.get('utm_content') || p.get('v') || p.get('utm_campaign') || p.get('utm_source');
+          if(r){ try{ localStorage.setItem('attrib_ref', r); }catch(e){} return r; }
+          try{ return localStorage.getItem('attrib_ref') || ''; }catch(e){ return ''; }
+        }catch(e){ return ''; }
+      }
+      getRef();
       function track(name, data){
         try{ if(typeof window.gtag==='function'){ window.gtag('event', name, data); } }catch(e){}
         try{ if(window.va){ window.va('event', { name: name, data: data }); } }catch(e){}
@@ -234,9 +243,17 @@
         var t = e.target; if(!t || !t.closest) return;
         var a = t.closest('[data-checkout], a[href*="stripe.com"]');
         if(!a) return;
+        var ref = getRef();
+        var href = a.getAttribute('href') || '';
+        if(ref && href.indexOf('stripe.com') > -1 && href.indexOf('client_reference_id=') === -1){
+          var safe = String(ref).replace(/[^a-zA-Z0-9_-]/g,'_').slice(0,180);
+          href += (href.indexOf('?') > -1 ? '&' : '?') + 'client_reference_id=' + safe;
+          a.setAttribute('href', href);
+        }
         track('checkout_click', {
           page_path: location.pathname,
-          link_url: a.getAttribute('href') || '',
+          video_ref: ref || 'direto',
+          link_url: href,
           button_text: (a.textContent||'').trim().slice(0,80)
         });
       }, true);
