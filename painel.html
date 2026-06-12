@@ -112,6 +112,10 @@
     </div>
     <div class="card feed" style="margin-top:14px"><h2>🧾 Últimas vendas</h2><div id="s-feed"></div></div>
 
+    <!-- ============ CARRINHO ============ -->
+    <div class="sec-title">🛒 Carrinho iniciado <span class="ln"></span></div>
+    <div id="checkout-area"></div>
+
     <!-- ============ VISITAS ============ -->
     <div class="sec-title">👀 Visitas <span class="ln"></span></div>
     <div id="visits-area"></div>
@@ -124,6 +128,21 @@
     function moneyMap(m){var ks=Object.keys(m);if(!ks.length)return '—';return ks.map(function(c){return money(m[c],c);}).join('  ·  ');}
     function ago(ts,now){var s=now-ts;if(s<60)return 'agora';if(s<3600)return Math.floor(s/60)+' min';if(s<86400)return Math.floor(s/3600)+' h';return Math.floor(s/86400)+' d';}
     function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+    function pathLabel(p){
+      if(!p) return '—';
+      var LANG={es:'ES',it:'IT',fr:'FR',de:'DE',en:'EN'};
+      if(/\.html$/.test(p)){
+        var mm=/homem/.test(p), dd=/desconto/.test(p), m1=p.match(/-(es|it|fr|de|en)/);
+        return (mm?'♂ Masculino':'♀ Feminino')+' · '+(m1?m1[1].toUpperCase():'PT')+(dd?' · Desconto':'');
+      }
+      var masc=/^\/h(\/|$)/.test(p);
+      var rest=(masc?p.replace(/^\/h/,''):p).replace(/^\//,'').replace(/\/$/,'');
+      var parts=rest?rest.split('/'):[];
+      var desc=parts.indexOf('desconto')>-1;
+      var langSeg=parts.filter(function(x){return x!=='desconto';})[0]||'';
+      var lang=LANG[langSeg]||'PT';
+      return (masc?'♂ Masculino':'♀ Feminino')+' · '+lang+(desc?' · Desconto':'');
+    }
     function startToday(now){return now-(now%86400);}
     function countBy(arr,kf){var m={};arr.forEach(function(x){var k=kf(x)||'—';m[k]=(m[k]||0)+1;});return m;}
     function listRows(map,opts){opts=opts||{};var ks=Object.keys(map).sort(function(a,b){return map[b]-map[a];});if(!ks.length)return '<div class="empty">'+(opts.empty||'Sem dados.')+'</div>';var max=map[ks[0]]||1;return ks.slice(0,12).map(function(k){var pct=Math.round(map[k]/max*100);var label=opts.flag?(flag(k)+' '+esc(k)):esc(k);return '<div class="row"><div style="flex:1;min-width:0"><div class="name">'+label+' <span class="muted">· '+map[k]+'</span></div><div class="barbg"><div class="bar '+(opts.blue?'b':'')+'" style="width:'+pct+'%"></div></div></div></div>';}).join('');}
@@ -162,6 +181,32 @@
       document.getElementById('s-bycountry').innerHTML = listRows(byC,{flag:true,empty:'Sem dados de país.'});
       document.getElementById('s-feed').innerHTML = sales.length? sales.slice(0,25).map(function(s){return '<div class="row"><span class="when">'+ago(s.t,now)+'</span><span class="name">'+flag(s.country)+' '+money(s.amount,s.currency)+'</span><span class="pill">'+esc(s.video)+'</span></div>';}).join('') : '<div class="empty">Nenhuma venda no período.</div>';
 
+      // ---- CARRINHO INICIADO ----
+      var ca=document.getElementById('checkout-area');
+      if(!j.checkouts){
+        ca.innerHTML='<div class="note">Os carrinhos iniciados aparecem aqui assim que houver cliques no botão de compra (precisa do armazenamento ativo).</div>';
+      } else {
+        var CK=j.checkouts, cr=CK.recent||[];
+        var ckLive=cr.filter(function(e){return e.t> now-300;}).length;
+        var ckByC=countBy(cr,function(e){return e.c;});
+        var ckByL=countBy(cr,function(e){return pathLabel(e.p);});
+        var ckByV=countBy(cr,function(e){return e.v;});
+        ca.innerHTML =
+          '<div class="grid kpis3">'
+          + '<div class="card kpi"><div class="lbl">Carrinhos hoje</div><div class="val">'+CK.today+'</div></div>'
+          + '<div class="card kpi"><div class="lbl">Ao vivo (5 min)</div><div class="val" style="color:var(--gold)">'+ckLive+'</div></div>'
+          + '<div class="card kpi"><div class="lbl">Total</div><div class="val">'+CK.total+'</div></div>'
+          + '</div>'
+          + '<div class="grid cols3">'
+          + '<div class="card"><h2>🔗 Por link</h2>'+listRows(ckByL,{empty:'Nenhum carrinho ainda.'})+'</div>'
+          + '<div class="card"><h2>🌎 Por país</h2>'+listRows(ckByC,{flag:true,empty:'Sem dados.'})+'</div>'
+          + '<div class="card"><h2>🎬 Por vídeo</h2>'+listRows(ckByV,{empty:'Sem dados.'})+'</div>'
+          + '</div>'
+          + '<div class="card feed" style="margin-top:14px"><h2>🛒 Carrinhos recentes</h2>'
+          + (cr.length? cr.slice(0,25).map(function(e){return '<div class="row"><span class="when">'+ago(e.t,now)+'</span><span class="name">'+flag(e.c)+' '+esc(pathLabel(e.p))+'</span><span class="pill">'+esc(e.v||'direto')+'</span></div>';}).join('') : '<div class="empty">Nenhum carrinho iniciado ainda.</div>')
+          + '</div>';
+      }
+
       // ---- VISITAS ----
       var area=document.getElementById('visits-area');
       if(!j.visits){
@@ -172,7 +217,7 @@
       var liveCount=recent.filter(function(e){return e.t> now-300;}).length;
       var byVC=countBy(recent,function(e){return e.c;});
       var byVV=countBy(recent,function(e){return e.v;});
-      var byVP=countBy(recent,function(e){return e.p;});
+      var byVP=countBy(recent,function(e){return pathLabel(e.p);});
       area.innerHTML =
         '<div class="grid kpis3">'
         + '<div class="card kpi"><div class="lbl">Visitas hoje</div><div class="val">'+V.today+'</div></div>'

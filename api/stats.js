@@ -57,6 +57,7 @@ module.exports = async (req, res) => {
 
   // ---------- VISITAS (KV) ----------
   let visits = null;
+  let checkouts = null;
   const kv = detectKV();
   const kvUrl = kv.url, kvTok = kv.token;
   if (kvUrl && kvTok) {
@@ -71,19 +72,26 @@ module.exports = async (req, res) => {
         body: JSON.stringify([
           ['LRANGE', 'ev', '0', '999'],
           ['GET', 'v:' + ymd],
-          ['GET', 'v:total']
+          ['GET', 'v:total'],
+          ['LRANGE', 'ck', '0', '499'],
+          ['GET', 'ck:' + ymd],
+          ['GET', 'ck:total']
         ])
       });
       const j = await r.json();
-      const list = (j[0] && j[0].result) || [];
-      const recent = list.map(s => { try { return JSON.parse(s); } catch (e) { return null; } }).filter(Boolean);
+      const parse = arr => (arr || []).map(s => { try { return JSON.parse(s); } catch (e) { return null; } }).filter(Boolean);
       visits = {
         today: parseInt((j[1] && j[1].result) || '0', 10) || 0,
         total: parseInt((j[2] && j[2].result) || '0', 10) || 0,
-        recent: recent
+        recent: parse(j[0] && j[0].result)
       };
-    } catch (e) { visits = null; }
+      checkouts = {
+        today: parseInt((j[4] && j[4].result) || '0', 10) || 0,
+        total: parseInt((j[5] && j[5].result) || '0', 10) || 0,
+        recent: parse(j[3] && j[3].result)
+      };
+    } catch (e) { visits = null; checkouts = null; }
   }
 
-  res.status(200).json({ now: Math.floor(Date.now() / 1000), days: days, sales: sales, salesError: salesError, visits: visits });
+  res.status(200).json({ now: Math.floor(Date.now() / 1000), days: days, sales: sales, salesError: salesError, visits: visits, checkouts: checkouts });
 };

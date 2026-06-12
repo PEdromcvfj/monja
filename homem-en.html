@@ -271,6 +271,7 @@
           href += (href.indexOf('?') > -1 ? '&' : '?') + 'client_reference_id=' + safe;
           a.setAttribute('href', href);
         }
+        try{ navigator.sendBeacon('/api/track?type=checkout&p='+encodeURIComponent(location.pathname)+'&v='+encodeURIComponent(ref||'')); }catch(e){}
         track('begin_checkout', {
           page_path: location.pathname,
           video_ref: ref || 'direto',

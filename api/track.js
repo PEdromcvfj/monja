@@ -21,6 +21,7 @@ module.exports = async (req, res) => {
 
   try {
     const q = req.query || {};
+    const type = String(q.type || 'visit');
     const path = String(q.p || '').slice(0, 80);
     const video = String(q.v || '').slice(0, 80) || 'direto';
     const country = String(req.headers['x-vercel-ip-country'] || '—').slice(0, 4);
@@ -31,13 +32,24 @@ module.exports = async (req, res) => {
       + String(d.getUTCDate()).padStart(2, '0');
 
     const ev = JSON.stringify({ t: now, c: country, v: video, p: path });
-    const pipeline = [
-      ['LPUSH', 'ev', ev],
-      ['LTRIM', 'ev', '0', '999'],
-      ['INCR', 'v:total'],
-      ['INCR', 'v:' + ymd],
-      ['EXPIRE', 'v:' + ymd, '3456000']
-    ];
+    let pipeline;
+    if (type === 'checkout') {
+      pipeline = [
+        ['LPUSH', 'ck', ev],
+        ['LTRIM', 'ck', '0', '499'],
+        ['INCR', 'ck:total'],
+        ['INCR', 'ck:' + ymd],
+        ['EXPIRE', 'ck:' + ymd, '3456000']
+      ];
+    } else {
+      pipeline = [
+        ['LPUSH', 'ev', ev],
+        ['LTRIM', 'ev', '0', '999'],
+        ['INCR', 'v:total'],
+        ['INCR', 'v:' + ymd],
+        ['EXPIRE', 'v:' + ymd, '3456000']
+      ];
+    }
     await fetch(url + '/pipeline', {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
