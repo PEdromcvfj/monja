@@ -33,7 +33,7 @@ module.exports = async (req, res) => {
 
   // seguranca opcional por token
   const want = process.env.KIWIFY_TOKEN || '';
-  const got = (req.query && (req.query.token || req.query.signature)) || '';
+  const got = (req.query && req.query.token) || '';
   if (want && got !== want) { res.status(401).json({ error: 'unauthorized' }); return; }
 
   // corpo (pode vir como objeto ou string)
