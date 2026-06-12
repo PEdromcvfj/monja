@@ -146,6 +146,7 @@
     function countBy(arr,kf){var m={};arr.forEach(function(x){var k=kf(x)||'—';m[k]=(m[k]||0)+1;});return m;}
     function listRows(map,opts){opts=opts||{};var ks=Object.keys(map).sort(function(a,b){return map[b]-map[a];});if(!ks.length)return '<div class="empty">'+(opts.empty||'Sem dados.')+'</div>';var max=map[ks[0]]||1;return ks.slice(0,12).map(function(k){var pct=Math.round(map[k]/max*100);var label=opts.flag?(flag(k)+' '+esc(k)):esc(k);return '<div class="row"><div style="flex:1;min-width:0"><div class="name">'+label+' <span class="muted">· '+map[k]+'</span></div><div class="barbg"><div class="bar '+(opts.blue?'b':'')+'" style="width:'+pct+'%"></div></div></div></div>';}).join('');}
     function startToday(now){return now-(now%86400);}
+    function pct(a,b){if(!b)return '—';return (Math.round(a/b*1000)/10)+'%';}
 
     var PW='';
     function getPW(){try{return localStorage.getItem('painel_pw')||'';}catch(e){return '';}}
@@ -201,8 +202,13 @@
           + '<div class="card"><h2>🎬 De que reel (vídeo)</h2>'+listRows(vByV,{blue:true,empty:'Sem visitas ainda.'})+'</div>'
           + '<div class="card"><h2>📄 Em que página entraram</h2>'+listRows(vByP,{blue:true,empty:'Sem visitas ainda.'})+'</div>'
           + '</div>'
+          + '<div class="grid kpis3" style="margin-top:14px">'
+          + '<div class="card kpi"><div class="lbl">Visita → Carrinho (hoje)</div><div class="val">'+pct(CK?CK.today:0, V.today)+'</div></div>'
+          + '<div class="card kpi"><div class="lbl">Carrinho → Venda (hoje)</div><div class="val">'+pct(tCount, CK?CK.today:0)+'</div></div>'
+          + '<div class="card kpi"><div class="lbl">Visita → Venda (hoje)</div><div class="val" style="color:var(--gold)">'+pct(tCount, V.today)+'</div></div>'
+          + '</div>'
           + '<div class="card feed" style="margin-top:14px"><h2>🟢 Visitantes ao vivo <span class="tag">'+vLive+' nos últimos 5 min</span></h2>'
-          + (vrec.length? vrec.slice(0,30).map(function(e){return '<div class="row"><span class="when">'+ago(e.t,now)+'</span><span class="name">'+flag(e.c)+' <span class="muted">'+esc(pathLabel(e.p))+'</span></span><span class="pill">'+esc(e.v||'direto')+'</span></div>';}).join('') : '<div class="empty">Ninguém ainda.</div>')
+          + (vrec.length? vrec.slice(0,30).map(function(e){return '<div class="row"><span class="when">'+ago(e.t,now)+'</span><span class="name">'+flag(e.c)+' '+esc(e.c)+' · <span class="muted">'+esc(pathLabel(e.p))+'</span></span><span class="pill">🎬 '+esc(e.v||'direto')+'</span></div>';}).join('') : '<div class="empty">Ninguém ainda.</div>')
           + '</div>';
       }
 
@@ -222,7 +228,7 @@
           + '<div class="card"><h2>🎬 De que reel (vídeo)</h2>'+listRows(cByV,{empty:'Sem dados.'})+'</div>'
           + '</div>'
           + '<div class="card feed" style="margin-top:14px"><h2>🛒 Carrinhos recentes</h2>'
-          + (crec.length? crec.slice(0,25).map(function(e){return '<div class="row"><span class="when">'+ago(e.t,now)+'</span><span class="name">'+flag(e.c)+' '+esc(pathLabel(e.p))+'</span><span class="pill">'+esc(e.v||'direto')+'</span></div>';}).join('') : '<div class="empty">Nenhum carrinho ainda.</div>')
+          + (crec.length? crec.slice(0,25).map(function(e){return '<div class="row"><span class="when">'+ago(e.t,now)+'</span><span class="name">'+flag(e.c)+' '+esc(e.c)+' · '+esc(pathLabel(e.p))+'</span><span class="pill">🎬 '+esc(e.v||'direto')+'</span></div>';}).join('') : '<div class="empty">Nenhum carrinho ainda.</div>')
           + '</div>';
       }
 
