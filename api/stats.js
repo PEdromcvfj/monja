@@ -3,6 +3,19 @@
 //   STRIPE_SECRET_KEY   -> chave (de preferência RESTRITA, somente leitura) do Stripe
 //   DASHBOARD_PASSWORD  -> senha para abrir o painel
 //   KV_REST_API_URL / KV_REST_API_TOKEN  -> armazenamento (visitas). Opcional.
+function detectKV() {
+  const e = process.env;
+  let url = e.KV_REST_API_URL || e.UPSTASH_REDIS_REST_URL || e.STORAGE_REST_API_URL || '';
+  let token = e.KV_REST_API_TOKEN || e.UPSTASH_REDIS_REST_TOKEN || e.STORAGE_REST_API_TOKEN || '';
+  if (!url || !token) {
+    for (const k in e) {
+      if (!url && /_REST_API_URL$/.test(k)) url = e[k];
+      if (!token && /_REST_API_TOKEN$/.test(k) && !/READ_ONLY/.test(k)) token = e[k];
+    }
+  }
+  return { url: url, token: token };
+}
+
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
 
@@ -44,8 +57,8 @@ module.exports = async (req, res) => {
 
   // ---------- VISITAS (KV) ----------
   let visits = null;
-  const kvUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-  const kvTok = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+  const kv = detectKV();
+  const kvUrl = kv.url, kvTok = kv.token;
   if (kvUrl && kvTok) {
     try {
       const d = new Date();
