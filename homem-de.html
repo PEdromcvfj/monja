@@ -222,7 +222,25 @@
   <!-- =====================  METRICAS  ===================== -->
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF88GLDWV3"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-JF88GLDWV3');</script>
+  <script>
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    (function(){
+      var cfg={};
+      try{
+        var p=new URLSearchParams(location.search);
+        var v=p.get('utm_content')||p.get('v');
+        if(v){
+          cfg.campaign_source=p.get('utm_source')||'facebook';
+          cfg.campaign_medium=p.get('utm_medium')||'reels';
+          cfg.campaign_name=p.get('utm_campaign')||'reels';
+          cfg.campaign_content=v;
+        }
+      }catch(e){}
+      gtag('config','G-JF88GLDWV3',cfg);
+    })();
+  </script>
   <!-- Vercel Web Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
   <!-- Rastreamento de cliques + atribuicao por video (UTM -> Stripe) -->
@@ -252,7 +270,7 @@
           href += (href.indexOf('?') > -1 ? '&' : '?') + 'client_reference_id=' + safe;
           a.setAttribute('href', href);
         }
-        track('checkout_click', {
+        track('begin_checkout', {
           page_path: location.pathname,
           video_ref: ref || 'direto',
           link_url: href,
