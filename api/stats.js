@@ -58,6 +58,7 @@ module.exports = async (req, res) => {
   // ---------- VISITAS (KV) ----------
   let visits = null;
   let checkouts = null;
+  let kiwifyRaw = [];
   const kv = detectKV();
   const kvUrl = kv.url, kvTok = kv.token;
   if (kvUrl && kvTok) {
@@ -75,10 +76,13 @@ module.exports = async (req, res) => {
           ['GET', 'v:total'],
           ['LRANGE', 'ck', '0', '499'],
           ['GET', 'ck:' + ymd],
-          ['GET', 'ck:total']
+          ['GET', 'ck:total'],
+          ['LRANGE', 'ks', '0', '999'],
+          ['LRANGE', 'ks_raw', '0', '9']
         ])
       });
       const j = await r.json();
+      kiwifyRaw = (j[7] && j[7].result) || [];
       const parse = arr => (arr || []).map(s => { try { return JSON.parse(s); } catch (e) { return null; } }).filter(Boolean);
       visits = {
         today: parseInt((j[1] && j[1].result) || '0', 10) || 0,
@@ -90,8 +94,13 @@ module.exports = async (req, res) => {
         total: parseInt((j[5] && j[5].result) || '0', 10) || 0,
         recent: parse(j[3] && j[3].result)
       };
+      // junta as vendas do Kiwify (PT) com as do Stripe
+      const ksales = parse(j[6] && j[6].result).filter(s => s.t >= since);
+      if (ksales.length) { sales = sales.concat(ksales).sort((a, b) => b.t - a.t); }
     } catch (e) { visits = null; checkouts = null; }
   }
 
-  res.status(200).json({ now: Math.floor(Date.now() / 1000), days: days, sales: sales, salesError: salesError, visits: visits, checkouts: checkouts });
+  const out = { now: Math.floor(Date.now() / 1000), days: days, sales: sales, salesError: salesError, visits: visits, checkouts: checkouts };
+  if (req.query && req.query.raw === '1') out.kiwifyRaw = kiwifyRaw;
+  res.status(200).json(out);
 };

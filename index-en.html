@@ -271,6 +271,11 @@
           href += (href.indexOf('?') > -1 ? '&' : '?') + 'client_reference_id=' + safe;
           a.setAttribute('href', href);
         }
+        if(ref && href.indexOf('kiwify') > -1 && href.indexOf('utm_content=') === -1){
+          var safek = String(ref).replace(/[^a-zA-Z0-9_-]/g,'_').slice(0,180);
+          href += (href.indexOf('?') > -1 ? '&' : '?') + 'utm_source=facebook&utm_medium=reels&utm_content=' + safek;
+          a.setAttribute('href', href);
+        }
         try{ navigator.sendBeacon('/api/track?type=checkout&p='+encodeURIComponent(location.pathname)+'&v='+encodeURIComponent(ref||'')); }catch(e){}
         track('begin_checkout', {
           page_path: location.pathname,
