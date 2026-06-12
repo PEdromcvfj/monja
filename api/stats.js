@@ -62,7 +62,7 @@ module.exports = async (req, res) => {
   const kvUrl = kv.url, kvTok = kv.token;
   if (kvUrl && kvTok) {
     try {
-      const d = new Date();
+      const d = new Date(Date.now() - 3 * 3600 * 1000); // dia no horário do Brasil (UTC-3)
       const ymd = '' + d.getUTCFullYear()
         + String(d.getUTCMonth() + 1).padStart(2, '0')
         + String(d.getUTCDate()).padStart(2, '0');

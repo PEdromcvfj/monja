@@ -148,7 +148,7 @@
     }
     function countBy(arr,kf){var m={};arr.forEach(function(x){var k=kf(x)||'—';m[k]=(m[k]||0)+1;});return m;}
     function listRows(map,opts){opts=opts||{};var ks=Object.keys(map).sort(function(a,b){return map[b]-map[a];});if(!ks.length)return '<div class="empty">'+(opts.empty||'Sem dados.')+'</div>';var max=map[ks[0]]||1;return ks.slice(0,12).map(function(k){var pct=Math.round(map[k]/max*100);var label=opts.flag?(flag(k)+' '+esc(k)):esc(k);return '<div class="row"><div style="flex:1;min-width:0"><div class="name">'+label+' <span class="muted">· '+map[k]+'</span></div><div class="barbg"><div class="bar '+(opts.blue?'b':'')+'" style="width:'+pct+'%"></div></div></div></div>';}).join('');}
-    function startToday(now){return now-(now%86400);}
+    function startToday(now){var off=-10800;return Math.floor((now+off)/86400)*86400-off;}
     function pct(a,b){if(!b)return '—';return (Math.round(a/b*1000)/10)+'%';}
 
     var PW='';
@@ -165,9 +165,11 @@
 
     function render(j){
       var now=j.now;
+      var sel=document.getElementById('range').value;
+      var periodSince=(sel==='1')?startToday(now):now-parseInt(sel,10)*86400;
 
       // ===== VENDAS (cálculos) =====
-      var sales=j.sales||[]; var ts=startToday(now);
+      var sales=(j.sales||[]).filter(function(s){return s.t>=periodSince;}); var ts=startToday(now);
       var rev={},tRev={},tCount=0,sByV={},sByC={};
       sales.forEach(function(s){
         rev[s.currency]=(rev[s.currency]||0)+s.amount;
@@ -177,11 +179,13 @@
       });
 
       // ===== VISITAS =====
-      var V=j.visits, vrec=(V&&V.recent)||[];
-      var vLive=vrec.filter(function(e){return e.t>now-300;}).length;
+      var V=j.visits, vrecAll=(V&&V.recent)||[];
+      var vrec=vrecAll.filter(function(e){return e.t>=periodSince;});
+      var vLive=vrecAll.filter(function(e){return e.t>now-300;}).length;
 
       // ===== CARRINHO =====
-      var CK=j.checkouts, crec=(CK&&CK.recent)||[];
+      var CK=j.checkouts, crecAll=(CK&&CK.recent)||[];
+      var crec=crecAll.filter(function(e){return e.t>=periodSince;});
 
       // ===== RESUMO (topo) =====
       document.getElementById('o-visits').textContent = V? V.today : '—';

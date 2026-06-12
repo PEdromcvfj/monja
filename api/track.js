@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
     const video = String(q.v || '').slice(0, 80) || 'direto';
     const country = String(req.headers['x-vercel-ip-country'] || '—').slice(0, 4);
     const now = Math.floor(Date.now() / 1000);
-    const d = new Date();
+    const d = new Date(Date.now() - 3 * 3600 * 1000); // dia no horário do Brasil (UTC-3)
     const ymd = '' + d.getUTCFullYear()
       + String(d.getUTCMonth() + 1).padStart(2, '0')
       + String(d.getUTCDate()).padStart(2, '0');
