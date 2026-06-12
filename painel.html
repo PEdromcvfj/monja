@@ -108,6 +108,9 @@
       <div class="card kpi hero-kpi"><div class="lbl">Receita hoje</div><div class="val" id="o-rev" style="color:var(--gold)">—</div></div>
     </div>
 
+    <!-- ====== CARRINHOS RECENTES (topo) ====== -->
+    <div id="ck-recent" style="margin-top:14px"></div>
+
     <!-- ====== VISITAS ====== -->
     <div class="sec-title">👀 Visitas <span class="tag" id="v-total"></span><span class="ln"></span></div>
     <div id="visits-area"></div>
@@ -212,6 +215,14 @@
           + '</div>';
       }
 
+      // ===== CARRINHOS RECENTES (topo) =====
+      var ckr=document.getElementById('ck-recent');
+      ckr.innerHTML = (CK && crec.length)
+        ? '<div class="card feed"><h2>🛒 Carrinhos recentes <span class="tag">quem clicou em comprar</span></h2>'
+          + crec.slice(0,25).map(function(e){return '<div class="row"><span class="when">'+ago(e.t,now)+'</span><span class="name">'+flag(e.c)+' '+esc(e.c)+' · '+esc(pathLabel(e.p))+'</span><span class="pill">🎬 '+esc(e.v||'direto')+'</span></div>';}).join('')
+          + '</div>'
+        : '';
+
       // ===== CARRINHO (render) =====
       document.getElementById('c-total').textContent = CK? ('· total '+CK.total) : '';
       var ca=document.getElementById('checkout-area');
@@ -226,9 +237,6 @@
           + '<div class="card"><h2>🔗 De que link</h2>'+listRows(cByL,{empty:'Nenhum carrinho ainda.'})+'</div>'
           + '<div class="card"><h2>🌎 De que país</h2>'+listRows(cByC,{flag:true,empty:'Sem dados.'})+'</div>'
           + '<div class="card"><h2>🎬 De que reel (vídeo)</h2>'+listRows(cByV,{empty:'Sem dados.'})+'</div>'
-          + '</div>'
-          + '<div class="card feed" style="margin-top:14px"><h2>🛒 Carrinhos recentes</h2>'
-          + (crec.length? crec.slice(0,25).map(function(e){return '<div class="row"><span class="when">'+ago(e.t,now)+'</span><span class="name">'+flag(e.c)+' '+esc(e.c)+' · '+esc(pathLabel(e.p))+'</span><span class="pill">🎬 '+esc(e.v||'direto')+'</span></div>';}).join('') : '<div class="empty">Nenhum carrinho ainda.</div>')
           + '</div>';
       }
 
