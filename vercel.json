@@ -25,6 +25,7 @@
     { "source": "/h/de/desconto", "destination": "/homem-desconto-de.html" },
     { "source": "/h/it/desconto", "destination": "/homem-desconto-it.html" },
 
-    { "source": "/obrigado", "destination": "/obrigado.html" }
+    { "source": "/obrigado", "destination": "/obrigado.html" },
+    { "source": "/painel", "destination": "/painel.html" }
   ]
 }

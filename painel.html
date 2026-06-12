@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel de Vendas · ao vivo</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0d0f14" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#0d0f14; --bg2:#12151c; --card:#161a23; --card2:#1b2030;
+      --line:#262c3a; --txt:#eef1f7; --mut:#8b93a7;
+      --gold:#d8a85a; --green:#5fd29a; --blue:#6aa3ff; --red:#ff7a7a;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(1200px 600px at 80% -10%,#1a2030 0%,var(--bg) 55%);
+         color:var(--txt);font-family:Inter,system-ui,sans-serif;min-height:100vh}
+    a{color:inherit}
+    .wrap{max-width:1100px;margin:0 auto;padding:22px 18px 60px}
+    header.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.9rem;margin:0;letter-spacing:.3px}
+    .live{display:inline-flex;align-items:center;gap:7px;font-size:.8rem;color:var(--mut);
+          background:var(--card);border:1px solid var(--line);padding:6px 11px;border-radius:999px}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(95,210,154,.6);animation:pulse 1.8s infinite}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(95,210,154,.55)}70%{box-shadow:0 0 0 10px rgba(95,210,154,0)}100%{box-shadow:0 0 0 0 rgba(95,210,154,0)}}
+    .controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    select,button{font-family:inherit;font-size:.85rem;color:var(--txt);background:var(--card);
+      border:1px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer}
+    button:hover,select:hover{border-color:#3a4256}
+    .grid{display:grid;gap:14px}
+    .kpis{grid-template-columns:repeat(4,1fr)}
+    @media(max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}}
+    .card{background:linear-gradient(180deg,var(--card),var(--bg2));border:1px solid var(--line);
+          border-radius:16px;padding:18px}
+    .kpi .lbl{font-size:.78rem;color:var(--mut);font-weight:500;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em}
+    .kpi .val{font-size:1.9rem;font-weight:800;line-height:1.1}
+    .kpi .val small{font-size:.95rem;color:var(--mut);font-weight:600}
+    .cols{grid-template-columns:1fr 1fr;margin-top:14px}
+    @media(max-width:760px){.cols{grid-template-columns:1fr}}
+    .card h2{font-size:.95rem;margin:0 0 14px;font-weight:700;display:flex;align-items:center;gap:8px}
+    .card h2 .tag{font-size:.7rem;color:var(--mut);font-weight:500}
+    .row{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--line)}
+    .row:last-child{border-bottom:0}
+    .row .name{flex:1;font-weight:600;font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .row .num{font-weight:700;color:var(--gold)}
+    .bar{height:7px;border-radius:999px;background:linear-gradient(90deg,var(--gold),#b8862f);margin-top:6px}
+    .barbg{background:#222838;border-radius:999px;height:7px;overflow:hidden;flex:1}
+    .feed .row .when{color:var(--mut);font-size:.8rem;min-width:64px}
+    .pill{font-size:.72rem;color:var(--mut);background:#222838;border:1px solid var(--line);padding:3px 8px;border-radius:999px}
+    .muted{color:var(--mut)}
+    .empty{color:var(--mut);text-align:center;padding:26px 0;font-size:.9rem}
+    /* login */
+    #gate{position:fixed;inset:0;background:rgba(8,10,14,.92);display:flex;align-items:center;justify-content:center;padding:24px;z-index:50}
+    #gate .box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;max-width:360px;width:100%;text-align:center}
+    #gate h3{font-family:'Cormorant Garamond',serif;font-size:1.7rem;margin:0 0 6px}
+    #gate p{color:var(--mut);font-size:.88rem;margin:0 0 18px}
+    #gate input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg2);color:var(--txt);font-size:1rem;margin-bottom:12px}
+    #gate button{width:100%;background:linear-gradient(90deg,var(--gold),#b8862f);color:#1a1407;border:0;font-weight:700;padding:12px;border-radius:12px;font-size:1rem}
+    #err{color:var(--red);font-size:.82rem;min-height:18px;margin-top:4px}
+    .updated{font-size:.78rem;color:var(--mut)}
+  </style>
+</head>
+<body>
+  <div id="gate">
+    <div class="box">
+      <h3>Painel de Vendas</h3>
+      <p>Digite a senha para acessar.</p>
+      <input id="pw" type="password" placeholder="Senha" autocomplete="current-password" />
+      <button id="enter">Entrar</button>
+      <div id="err"></div>
+    </div>
+  </div>
+
+  <div class="wrap" id="app" style="display:none">
+    <header class="top">
+      <div class="brand">
+        <h1>Vendas · <span class="muted">500 Rituais</span></h1>
+        <span class="live"><span class="dot"></span> ao vivo</span>
+      </div>
+      <div class="controls">
+        <select id="range">
+          <option value="1">Hoje</option>
+          <option value="7" selected>7 dias</option>
+          <option value="30">30 dias</option>
+          <option value="90">90 dias</option>
+        </select>
+        <button id="refresh">↻ Atualizar</button>
+        <span class="updated" id="updated"></span>
+      </div>
+    </header>
+
+    <div class="grid kpis">
+      <div class="card kpi"><div class="lbl">Vendas no período</div><div class="val" id="k-count">—</div></div>
+      <div class="card kpi"><div class="lbl">Receita no período</div><div class="val" id="k-rev">—</div></div>
+      <div class="card kpi"><div class="lbl">Vendas hoje</div><div class="val" id="k-today">—</div></div>
+      <div class="card kpi"><div class="lbl">Receita hoje</div><div class="val" id="k-todayrev">—</div></div>
+    </div>
+
+    <div class="grid cols">
+      <div class="card">
+        <h2>🎬 Vendas por vídeo <span class="tag" id="vid-tag"></span></h2>
+        <div id="byvideo"></div>
+      </div>
+      <div class="card">
+        <h2>🌎 Vendas por país</h2>
+        <div id="bycountry"></div>
+      </div>
+    </div>
+
+    <div class="card feed" style="margin-top:14px">
+      <h2>🧾 Últimas vendas</h2>
+      <div id="feed"></div>
+    </div>
+
+    <p class="empty" style="margin-top:24px">As visitas em tempo real (país, horário, vídeo) ficam no app do <b>Google Analytics</b>. Este painel é focado nas <b>vendas</b>.</p>
+  </div>
+
+  <script>
+    var FLAGS = { BR:'🇧🇷', US:'🇺🇸', ES:'🇪🇸', IT:'🇮🇹', FR:'🇫🇷', DE:'🇩🇪', GB:'🇬🇧', PT:'🇵🇹', MX:'🇲🇽', AR:'🇦🇷' };
+    function flag(c){ return FLAGS[c] || '🏳️'; }
+    function money(v, cur){ try{ return new Intl.NumberFormat('pt-BR',{style:'currency',currency:cur||'BRL'}).format(v); }catch(e){ return (cur||'')+' '+v.toFixed(2); } }
+    function moneyMap(m){ var ks=Object.keys(m); if(!ks.length) return '—'; return ks.map(function(c){return money(m[c],c);}).join('  ·  '); }
+    function ago(ts, now){ var s=now-ts; if(s<60)return 'agora'; if(s<3600)return Math.floor(s/60)+' min'; if(s<86400)return Math.floor(s/3600)+' h'; return Math.floor(s/86400)+' d'; }
+
+    var PW = '';
+    function getPW(){ try{ return localStorage.getItem('painel_pw')||''; }catch(e){ return ''; } }
+
+    async function load(){
+      var days = document.getElementById('range').value;
+      var r;
+      try{
+        r = await fetch('/api/stats?days='+days+'&key='+encodeURIComponent(PW));
+      }catch(e){ return; }
+      if(r.status===401){ openGate('Senha incorreta.'); return; }
+      var j = await r.json();
+      if(j.error){ document.getElementById('updated').textContent='erro: '+j.error; return; }
+      render(j);
+      var d=new Date(); document.getElementById('updated').textContent = 'atualizado '+d.toLocaleTimeString('pt-BR').slice(0,5);
+    }
+
+    function startOfTodayUTC(now){ return now - (now % 86400); }
+
+    function render(j){
+      var now = j.now, sales = j.sales||[];
+      var todayStart = startOfTodayUTC(now);
+      var rev = {}, todayRev = {}, todayCount = 0;
+      var byVideo = {}, byCountry = {};
+      sales.forEach(function(s){
+        rev[s.currency] = (rev[s.currency]||0) + s.amount;
+        if(s.t >= todayStart){ todayCount++; todayRev[s.currency]=(todayRev[s.currency]||0)+s.amount; }
+        if(!byVideo[s.video]) byVideo[s.video] = {count:0, rev:{}};
+        byVideo[s.video].count++; byVideo[s.video].rev[s.currency]=(byVideo[s.video].rev[s.currency]||0)+s.amount;
+        byCountry[s.country] = (byCountry[s.country]||0)+1;
+      });
+
+      document.getElementById('k-count').textContent = sales.length;
+      document.getElementById('k-rev').innerHTML = '<small></small>'+moneyMap(rev);
+      document.getElementById('k-today').textContent = todayCount;
+      document.getElementById('k-todayrev').innerHTML = '<small></small>'+moneyMap(todayRev);
+
+      // por video
+      var vids = Object.keys(byVideo).sort(function(a,b){return byVideo[b].count-byVideo[a].count;});
+      var maxV = vids.length ? byVideo[vids[0]].count : 0;
+      document.getElementById('vid-tag').textContent = vids.length ? (vids.length+' origens') : '';
+      document.getElementById('byvideo').innerHTML = vids.length ? vids.slice(0,12).map(function(v){
+        var o=byVideo[v]; var pct = maxV? Math.round(o.count/maxV*100):0;
+        return '<div class="row"><div style="flex:1;min-width:0">'
+          + '<div class="name">'+escapeHtml(v)+' <span class="muted">· '+o.count+'</span></div>'
+          + '<div class="barbg"><div class="bar" style="width:'+pct+'%"></div></div></div>'
+          + '<div class="num">'+moneyMap(o.rev)+'</div></div>';
+      }).join('') : '<div class="empty">Nenhuma venda ainda.</div>';
+
+      // por pais
+      var cs = Object.keys(byCountry).sort(function(a,b){return byCountry[b]-byCountry[a];});
+      document.getElementById('bycountry').innerHTML = cs.length ? cs.slice(0,12).map(function(c){
+        return '<div class="row"><div class="name">'+flag(c)+' '+escapeHtml(c)+'</div><div class="num">'+byCountry[c]+'</div></div>';
+      }).join('') : '<div class="empty">Sem dados de país.</div>';
+
+      // feed
+      document.getElementById('feed').innerHTML = sales.length ? sales.slice(0,25).map(function(s){
+        return '<div class="row"><span class="when">'+ago(s.t,now)+'</span>'
+          + '<span class="name">'+flag(s.country)+' '+money(s.amount,s.currency)+'</span>'
+          + '<span class="pill">'+escapeHtml(s.video)+'</span></div>';
+      }).join('') : '<div class="empty">Nenhuma venda no período.</div>';
+    }
+
+    function escapeHtml(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+    function openGate(msg){
+      document.getElementById('gate').style.display='flex';
+      document.getElementById('app').style.display='none';
+      document.getElementById('err').textContent = msg||'';
+    }
+    function enter(){
+      PW = document.getElementById('pw').value.trim();
+      try{ localStorage.setItem('painel_pw', PW); }catch(e){}
+      document.getElementById('gate').style.display='none';
+      document.getElementById('app').style.display='block';
+      load();
+    }
+
+    document.getElementById('enter').onclick = enter;
+    document.getElementById('pw').addEventListener('keydown',function(e){ if(e.key==='Enter') enter(); });
+    document.getElementById('refresh').onclick = load;
+    document.getElementById('range').onchange = load;
+
+    // auto-refresh 20s
+    setInterval(function(){ if(document.getElementById('app').style.display!=='none') load(); }, 20000);
+
+    // inicio
+    PW = getPW();
+    if(PW){ document.getElementById('gate').style.display='none'; document.getElementById('app').style.display='block'; load(); }
+  </script>
+</body>
+</html>
