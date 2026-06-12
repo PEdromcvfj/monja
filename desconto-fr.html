@@ -75,6 +75,7 @@
         }catch(e){ return ''; }
       }
       getRef();
+      try{ navigator.sendBeacon('/api/track?p='+encodeURIComponent(location.pathname)+'&v='+encodeURIComponent(getRef())); }catch(e){}
       function track(name, data){
         try{ if(typeof window.gtag==='function'){ window.gtag('event', name, data); } }catch(e){}
         try{ if(window.va){ window.va('event', { name: name, data: data }); } }catch(e){}
