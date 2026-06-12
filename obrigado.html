@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obrigado pela sua compra</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#2E3A2C" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF88GLDWV3"></script>
+  <script>
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config','G-JF88GLDWV3');
+  </script>
+  <!-- Vercel Web Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
+
+  <style>
+    body { margin:0; background:#FAF5EA; color:#2A2520; font-family:Inter,system-ui,sans-serif;
+           min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
+    .card { max-width:540px; text-align:center; }
+    .badge { width:84px;height:84px;border-radius:999px;margin:0 auto 22px;display:flex;align-items:center;justify-content:center;
+             font-size:40px;background:#7C8A66;color:#FAF5EA;box-shadow:0 16px 42px -18px rgba(58,74,54,.5); }
+    h1 { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:2.6rem; color:#2E3A2C; margin:0 0 14px; }
+    p  { font-size:1.1rem; line-height:1.6; color:#4a4239; margin:0 auto 10px; max-width:30rem; }
+    .sub { font-size:.95rem; color:#7C8A66; margin-top:18px; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="badge">🌿</div>
+    <h1 id="t">Obrigado pela sua compra!</h1>
+    <p id="m">Seu acesso aos 500 Rituais Ancestrais foi enviado para o seu e-mail.</p>
+    <p class="sub" id="s">Não recebeu? Verifique o spam ou a aba de promoções.</p>
+  </main>
+
+  <script>
+    (function(){
+      var L = {
+        pt:{t:"Obrigado pela sua compra!", m:"Seu acesso aos 500 Rituais Ancestrais foi enviado para o seu e-mail.", s:"Não recebeu? Verifique o spam ou a aba de promoções."},
+        es:{t:"¡Gracias por tu compra!", m:"Tu acceso a los 500 Rituales Ancestrales fue enviado a tu correo.", s:"¿No lo recibiste? Revisa el spam o la pestaña de promociones."},
+        it:{t:"Grazie per il tuo acquisto!", m:"Il tuo accesso ai 500 Rituali Ancestrali è stato inviato alla tua email.", s:"Non l'hai ricevuta? Controlla lo spam o la scheda promozioni."},
+        fr:{t:"Merci pour votre achat !", m:"Votre accès aux 500 Rituels Ancestraux a été envoyé à votre e-mail.", s:"Pas reçu ? Vérifiez les spams ou l'onglet promotions."},
+        de:{t:"Danke für deinen Kauf!", m:"Dein Zugang zu den 500 Ahnenritualen wurde an deine E-Mail gesendet.", s:"Nicht erhalten? Prüfe den Spam- oder Werbeordner."},
+        en:{t:"Thank you for your purchase!", m:"Your access to the 500 Ancestral Rituals has been sent to your email.", s:"Didn't get it? Check spam or the promotions tab."}
+      };
+      var p; try{ p = new URLSearchParams(location.search); }catch(e){ p = { get:function(){return null;} }; }
+      var lang = (p.get('lang')||'pt').toLowerCase().slice(0,2);
+      var tx = L[lang] || L.pt;
+      document.getElementById('t').textContent = tx.t;
+      document.getElementById('m').textContent = tx.m;
+      document.getElementById('s').textContent = tx.s;
+      document.documentElement.lang = lang;
+
+      // dados da venda
+      var value = parseFloat(p.get('value')) || 0;
+      var currency = (p.get('currency') || 'BRL').toUpperCase();
+      var sid = p.get('session_id') || '';
+      var ref = '';
+      try{ ref = localStorage.getItem('attrib_ref') || ''; }catch(e){}
+
+      // evita contar a mesma venda 2x se a pessoa recarregar a pagina
+      var key = 'purchase_' + (sid || (value + '_' + currency + '_' + ref));
+      var dup = false;
+      try{ dup = sessionStorage.getItem(key) === '1'; if(!dup) sessionStorage.setItem(key,'1'); }catch(e){}
+
+      if(!dup){
+        var data = { transaction_id: sid || ('na_'+Date.now()), value: value, currency: currency, video_ref: ref || 'direto' };
+        try{ if(typeof gtag==='function') gtag('event','purchase', data); }catch(e){}
+        try{ if(window.va) window.va('event', { name:'purchase', data:data }); }catch(e){}
+      }
+    })();
+  </script>
+</body>
+</html>
