@@ -89,8 +89,9 @@
       </div>
       <div class="controls">
         <select id="range">
-          <option value="1">Hoje</option>
-          <option value="7" selected>7 dias</option>
+          <option value="today" selected>Hoje</option>
+          <option value="yesterday">Ontem</option>
+          <option value="7">7 dias</option>
           <option value="30">30 dias</option>
           <option value="90">90 dias</option>
         </select>
@@ -101,11 +102,11 @@
 
     <!-- ====== RESUMO (primeiro plano) ====== -->
     <div class="grid kpis5">
-      <div class="card kpi hero-kpi"><div class="lbl">Visitas hoje</div><div class="val" id="o-visits">—</div></div>
+      <div class="card kpi hero-kpi"><div class="lbl" id="lbl-visits">Visitas hoje</div><div class="val" id="o-visits">—</div></div>
       <div class="card kpi hero-kpi"><div class="lbl">🟢 Ao vivo (5 min)</div><div class="val" id="o-live" style="color:var(--green)">—</div></div>
-      <div class="card kpi hero-kpi"><div class="lbl">Carrinhos hoje</div><div class="val" id="o-ck">—</div></div>
-      <div class="card kpi hero-kpi"><div class="lbl">Vendas hoje</div><div class="val" id="o-sales">—</div></div>
-      <div class="card kpi hero-kpi"><div class="lbl">Receita hoje</div><div class="val" id="o-rev" style="color:var(--gold)">—</div></div>
+      <div class="card kpi hero-kpi"><div class="lbl" id="lbl-ck">Carrinhos hoje</div><div class="val" id="o-ck">—</div></div>
+      <div class="card kpi hero-kpi"><div class="lbl" id="lbl-sales">Vendas hoje</div><div class="val" id="o-sales">—</div></div>
+      <div class="card kpi hero-kpi"><div class="lbl" id="lbl-rev">Receita hoje</div><div class="val" id="o-rev" style="color:var(--gold)">—</div></div>
     </div>
 
     <!-- ====== CARRINHOS RECENTES (topo) ====== -->
@@ -154,9 +155,19 @@
     var PW='';
     function getPW(){try{return localStorage.getItem('painel_pw')||'';}catch(e){return '';}}
 
+    var curWin = { since:0, until:0, name:'hoje' };
+    function windowFor(sel){
+      var now=Math.floor(Date.now()/1000), ST=startToday(now);
+      if(sel==='today') return {since:ST, until:now, name:'hoje'};
+      if(sel==='yesterday') return {since:ST-86400, until:ST-1, name:'ontem'};
+      var n=parseInt(sel,10)||7;
+      return {since:now-n*86400, until:now, name:n+' dias'};
+    }
+    function setLbl(id,t){var el=document.getElementById(id); if(el) el.textContent=t;}
+
     async function load(){
-      var days=document.getElementById('range').value;
-      var r; try{ r=await fetch('/api/stats?days='+days+'&key='+encodeURIComponent(PW)); }catch(e){return;}
+      curWin = windowFor(document.getElementById('range').value);
+      var r; try{ r=await fetch('/api/stats?since='+curWin.since+'&until='+curWin.until+'&key='+encodeURIComponent(PW)); }catch(e){return;}
       if(r.status===401){ openGate('Senha incorreta.'); return; }
       var j=await r.json();
       render(j);
@@ -164,35 +175,35 @@
     }
 
     function render(j){
-      var now=j.now;
-      var sel=document.getElementById('range').value;
-      var periodSince=(sel==='1')?startToday(now):now-parseInt(sel,10)*86400;
+      var now=j.now, since=curWin.since, until=curWin.until, pname=curWin.name;
 
-      // ===== VENDAS (cálculos) =====
-      var sales=(j.sales||[]).filter(function(s){return s.t>=periodSince;}); var ts=startToday(now);
-      var rev={},tRev={},tCount=0,sByV={},sByC={};
+      // ===== VENDAS (janela do período) =====
+      var sales=(j.sales||[]).filter(function(s){return s.t>=since && s.t<=until;});
+      var rev={},sByV={},sByC={};
       sales.forEach(function(s){
         rev[s.currency]=(rev[s.currency]||0)+s.amount;
-        if(s.t>=ts){tCount++;tRev[s.currency]=(tRev[s.currency]||0)+s.amount;}
         if(!sByV[s.video])sByV[s.video]={c:0,r:{}}; sByV[s.video].c++; sByV[s.video].r[s.currency]=(sByV[s.video].r[s.currency]||0)+s.amount;
         sByC[s.country]=(sByC[s.country]||0)+1;
       });
 
-      // ===== VISITAS =====
+      // ===== VISITAS / CARRINHOS =====
       var V=j.visits, vrecAll=(V&&V.recent)||[];
-      var vrec=vrecAll.filter(function(e){return e.t>=periodSince;});
+      var vrec=vrecAll.filter(function(e){return e.t>=since && e.t<=until;});
       var vLive=vrecAll.filter(function(e){return e.t>now-300;}).length;
-
-      // ===== CARRINHO =====
       var CK=j.checkouts, crecAll=(CK&&CK.recent)||[];
-      var crec=crecAll.filter(function(e){return e.t>=periodSince;});
+      var crec=crecAll.filter(function(e){return e.t>=since && e.t<=until;});
+      var pVisits=j.periodVisits||0, pCarts=j.periodCarts||0;
 
-      // ===== RESUMO (topo) =====
-      document.getElementById('o-visits').textContent = V? V.today : '—';
+      // ===== RESUMO (topo) — reflete o período escolhido =====
+      setLbl('lbl-visits','Visitas — '+pname);
+      setLbl('lbl-ck','Carrinhos — '+pname);
+      setLbl('lbl-sales','Vendas — '+pname);
+      setLbl('lbl-rev','Receita — '+pname);
+      document.getElementById('o-visits').textContent = V? pVisits : '—';
       document.getElementById('o-live').textContent = V? vLive : '—';
-      document.getElementById('o-ck').textContent = CK? CK.today : '—';
-      document.getElementById('o-sales').textContent = tCount;
-      document.getElementById('o-rev').innerHTML = Object.keys(tRev).length? moneyMap(tRev) : '<span class="muted">—</span>';
+      document.getElementById('o-ck').textContent = CK? pCarts : '—';
+      document.getElementById('o-sales').textContent = sales.length;
+      document.getElementById('o-rev').innerHTML = Object.keys(rev).length? moneyMap(rev) : '<span class="muted">—</span>';
 
       // ===== VISITAS (render) =====
       document.getElementById('v-total').textContent = V? ('· total '+V.total) : '';
@@ -210,9 +221,9 @@
           + '<div class="card"><h2>📄 Em que página entraram</h2>'+listRows(vByP,{blue:true,empty:'Sem visitas ainda.'})+'</div>'
           + '</div>'
           + '<div class="grid kpis3" style="margin-top:14px">'
-          + '<div class="card kpi"><div class="lbl">Visita → Carrinho (hoje)</div><div class="val">'+pct(CK?CK.today:0, V.today)+'</div></div>'
-          + '<div class="card kpi"><div class="lbl">Carrinho → Venda (hoje)</div><div class="val">'+pct(tCount, CK?CK.today:0)+'</div></div>'
-          + '<div class="card kpi"><div class="lbl">Visita → Venda (hoje)</div><div class="val" style="color:var(--gold)">'+pct(tCount, V.today)+'</div></div>'
+          + '<div class="card kpi"><div class="lbl">Visita → Carrinho ('+pname+')</div><div class="val">'+pct(pCarts, pVisits)+'</div></div>'
+          + '<div class="card kpi"><div class="lbl">Carrinho → Venda ('+pname+')</div><div class="val">'+pct(sales.length, pCarts)+'</div></div>'
+          + '<div class="card kpi"><div class="lbl">Visita → Venda ('+pname+')</div><div class="val" style="color:var(--gold)">'+pct(sales.length, pVisits)+'</div></div>'
           + '</div>'
           + '<div class="card feed" style="margin-top:14px"><h2>🟢 Visitantes ao vivo <span class="tag">'+vLive+' nos últimos 5 min</span></h2>'
           + (vrec.length? vrec.slice(0,30).map(function(e){return '<div class="row"><span class="when">'+ago(e.t,now)+'</span><span class="name">'+flag(e.c)+' '+esc(e.c)+' · <span class="muted">'+esc(pathLabel(e.p))+'</span></span><span class="pill">🎬 '+esc(e.v||'direto')+'</span></div>';}).join('') : '<div class="empty">Ninguém ainda.</div>')
@@ -248,10 +259,8 @@
       var sa=document.getElementById('sales-area');
       var vk=Object.keys(sByV).sort(function(a,b){return sByV[b].c-sByV[a].c;});
       sa.innerHTML =
-        '<div class="grid kpis"><div class="card kpi"><div class="lbl">Vendas no período</div><div class="val">'+sales.length+'</div></div>'
-        + '<div class="card kpi"><div class="lbl">Receita no período</div><div class="val">'+moneyMap(rev)+'</div></div>'
-        + '<div class="card kpi"><div class="lbl">Vendas hoje</div><div class="val">'+tCount+'</div></div>'
-        + '<div class="card kpi"><div class="lbl">Receita hoje</div><div class="val">'+(Object.keys(tRev).length?moneyMap(tRev):'—')+'</div></div></div>'
+        '<div class="grid cols"><div class="card kpi"><div class="lbl">Vendas — '+pname+'</div><div class="val">'+sales.length+'</div></div>'
+        + '<div class="card kpi"><div class="lbl">Receita — '+pname+'</div><div class="val">'+(Object.keys(rev).length?moneyMap(rev):'—')+'</div></div></div>'
         + (j.salesError? '<div class="note">⚠️ Vendas: configure <b>STRIPE_SECRET_KEY</b> ('+esc(j.salesError)+').</div>' : '')
         + '<div class="grid cols">'
         + '<div class="card"><h2>🎬 Vendas por reel (vídeo)</h2>'+(vk.length? vk.slice(0,12).map(function(v){var o=sByV[v];var max=sByV[vk[0]].c;var pct=Math.round(o.c/max*100);return '<div class="row"><div style="flex:1;min-width:0"><div class="name">'+esc(v)+' <span class="muted">· '+o.c+'</span></div><div class="barbg"><div class="bar" style="width:'+pct+'%"></div></div></div><div class="num">'+moneyMap(o.r)+'</div></div>';}).join('') : '<div class="empty">Nenhuma venda ainda.</div>')+'</div>'

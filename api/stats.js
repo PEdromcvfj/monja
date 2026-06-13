@@ -1,8 +1,6 @@
-// Função serverless (Vercel) — devolve VENDAS (Stripe) e VISITAS (KV) para o painel.
-// Variáveis de ambiente:
-//   STRIPE_SECRET_KEY   -> chave (de preferência RESTRITA, somente leitura) do Stripe
-//   DASHBOARD_PASSWORD  -> senha para abrir o painel
-//   KV_REST_API_URL / KV_REST_API_TOKEN  -> armazenamento (visitas). Opcional.
+// Função serverless (Vercel) — devolve VENDAS (Stripe + Kiwify) e VISITAS (KV) para o painel.
+// Aceita janela por ?since=&until= (unix). Fallback: ?days=.
+//   STRIPE_SECRET_KEY · DASHBOARD_PASSWORD · KV_REST_API_URL / KV_REST_API_TOKEN
 function detectKV() {
   const e = process.env;
   let url = e.KV_REST_API_URL || e.UPSTASH_REDIS_REST_URL || e.STORAGE_REST_API_URL || '';
@@ -15,16 +13,24 @@ function detectKV() {
   }
   return { url: url, token: token };
 }
+const BR_OFF = 3 * 3600 * 1000; // UTC-3
+function brYmd(unixSec) {
+  const d = new Date(unixSec * 1000 - BR_OFF);
+  return '' + d.getUTCFullYear() + String(d.getUTCMonth() + 1).padStart(2, '0') + String(d.getUTCDate()).padStart(2, '0');
+}
 
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
-
   const pass = process.env.DASHBOARD_PASSWORD || '';
   const key = (req.query && req.query.key) || '';
   if (!pass || key !== pass) { res.status(401).json({ error: 'unauthorized' }); return; }
 
-  const days = Math.min(parseInt((req.query && req.query.days) || '30', 10) || 30, 90);
-  const since = Math.floor(Date.now() / 1000) - days * 86400;
+  const q = req.query || {};
+  const nowSec = Math.floor(Date.now() / 1000);
+  let until = parseInt(q.until, 10) || nowSec;
+  let since = parseInt(q.since, 10) || (until - (Math.min(parseInt(q.days, 10) || 30, 95)) * 86400);
+  if (until - since > 95 * 86400) since = until - 95 * 86400;
+  if (since > until) since = until - 86400;
 
   // ---------- VENDAS (Stripe) ----------
   let sales = [];
@@ -36,7 +42,7 @@ module.exports = async (req, res) => {
       let after = '';
       for (let i = 0; i < 12; i++) {
         const url = 'https://api.stripe.com/v1/checkout/sessions?limit=100'
-          + '&created%5Bgte%5D=' + since
+          + '&created%5Bgte%5D=' + since + '&created%5Blte%5D=' + until
           + (after ? '&starting_after=' + after : '');
         const r = await fetch(url, { headers: { Authorization: 'Bearer ' + sk } });
         const j = await r.json();
@@ -55,52 +61,54 @@ module.exports = async (req, res) => {
     } catch (e) { salesError = String((e && e.message) || e); }
   } else { salesError = 'missing_STRIPE_SECRET_KEY'; }
 
-  // ---------- VISITAS (KV) ----------
-  let visits = null;
-  let checkouts = null;
-  let kiwifyRaw = [];
+  // ---------- VISITAS / CARRINHOS (KV) ----------
+  let visits = null, checkouts = null, kiwifyRaw = [];
+  let periodVisits = 0, periodCarts = 0;
   const kv = detectKV();
-  const kvUrl = kv.url, kvTok = kv.token;
-  if (kvUrl && kvTok) {
+  if (kv.url && kv.token) {
     try {
-      const d = new Date(Date.now() - 3 * 3600 * 1000); // dia no horário do Brasil (UTC-3)
-      const ymd = '' + d.getUTCFullYear()
-        + String(d.getUTCMonth() + 1).padStart(2, '0')
-        + String(d.getUTCDate()).padStart(2, '0');
-      const r = await fetch(kvUrl + '/pipeline', {
+      // datas (horário do Brasil) dentro da janela
+      const dates = []; const seen = {};
+      for (let ts = since; ts <= until; ts += 86400) { const y = brYmd(ts); if (!seen[y]) { seen[y] = 1; dates.push(y); } }
+      const yU = brYmd(until); if (!seen[yU]) { dates.push(yU); }
+
+      const cmds = [
+        ['LRANGE', 'ev', '0', '999'],   // 0
+        ['GET', 'v:total'],              // 1
+        ['LRANGE', 'ck', '0', '499'],   // 2
+        ['GET', 'ck:total'],             // 3
+        ['LRANGE', 'ks', '0', '999'],   // 4
+        ['LRANGE', 'ks_raw', '0', '9']  // 5
+      ];
+      dates.forEach(dt => { cmds.push(['GET', 'v:' + dt]); cmds.push(['GET', 'ck:' + dt]); });
+
+      const r = await fetch(kv.url + '/pipeline', {
         method: 'POST',
-        headers: { Authorization: 'Bearer ' + kvTok, 'Content-Type': 'application/json' },
-        body: JSON.stringify([
-          ['LRANGE', 'ev', '0', '999'],
-          ['GET', 'v:' + ymd],
-          ['GET', 'v:total'],
-          ['LRANGE', 'ck', '0', '499'],
-          ['GET', 'ck:' + ymd],
-          ['GET', 'ck:total'],
-          ['LRANGE', 'ks', '0', '999'],
-          ['LRANGE', 'ks_raw', '0', '9']
-        ])
+        headers: { Authorization: 'Bearer ' + kv.token, 'Content-Type': 'application/json' },
+        body: JSON.stringify(cmds)
       });
       const j = await r.json();
-      kiwifyRaw = (j[7] && j[7].result) || [];
       const parse = arr => (arr || []).map(s => { try { return JSON.parse(s); } catch (e) { return null; } }).filter(Boolean);
-      visits = {
-        today: parseInt((j[1] && j[1].result) || '0', 10) || 0,
-        total: parseInt((j[2] && j[2].result) || '0', 10) || 0,
-        recent: parse(j[0] && j[0].result)
-      };
-      checkouts = {
-        today: parseInt((j[4] && j[4].result) || '0', 10) || 0,
-        total: parseInt((j[5] && j[5].result) || '0', 10) || 0,
-        recent: parse(j[3] && j[3].result)
-      };
-      // junta as vendas do Kiwify (PT) com as do Stripe
-      const ksales = parse(j[6] && j[6].result).filter(s => s.t >= since);
+      kiwifyRaw = (j[5] && j[5].result) || [];
+      visits = { total: parseInt((j[1] && j[1].result) || '0', 10) || 0, recent: parse(j[0] && j[0].result) };
+      checkouts = { total: parseInt((j[3] && j[3].result) || '0', 10) || 0, recent: parse(j[2] && j[2].result) };
+      // soma dos contadores diários no período
+      dates.forEach((dt, i) => {
+        periodVisits += parseInt((j[6 + i * 2] && j[6 + i * 2].result) || '0', 10) || 0;
+        periodCarts += parseInt((j[6 + i * 2 + 1] && j[6 + i * 2 + 1].result) || '0', 10) || 0;
+      });
+      // vendas Kiwify dentro da janela
+      const ksales = parse(j[4] && j[4].result).filter(s => s.t >= since && s.t <= until);
       if (ksales.length) { sales = sales.concat(ksales).sort((a, b) => b.t - a.t); }
     } catch (e) { visits = null; checkouts = null; }
   }
 
-  const out = { now: Math.floor(Date.now() / 1000), days: days, sales: sales, salesError: salesError, visits: visits, checkouts: checkouts };
-  if (req.query && req.query.raw === '1') out.kiwifyRaw = kiwifyRaw;
+  const out = {
+    now: nowSec, since: since, until: until,
+    sales: sales, salesError: salesError,
+    visits: visits, checkouts: checkouts,
+    periodVisits: periodVisits, periodCarts: periodCarts
+  };
+  if (q.raw === '1') out.kiwifyRaw = kiwifyRaw;
   res.status(200).json(out);
 };
