@@ -55,6 +55,12 @@ module.exports = async (req, res) => {
       headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
       body: JSON.stringify(pipeline)
     });
+    if (type === 'checkout') {
+      try {
+        const { notify, pageLabel } = require('../lib/notify');
+        await notify('🛒 Carrinho iniciado\n' + country + ' · ' + pageLabel(path) + ' · 🎬 ' + video);
+      } catch (e) {}
+    }
     res.status(204).end();
   } catch (e) {
     res.status(204).end();

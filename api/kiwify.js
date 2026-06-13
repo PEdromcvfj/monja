@@ -74,6 +74,12 @@ module.exports = async (req, res) => {
         body: JSON.stringify(pipeline)
       });
     }
+    if (isPaid) {
+      try {
+        const { notify } = require('../lib/notify');
+        await notify('💰 VENDA! (Kiwify)\n' + currency + ' ' + amount.toFixed(2) + ' · ' + country + ' · 🎬 ' + video);
+      } catch (e) {}
+    }
     res.status(200).json({ ok: true, recorded: isPaid, amount: amount, currency: currency, video: video });
   } catch (e) {
     res.status(200).json({ ok: true, error: String((e && e.message) || e) });
