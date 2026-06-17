@@ -62,7 +62,7 @@ module.exports = async (req, res) => {
   } else { salesError = 'missing_STRIPE_SECRET_KEY'; }
 
   // ---------- VISITAS / CARRINHOS (KV) ----------
-  let visits = null, checkouts = null, kiwifyRaw = [];
+  let visits = null, checkouts = null, kiwifyRaw = [], paradiseRaw = [];
   let periodVisits = 0, periodCarts = 0;
   const kv = detectKV();
   if (kv.url && kv.token) {
@@ -78,7 +78,8 @@ module.exports = async (req, res) => {
         ['LRANGE', 'ck', '0', '499'],   // 2
         ['GET', 'ck:total'],             // 3
         ['LRANGE', 'ks', '0', '999'],   // 4
-        ['LRANGE', 'ks_raw', '0', '9']  // 5
+        ['LRANGE', 'ks_raw', '0', '9'], // 5
+        ['LRANGE', 'ps_raw', '0', '9']  // 6
       ];
       dates.forEach(dt => { cmds.push(['GET', 'v:' + dt]); cmds.push(['GET', 'ck:' + dt]); });
 
@@ -90,12 +91,13 @@ module.exports = async (req, res) => {
       const j = await r.json();
       const parse = arr => (arr || []).map(s => { try { return JSON.parse(s); } catch (e) { return null; } }).filter(Boolean);
       kiwifyRaw = (j[5] && j[5].result) || [];
+      paradiseRaw = (j[6] && j[6].result) || [];
       visits = { total: parseInt((j[1] && j[1].result) || '0', 10) || 0, recent: parse(j[0] && j[0].result) };
       checkouts = { total: parseInt((j[3] && j[3].result) || '0', 10) || 0, recent: parse(j[2] && j[2].result) };
       // soma dos contadores diários no período
       dates.forEach((dt, i) => {
-        periodVisits += parseInt((j[6 + i * 2] && j[6 + i * 2].result) || '0', 10) || 0;
-        periodCarts += parseInt((j[6 + i * 2 + 1] && j[6 + i * 2 + 1].result) || '0', 10) || 0;
+        periodVisits += parseInt((j[7 + i * 2] && j[7 + i * 2].result) || '0', 10) || 0;
+        periodCarts += parseInt((j[7 + i * 2 + 1] && j[7 + i * 2 + 1].result) || '0', 10) || 0;
       });
       // vendas Kiwify dentro da janela
       const ksales = parse(j[4] && j[4].result).filter(s => s.t >= since && s.t <= until);
@@ -109,6 +111,6 @@ module.exports = async (req, res) => {
     visits: visits, checkouts: checkouts,
     periodVisits: periodVisits, periodCarts: periodCarts
   };
-  if (q.raw === '1') out.kiwifyRaw = kiwifyRaw;
+  if (q.raw === '1') { out.kiwifyRaw = kiwifyRaw; out.paradiseRaw = paradiseRaw; }
   res.status(200).json(out);
 };
