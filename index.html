@@ -212,9 +212,8 @@
   </style>
   <!-- VTurb: pre-carregamento (velocidade) -->
   <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
-  <link rel="preload" href="https://scripts.converteai.net/c368f599-b51e-48b5-ab09-bdf942240f7c/players/6a2b2b4e8950ec706cbf773d/v4/player.js" as="script">
+  <link rel="preload" href="https://scripts.converteai.net/c368f599-b51e-48b5-ab09-bdf942240f7c/players/6a3485b68a324fd18f7dc021/v4/player.js" as="script">
   <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
-  <link rel="preload" href="https://cdn.converteai.net/c368f599-b51e-48b5-ab09-bdf942240f7c/6a2b2b478001297f97e67c9c/main.m3u8" as="fetch">
   <link rel="dns-prefetch" href="https://cdn.converteai.net">
   <link rel="dns-prefetch" href="https://scripts.converteai.net">
   <link rel="dns-prefetch" href="https://images.converteai.net">
@@ -311,8 +310,8 @@
       </h1>
       <!-- Player de video (VSL) -->
       <div class="mb-7 max-w-2xl mx-auto">
-        <vturb-smartplayer id="vid-6a2b2b4e8950ec706cbf773d" style="display: block; margin: 0 auto; width: 100%;"></vturb-smartplayer>
-        <script type="text/javascript">var s=document.createElement("script");s.src="https://scripts.converteai.net/c368f599-b51e-48b5-ab09-bdf942240f7c/players/6a2b2b4e8950ec706cbf773d/v4/player.js",s.async=!0,document.head.appendChild(s);</script>
+        <vturb-smartplayer id="vid-6a3485b68a324fd18f7dc021" style="display: block; margin: 0 auto; width: 100%;"></vturb-smartplayer>
+        <script type="text/javascript">var s=document.createElement("script");s.src="https://scripts.converteai.net/c368f599-b51e-48b5-ab09-bdf942240f7c/players/6a3485b68a324fd18f7dc021/v4/player.js",s.async=!0,document.head.appendChild(s);</script>
       </div>
       <!-- Botao de compra abaixo do video -->
       <div class="mb-2">
@@ -975,18 +974,19 @@
     /* ===========================================================
        CONFIGURAÇÃO — EDITE AQUI
        =========================================================== */
-    // 🔗 URL do checkout (PIX/ParadisePags — preço cheio R$ 49,90).
+    // 🔗 A compra é feita pelo botão DENTRO do vídeo (link de R$ 19 embutido pelo cliente).
+    //    Os botões de compra da própria página ficam OCULTOS (ver abaixo). Esta URL não é usada.
     const STRIPE_CHECKOUT_URL_PT = "https://compraonlinesegurada.org.ua/c/9b8d718275";
 
     // 💰 Preços (troque facilmente aqui)
-    const PRECO_DE  = "R$ 97,00";
-    const PRECO_POR = "R$ 49,90";
+    const PRECO_DE  = "R$ 47,00";
+    const PRECO_POR = "R$ 19,00";
     /* =========================================================== */
 
-    // Aplica a URL de checkout em todos os botões de CTA
+    // A compra acontece pelo botão DENTRO do vídeo (com o link de R$ 19).
+    // Por isso os botões de compra da própria página ficam OCULTOS.
     document.querySelectorAll('[data-checkout]').forEach(function (el) {
-      el.setAttribute('href', STRIPE_CHECKOUT_URL_PT);
-      el.setAttribute('rel', 'noopener');
+      el.style.display = 'none';
     });
 
     // Aplica os preços em todos os pontos da página
