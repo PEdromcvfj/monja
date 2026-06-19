@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Renova Memórias — Restaure e Colorize Suas Fotos Antigas</title>
+
+  <!-- ===================== SEO ===================== -->
+  <meta name="description" content="Renova Memórias: restauramos fotos antigas rasgadas, manchadas e desbotadas, e colorizamos imagens em preto e branco. Suas lembranças de volta à vida com acabamento profissional." />
+  <meta name="keywords" content="restauração de fotos, restaurar foto antiga, colorizar foto, foto rasgada, foto manchada, recuperar foto, memórias" />
+  <meta name="author" content="Renova Memórias" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#1C1714" />
+
+  <!-- ===================== Open Graph ===================== -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:title" content="Renova Memórias — restaure e colorize suas fotos antigas" />
+  <meta property="og:description" content="Restauramos rasgos, manchas e desbotamento e colorizamos fotos P&B. Suas memórias de volta à vida." />
+  <meta property="og:image" content="https://placehold.co/1200x630/1C1714/E7C77B?text=Renova+Mem%C3%B3rias" />
+
+  <!-- ===================== Fontes ===================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- ===================== Tailwind ===================== -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink:    { DEFAULT: '#1C1714', soft: '#2A2521', mute: '#5A5048' },
+            cream:  { DEFAULT: '#FAF6EF', soft: '#F3ECE0', deep: '#EADFCB' },
+            gold:   { DEFAULT: '#C79A4B', light: '#E7C77B', dark: '#A87E33' },
+            sepia:  { DEFAULT: '#8A6D4B' },
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans:  ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background-color: #FAF6EF; color: #1C1714; }
+    .text-balance { text-wrap: balance; }
+
+    /* FAQ */
+    details > summary { list-style: none; cursor: pointer; }
+    details > summary::-webkit-details-marker { display: none; }
+    details[open] .faq-icon { transform: rotate(45deg); }
+    .faq-icon { transition: transform .25s ease; }
+
+    /* Reveal */
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+      .reveal.is-visible { opacity: 1; transform: none; }
+    }
+
+    .shadow-soft { box-shadow: 0 22px 60px -26px rgba(28,23,20,.45); }
+    .shadow-card { box-shadow: 0 10px 30px -16px rgba(28,23,20,.30); }
+    .hr-gold { height: 1px; background: linear-gradient(90deg, transparent, rgba(199,154,75,.6), transparent); }
+
+    /* ===== Slider Antes/Depois ===== */
+    .ba { position: relative; user-select: none; overflow: hidden; border-radius: 1rem; }
+    .ba img { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+    .ba .after { position: absolute; inset: 0; clip-path: inset(0 0 0 50%); }
+    .ba .handle {
+      position: absolute; top: 0; bottom: 0; left: 50%; width: 2px;
+      background: #FAF6EF; transform: translateX(-1px); pointer-events: none;
+    }
+    .ba .knob {
+      position: absolute; top: 50%; left: 50%; width: 44px; height: 44px;
+      transform: translate(-50%,-50%); border-radius: 999px; background: #FAF6EF;
+      box-shadow: 0 4px 16px rgba(0,0,0,.35); display: grid; place-items: center;
+      pointer-events: none; color: #1C1714; font-size: 14px;
+    }
+    .ba .tag {
+      position: absolute; bottom: 12px; padding: 4px 12px; border-radius: 999px;
+      font-size: 11px; letter-spacing: .12em; font-weight: 600; text-transform: uppercase;
+      background: rgba(28,23,20,.72); color: #FAF6EF; backdrop-filter: blur(4px);
+    }
+    .ba input[type=range] {
+      position: absolute; inset: 0; width: 100%; height: 100%; margin: 0;
+      opacity: 0; cursor: ew-resize;
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased text-ink">
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="sticky top-0 z-40 bg-cream/85 backdrop-blur border-b border-ink/5">
+    <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
+      <a href="#topo" class="flex items-center gap-2.5">
+        <span class="grid place-items-center w-9 h-9 rounded-full bg-ink text-gold-light font-serif text-lg">R</span>
+        <span class="font-serif text-xl tracking-tight">Renova <span class="text-gold-dark">Memórias</span></span>
+      </a>
+      <nav class="hidden md:flex items-center gap-7 text-sm text-ink-mute">
+        <a href="#como" class="hover:text-ink transition">Como funciona</a>
+        <a href="#galeria" class="hover:text-ink transition">Exemplos</a>
+        <a href="#preco" class="hover:text-ink transition">Preço</a>
+        <a href="#faq" class="hover:text-ink transition">Dúvidas</a>
+      </nav>
+      <a href="#preco" class="inline-flex items-center gap-2 rounded-full bg-gold text-ink font-semibold text-sm px-5 py-2.5 hover:bg-gold-dark hover:text-cream transition shadow-card">
+        Restaurar agora
+      </a>
+    </div>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section id="topo" class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-cream via-cream to-cream-soft"></div>
+    <div class="relative max-w-6xl mx-auto px-5 pt-14 pb-16 md:pt-20 md:pb-24 grid md:grid-cols-2 gap-12 items-center">
+      <div class="reveal">
+        <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-gold-dark bg-gold-light/30 rounded-full px-3 py-1.5">
+          ✦ Memórias de volta à vida
+        </span>
+        <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl leading-[1.05] mt-5 text-balance">
+          Restaure e colorize<br class="hidden sm:block" /> suas <span class="text-gold-dark italic">fotos antigas</span>
+        </h1>
+        <p class="text-lg text-ink-soft/90 mt-5 max-w-md leading-relaxed">
+          Recuperamos fotos rasgadas, manchadas e desbotadas — e damos cor às imagens em preto e branco. Acabamento profissional, feito à mão por especialistas.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-3 mt-8">
+          <a href="#preco" class="inline-flex items-center gap-2 rounded-full bg-ink text-cream font-semibold px-7 py-4 hover:bg-ink-soft transition shadow-soft">
+            Quero restaurar minha foto →
+          </a>
+          <span class="text-sm text-ink-mute">A partir de <b class="text-ink">R$ 39,90</b> por foto</span>
+        </div>
+
+        <div class="flex items-center gap-6 mt-9 text-sm text-ink-mute">
+          <div class="flex items-center gap-2"><span class="text-gold text-lg">★★★★★</span> +3.000 fotos restauradas</div>
+          <div class="hidden sm:flex items-center gap-2">🔒 Pagamento via PIX</div>
+        </div>
+      </div>
+
+      <!-- Slider antes/depois -->
+      <div class="reveal">
+        <div class="ba shadow-soft aspect-[4/5] max-w-md mx-auto" data-ba>
+          <img src="https://placehold.co/800x1000/3a342e/c9bfb0?text=ANTES" alt="Foto antiga danificada" class="before" />
+          <div class="after">
+            <img src="https://placehold.co/800x1000/8a6d4b/faf6ef?text=DEPOIS" alt="Foto restaurada e colorizada" />
+          </div>
+          <span class="tag left-3">Antes</span>
+          <span class="tag right-3">Depois</span>
+          <div class="handle"></div>
+          <div class="knob">⇄</div>
+          <input type="range" min="0" max="100" value="50" aria-label="Comparar antes e depois" />
+        </div>
+        <p class="text-center text-xs text-ink-mute mt-3">Arraste para comparar ◂ ▸</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAIXA DE CONFIANÇA ===================== -->
+  <section class="bg-ink text-cream">
+    <div class="max-w-6xl mx-auto px-5 py-7 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div><div class="font-serif text-2xl text-gold-light">3.000+</div><div class="text-xs text-cream/60 mt-1">Fotos restauradas</div></div>
+      <div><div class="font-serif text-2xl text-gold-light">3 a 5 dias</div><div class="text-xs text-cream/60 mt-1">Prazo de entrega</div></div>
+      <div><div class="font-serif text-2xl text-gold-light">100%</div><div class="text-xs text-cream/60 mt-1">Digital, fácil e seguro</div></div>
+      <div><div class="font-serif text-2xl text-gold-light">PIX</div><div class="text-xs text-cream/60 mt-1">Pagamento rápido</div></div>
+    </div>
+  </section>
+
+  <!-- ===================== COMO FUNCIONA ===================== -->
+  <section id="como" class="max-w-6xl mx-auto px-5 py-20 md:py-24">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <span class="text-xs font-semibold tracking-widest uppercase text-gold-dark">Simples e rápido</span>
+      <h2 class="font-serif text-3xl md:text-4xl mt-3">Como funciona</h2>
+      <p class="text-ink-mute mt-4">Em 3 passos suas memórias voltam novinhas — sem sair de casa.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 mt-14">
+      <div class="reveal bg-white rounded-2xl p-8 shadow-card border border-ink/5">
+        <div class="w-12 h-12 rounded-full bg-gold-light/40 text-gold-dark grid place-items-center font-serif text-xl">1</div>
+        <h3 class="font-serif text-xl mt-5">Envie sua foto</h3>
+        <p class="text-ink-mute mt-2 text-sm leading-relaxed">Tire uma foto com o celular da imagem original ou envie o arquivo digitalizado. Quanto melhor a luz, melhor o resultado.</p>
+      </div>
+      <div class="reveal bg-white rounded-2xl p-8 shadow-card border border-ink/5">
+        <div class="w-12 h-12 rounded-full bg-gold-light/40 text-gold-dark grid place-items-center font-serif text-xl">2</div>
+        <h3 class="font-serif text-xl mt-5">Nós restauramos</h3>
+        <p class="text-ink-mute mt-2 text-sm leading-relaxed">Nossos especialistas corrigem rasgos, manchas e desbotamento, e colorizam quando você quiser — tudo à mão, com cuidado.</p>
+      </div>
+      <div class="reveal bg-white rounded-2xl p-8 shadow-card border border-ink/5">
+        <div class="w-12 h-12 rounded-full bg-gold-light/40 text-gold-dark grid place-items-center font-serif text-xl">3</div>
+        <h3 class="font-serif text-xl mt-5">Receba pronta</h3>
+        <p class="text-ink-mute mt-2 text-sm leading-relaxed">Você recebe a foto restaurada em alta resolução (JPEG/PNG), pronta para imprimir, guardar ou presentear.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== O QUE CORRIGIMOS ===================== -->
+  <section class="bg-cream-soft border-y border-ink/5">
+    <div class="max-w-6xl mx-auto px-5 py-20 md:py-24">
+      <div class="text-center max-w-2xl mx-auto reveal">
+        <span class="text-xs font-semibold tracking-widest uppercase text-gold-dark">Nossos serviços</span>
+        <h2 class="font-serif text-3xl md:text-4xl mt-3">O que conseguimos recuperar</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-14">
+        <div class="reveal flex gap-4 bg-white rounded-xl p-6 shadow-card border border-ink/5">
+          <span class="text-2xl">🩹</span><div><h3 class="font-semibold">Rasgos e dobras</h3><p class="text-sm text-ink-mute mt-1">Reconstruímos partes rasgadas, vincadas ou faltando.</p></div>
+        </div>
+        <div class="reveal flex gap-4 bg-white rounded-xl p-6 shadow-card border border-ink/5">
+          <span class="text-2xl">💧</span><div><h3 class="font-semibold">Manchas e mofo</h3><p class="text-sm text-ink-mute mt-1">Removemos manchas de água, mofo e amarelado do tempo.</p></div>
+        </div>
+        <div class="reveal flex gap-4 bg-white rounded-xl p-6 shadow-card border border-ink/5">
+          <span class="text-2xl">🎨</span><div><h3 class="font-semibold">Colorização</h3><p class="text-sm text-ink-mute mt-1">Damos cores realistas a fotos em preto e branco.</p></div>
+        </div>
+        <div class="reveal flex gap-4 bg-white rounded-xl p-6 shadow-card border border-ink/5">
+          <span class="text-2xl">✨</span><div><h3 class="font-semibold">Desbotamento</h3><p class="text-sm text-ink-mute mt-1">Recuperamos contraste, nitidez e brilho perdidos.</p></div>
+        </div>
+        <div class="reveal flex gap-4 bg-white rounded-xl p-6 shadow-card border border-ink/5">
+          <span class="text-2xl">🧹</span><div><h3 class="font-semibold">Remoção de objetos</h3><p class="text-sm text-ink-mute mt-1">Tiramos riscos, vincos, pessoas ou elementos indesejados.</p></div>
+        </div>
+        <div class="reveal flex gap-4 bg-white rounded-xl p-6 shadow-card border border-ink/5">
+          <span class="text-2xl">🖼️</span><div><h3 class="font-semibold">Alta resolução</h3><p class="text-sm text-ink-mute mt-1">Entrega pronta para imprimir em qualquer tamanho.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== GALERIA ANTES/DEPOIS ===================== -->
+  <section id="galeria" class="max-w-6xl mx-auto px-5 py-20 md:py-24">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <span class="text-xs font-semibold tracking-widest uppercase text-gold-dark">Resultados reais</span>
+      <h2 class="font-serif text-3xl md:text-4xl mt-3">Veja a transformação</h2>
+      <p class="text-ink-mute mt-4">Arraste cada imagem para comparar o antes e o depois.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14">
+      <!-- card -->
+      <figure class="reveal">
+        <div class="ba shadow-card aspect-square" data-ba>
+          <img src="https://placehold.co/700x700/3a342e/c9bfb0?text=ANTES" alt="" class="before" />
+          <div class="after"><img src="https://placehold.co/700x700/8a6d4b/faf6ef?text=DEPOIS" alt="" /></div>
+          <span class="tag left-3">Antes</span><span class="tag right-3">Depois</span>
+          <div class="handle"></div><div class="knob">⇄</div>
+          <input type="range" min="0" max="100" value="50" aria-label="Comparar" />
+        </div>
+        <figcaption class="text-sm text-ink-mute mt-3 text-center">Rasgos removidos + colorização</figcaption>
+      </figure>
+
+      <figure class="reveal">
+        <div class="ba shadow-card aspect-square" data-ba>
+          <img src="https://placehold.co/700x700/2f2a26/c9bfb0?text=ANTES" alt="" class="before" />
+          <div class="after"><img src="https://placehold.co/700x700/7a6248/faf6ef?text=DEPOIS" alt="" /></div>
+          <span class="tag left-3">Antes</span><span class="tag right-3">Depois</span>
+          <div class="handle"></div><div class="knob">⇄</div>
+          <input type="range" min="0" max="100" value="50" aria-label="Comparar" />
+        </div>
+        <figcaption class="text-sm text-ink-mute mt-3 text-center">Manchas e mofo eliminados</figcaption>
+      </figure>
+
+      <figure class="reveal">
+        <div class="ba shadow-card aspect-square" data-ba>
+          <img src="https://placehold.co/700x700/403a33/c9bfb0?text=ANTES" alt="" class="before" />
+          <div class="after"><img src="https://placehold.co/700x700/93714d/faf6ef?text=DEPOIS" alt="" /></div>
+          <span class="tag left-3">Antes</span><span class="tag right-3">Depois</span>
+          <div class="handle"></div><div class="knob">⇄</div>
+          <input type="range" min="0" max="100" value="50" aria-label="Comparar" />
+        </div>
+        <figcaption class="text-sm text-ink-mute mt-3 text-center">Foto desbotada recuperada</figcaption>
+      </figure>
+    </div>
+    <p class="text-center text-xs text-ink-mute mt-8">* Substitua estas imagens pelos seus exemplos reais de antes/depois.</p>
+  </section>
+
+  <!-- ===================== PREÇO / CHECKOUT ===================== -->
+  <section id="preco" class="bg-ink text-cream">
+    <div class="max-w-5xl mx-auto px-5 py-20 md:py-24">
+      <div class="text-center max-w-2xl mx-auto reveal">
+        <span class="text-xs font-semibold tracking-widest uppercase text-gold-light">Preço único</span>
+        <h2 class="font-serif text-3xl md:text-4xl mt-3 text-cream">Restaure agora pelo PIX</h2>
+        <p class="text-cream/70 mt-4">Sem mensalidade, sem surpresa. Você paga por foto e recebe pronta em poucos dias.</p>
+      </div>
+
+      <div class="mt-14 grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        <!-- Plano 1 -->
+        <div class="reveal bg-ink-soft rounded-2xl p-8 border border-cream/10">
+          <h3 class="font-serif text-xl text-cream">1 Foto</h3>
+          <div class="mt-3 flex items-end gap-1">
+            <span class="font-serif text-4xl text-gold-light">R$ 39,90</span>
+          </div>
+          <p class="text-cream/60 text-sm mt-1">por foto restaurada</p>
+          <ul class="mt-6 space-y-3 text-sm text-cream/80">
+            <li class="flex gap-2"><span class="text-gold-light">✓</span> Restauração completa</li>
+            <li class="flex gap-2"><span class="text-gold-light">✓</span> Entrega em alta resolução</li>
+            <li class="flex gap-2"><span class="text-gold-light">✓</span> Prazo de 3 a 5 dias</li>
+          </ul>
+          <a href="#" data-checkout class="mt-7 block text-center rounded-full bg-cream text-ink font-semibold px-6 py-3.5 hover:bg-gold-light transition">
+            Pagar com PIX
+          </a>
+        </div>
+
+        <!-- Plano 2 destaque -->
+        <div class="reveal relative bg-gradient-to-b from-gold to-gold-dark rounded-2xl p-8 text-ink shadow-soft">
+          <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-ink text-gold-light text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full">Mais escolhido</span>
+          <h3 class="font-serif text-xl">Combo 3 Fotos</h3>
+          <div class="mt-3 flex items-end gap-2">
+            <span class="font-serif text-4xl">R$ 99,90</span>
+            <span class="line-through text-ink/50 mb-1">R$ 119,70</span>
+          </div>
+          <p class="text-ink/70 text-sm mt-1">economize R$ 19,80</p>
+          <ul class="mt-6 space-y-3 text-sm text-ink/90">
+            <li class="flex gap-2"><span>✓</span> 3 fotos restauradas</li>
+            <li class="flex gap-2"><span>✓</span> Colorização incluída</li>
+            <li class="flex gap-2"><span>✓</span> Prioridade na fila</li>
+            <li class="flex gap-2"><span>✓</span> Entrega em alta resolução</li>
+          </ul>
+          <a href="#" data-checkout class="mt-7 block text-center rounded-full bg-ink text-cream font-semibold px-6 py-3.5 hover:bg-ink-soft transition">
+            Pagar com PIX
+          </a>
+        </div>
+      </div>
+      <p class="text-center text-xs text-cream/40 mt-8">🔒 Pagamento 100% seguro via PIX • Garantia de satisfação</p>
+    </div>
+  </section>
+
+  <!-- ===================== DEPOIMENTOS ===================== -->
+  <section class="max-w-6xl mx-auto px-5 py-20 md:py-24">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <span class="text-xs font-semibold tracking-widest uppercase text-gold-dark">Conversas reais</span>
+      <h2 class="font-serif text-3xl md:text-4xl mt-3">O que dizem nossos clientes</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14">
+      <div class="reveal bg-white rounded-2xl p-7 shadow-card border border-ink/5">
+        <div class="text-gold text-lg">★★★★★</div>
+        <p class="mt-4 text-ink-soft leading-relaxed">"Chorei quando vi a foto do meu avô colorida. Parecia que ele estava ali de novo. Trabalho impecável!"</p>
+        <div class="mt-5 flex items-center gap-3">
+          <span class="w-9 h-9 rounded-full bg-gold-light/40 text-gold-dark grid place-items-center font-semibold text-sm">M</span>
+          <div><div class="text-sm font-semibold">Maria Santos</div><div class="text-xs text-ink-mute">São Paulo, SP</div></div>
+        </div>
+      </div>
+      <div class="reveal bg-white rounded-2xl p-7 shadow-card border border-ink/5">
+        <div class="text-gold text-lg">★★★★★</div>
+        <p class="mt-4 text-ink-soft leading-relaxed">"A foto do casamento dos meus pais estava toda rasgada. Devolveram perfeita, melhor que a original. Recomendo demais."</p>
+        <div class="mt-5 flex items-center gap-3">
+          <span class="w-9 h-9 rounded-full bg-gold-light/40 text-gold-dark grid place-items-center font-semibold text-sm">J</span>
+          <div><div class="text-sm font-semibold">João Pereira</div><div class="text-xs text-ink-mute">Belo Horizonte, MG</div></div>
+        </div>
+      </div>
+      <div class="reveal bg-white rounded-2xl p-7 shadow-card border border-ink/5">
+        <div class="text-gold text-lg">★★★★★</div>
+        <p class="mt-4 text-ink-soft leading-relaxed">"Rápido, barato e o resultado é de cinema. Já mandei 5 fotos da minha família toda. Virei cliente fiel."</p>
+        <div class="mt-5 flex items-center gap-3">
+          <span class="w-9 h-9 rounded-full bg-gold-light/40 text-gold-dark grid place-items-center font-semibold text-sm">A</span>
+          <div><div class="text-sm font-semibold">Ana Costa</div><div class="text-xs text-ink-mute">Curitiba, PR</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section id="faq" class="bg-cream-soft border-y border-ink/5">
+    <div class="max-w-3xl mx-auto px-5 py-20 md:py-24">
+      <div class="text-center reveal">
+        <span class="text-xs font-semibold tracking-widest uppercase text-gold-dark">Tire suas dúvidas</span>
+        <h2 class="font-serif text-3xl md:text-4xl mt-3">Perguntas frequentes</h2>
+      </div>
+
+      <div class="mt-12 space-y-3">
+        <details class="reveal group bg-white rounded-xl border border-ink/5 shadow-card">
+          <summary class="flex items-center justify-between p-5 font-semibold">Como eu envio minha foto?<span class="faq-icon text-gold text-xl">+</span></summary>
+          <div class="px-5 pb-5 text-ink-mute text-sm leading-relaxed">Após o pagamento você recebe um link para enviar a foto. Pode ser uma foto tirada com o celular da imagem original ou um arquivo já digitalizado.</div>
+        </details>
+        <details class="reveal group bg-white rounded-xl border border-ink/5 shadow-card">
+          <summary class="flex items-center justify-between p-5 font-semibold">Quanto tempo leva para ficar pronta?<span class="faq-icon text-gold text-xl">+</span></summary>
+          <div class="px-5 pb-5 text-ink-mute text-sm leading-relaxed">O prazo padrão é de 3 a 5 dias úteis. No combo, sua foto entra com prioridade na fila.</div>
+        </details>
+        <details class="reveal group bg-white rounded-xl border border-ink/5 shadow-card">
+          <summary class="flex items-center justify-between p-5 font-semibold">Vocês colorizam fotos em preto e branco?<span class="faq-icon text-gold text-xl">+</span></summary>
+          <div class="px-5 pb-5 text-ink-mute text-sm leading-relaxed">Sim! A colorização realista está incluída sempre que você quiser, sem custo extra.</div>
+        </details>
+        <details class="reveal group bg-white rounded-xl border border-ink/5 shadow-card">
+          <summary class="flex items-center justify-between p-5 font-semibold">Em qual formato recebo a foto?<span class="faq-icon text-gold text-xl">+</span></summary>
+          <div class="px-5 pb-5 text-ink-mute text-sm leading-relaxed">Você recebe o arquivo digital em alta resolução (JPEG ou PNG), pronto para imprimir em qualquer tamanho.</div>
+        </details>
+        <details class="reveal group bg-white rounded-xl border border-ink/5 shadow-card">
+          <summary class="flex items-center justify-between p-5 font-semibold">E se a foto estiver muito danificada?<span class="faq-icon text-gold text-xl">+</span></summary>
+          <div class="px-5 pb-5 text-ink-mute text-sm leading-relaxed">Mesmo fotos muito rasgadas ou manchadas costumam ter ótima recuperação. Se não for possível um bom resultado, devolvemos seu dinheiro.</div>
+        </details>
+        <details class="reveal group bg-white rounded-xl border border-ink/5 shadow-card">
+          <summary class="flex items-center justify-between p-5 font-semibold">Como funciona o pagamento?<span class="faq-icon text-gold text-xl">+</span></summary>
+          <div class="px-5 pb-5 text-ink-mute text-sm leading-relaxed">O pagamento é feito por PIX, de forma rápida e segura. Assim que confirmado, liberamos o envio da sua foto.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CTA FINAL ===================== -->
+  <section class="max-w-4xl mx-auto px-5 py-20 md:py-24 text-center reveal">
+    <h2 class="font-serif text-3xl md:text-4xl text-balance">Não deixe suas memórias desaparecerem</h2>
+    <p class="text-ink-mute mt-4 max-w-xl mx-auto">Cada foto antiga é uma história. Restaure hoje e guarde para sempre — por você e por quem você ama.</p>
+    <a href="#preco" class="inline-flex items-center gap-2 rounded-full bg-ink text-cream font-semibold px-8 py-4 mt-8 hover:bg-ink-soft transition shadow-soft">
+      Restaurar minha foto agora →
+    </a>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="bg-ink text-cream/70">
+    <div class="max-w-6xl mx-auto px-5 py-12 grid md:grid-cols-3 gap-8">
+      <div>
+        <div class="flex items-center gap-2.5">
+          <span class="grid place-items-center w-9 h-9 rounded-full bg-cream text-ink font-serif text-lg">R</span>
+          <span class="font-serif text-xl text-cream">Renova Memórias</span>
+        </div>
+        <p class="text-sm mt-4 leading-relaxed">Especialistas em restauração de fotos antigas e históricas. Suas memórias de volta à vida, com cuidado e dedicação.</p>
+      </div>
+      <div>
+        <h4 class="text-cream font-semibold text-sm uppercase tracking-wider">Navegação</h4>
+        <ul class="mt-4 space-y-2 text-sm">
+          <li><a href="#como" class="hover:text-cream transition">Como funciona</a></li>
+          <li><a href="#galeria" class="hover:text-cream transition">Exemplos</a></li>
+          <li><a href="#preco" class="hover:text-cream transition">Preço</a></li>
+          <li><a href="#faq" class="hover:text-cream transition">Dúvidas</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-cream font-semibold text-sm uppercase tracking-wider">Contato</h4>
+        <ul class="mt-4 space-y-2 text-sm">
+          <li>📷 Instagram: @renovamemorias</li>
+          <li>✉️ contato@renovamemorias.com.br</li>
+        </ul>
+        <a href="#preco" class="inline-block mt-5 rounded-full bg-gold text-ink font-semibold text-sm px-5 py-2.5 hover:bg-gold-light transition">Restaurar agora</a>
+      </div>
+    </div>
+    <div class="border-t border-cream/10">
+      <div class="max-w-6xl mx-auto px-5 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-cream/50">
+        <span>© 2026 Renova Memórias. Todos os direitos reservados.</span>
+        <a href="#" class="hover:text-cream/80 transition">Política de Privacidade</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script>
+    // Slider antes/depois
+    document.querySelectorAll('[data-ba]').forEach(function (ba) {
+      var range  = ba.querySelector('input[type=range]');
+      var after  = ba.querySelector('.after');
+      var handle = ba.querySelector('.handle');
+      var knob   = ba.querySelector('.knob');
+      function update(v) {
+        after.style.clipPath = 'inset(0 0 0 ' + v + '%)';
+        handle.style.left = v + '%';
+        knob.style.left = v + '%';
+      }
+      range.addEventListener('input', function () { update(this.value); });
+      update(range.value);
+    });
+
+    // Reveal on scroll
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+    // Checkout (plugue seu link de PIX aqui)
+    var CHECKOUT_URL = ''; // ex.: 'https://seucheckout-pix.com/...'
+    document.querySelectorAll('[data-checkout]').forEach(function (btn) {
+      btn.addEventListener('click', function (ev) {
+        if (CHECKOUT_URL) { ev.preventDefault(); window.location.href = CHECKOUT_URL; }
+        else { ev.preventDefault(); alert('Configure o link de checkout PIX na variável CHECKOUT_URL (no final do arquivo).'); }
+      });
+    });
+  </script>
+</body>
+</html>
