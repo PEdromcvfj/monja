@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Forgotten Hour — Ancient Rituals to Quiet the Mind and Sleep Deeply</title>
-  <meta name="description" content="Your mind won't switch off at night because you stopped doing what humans did for thousands of years before sleep. Rediscover the forgotten evening ritual — in 10 minutes, no apps." />
+  <title>The Forgotten Hour — Quiet the Mind and Sleep Deeply</title>
+  <meta name="description" content="Your mind won't switch off at night because you stopped doing what humans did for thousands of years before sleep. The Forgotten Hour: 500 ancestral rituals to quiet the mind and sleep deeply — 10 minutes a night, no apps." />
   <meta name="theme-color" content="#0d1117" />
   <meta property="og:title" content="The Forgotten Hour — quiet the mind, sleep deeply" />
-  <meta property="og:description" content="The ancient evening ritual that ends a racing mind. 10 minutes a night, no apps, no meditation marathons." />
+  <meta property="og:description" content="The ancient evening ritual that ends a racing mind. 10 minutes a night, no apps." />
   <meta property="og:type" content="website" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,19 +16,14 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = {
-      theme: { extend: {
-        colors: {
-          night:  { DEFAULT: '#0d1117', soft: '#131b27', panel: '#172131', line: '#26324a' },
-          gold:   { DEFAULT: '#d8b36a', dark: '#c49a4f', light: '#e8cd8d' },
-          cream:  { DEFAULT: '#ece6d8', soft: '#cfc7b4', mute: '#9a937f' },
-        },
-        fontFamily: {
-          serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-          sans:  ['Inter', 'system-ui', 'sans-serif'],
-        },
-      } },
-    };
+    tailwind.config = { theme: { extend: {
+      colors: {
+        night:  { DEFAULT: '#0d1117', soft: '#131b27', panel: '#172131', line: '#26324a' },
+        gold:   { DEFAULT: '#d8b36a', dark: '#c49a4f', light: '#e8cd8d' },
+        cream:  { DEFAULT: '#ece6d8', soft: '#cfc7b4', mute: '#9a937f' },
+      },
+      fontFamily: { serif: ['"Cormorant Garamond"','Georgia','serif'], sans: ['Inter','system-ui','sans-serif'] },
+    } } };
   </script>
   <style>
     html { scroll-behavior: smooth; }
@@ -43,23 +38,26 @@
       radial-gradient(1px 1px at 70% 20%, rgba(236,230,216,.4), transparent),
       radial-gradient(1px 1px at 85% 60%, rgba(236,230,216,.3), transparent),
       radial-gradient(1px 1px at 40% 80%, rgba(236,230,216,.35), transparent); }
+    .stick { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; }
+    @media (min-width: 640px) { .stick { display: none; } }
   </style>
 </head>
-<body class="font-sans antialiased">
+<body class="font-sans antialiased pb-20 sm:pb-0">
 
   <!-- HERO -->
   <header class="relative overflow-hidden bg-night bg-stars">
-    <div class="max-w-3xl mx-auto px-6 pt-16 pb-20 sm:pt-24 text-center">
-      <p class="font-serif italic text-gold-light text-lg mb-5">From the monastic traditions of the East</p>
+    <div class="max-w-3xl mx-auto px-6 pt-14 pb-18 sm:pt-24 sm:pb-24 text-center">
+      <p class="font-serif italic text-gold-light text-lg mb-2">The Forgotten Hour</p>
+      <p class="text-cream-mute text-xs tracking-widest uppercase mb-6">From the monastic traditions of the East</p>
       <h1 class="font-serif font-600 text-4xl sm:text-6xl leading-tight text-balance mb-6 text-cream">
         Your mind won't switch off at night — because you stopped doing what humans did for 3,000 years before sleep.
       </h1>
       <p class="text-cream-soft text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto mb-9">
-        Rediscover the forgotten evening ritual that quiets a racing mind and lets you fall into deep, ancient sleep — in 10 minutes a night. No apps. No meditation marathons.
+        Rediscover the forgotten evening ritual that quiets a racing mind and lets you fall into deep, ancient sleep — <span class="text-cream">500 ancestral rituals, 10 minutes a night.</span> No apps. No meditation marathons.
       </p>
-      <a href="#" data-checkout class="inline-block w-full sm:w-auto bg-gold hover:bg-gold-dark text-night font-semibold text-lg px-12 py-4 rounded-full glow transition-transform hover:scale-[1.02] active:scale-95">Begin tonight →</a>
+      <a href="#offer" data-checkout class="inline-block w-full sm:w-auto bg-gold hover:bg-gold-dark text-night font-semibold text-lg px-12 py-4 rounded-full glow transition-transform hover:scale-[1.02] active:scale-95">Begin tonight →</a>
       <p class="mt-6 text-cream-mute text-sm flex items-center justify-center gap-x-5 gap-y-1 flex-wrap">
-        <span>🌙 7-day guarantee</span><span>📱 Instant access</span><span>⏱️ 10 minutes a night</span>
+        <span>🌙 30-night guarantee</span><span>📱 Instant access</span><span>⏱️ 10 minutes a night</span>
       </p>
     </div>
     <div class="hairline max-w-md mx-auto"></div>
@@ -71,8 +69,8 @@
       <h2 class="font-serif text-3xl sm:text-4xl text-cream mb-6 text-balance">It's 1 a.m. Your body is exhausted — but your mind won't stop.</h2>
       <div class="space-y-4 text-cream-soft text-lg leading-relaxed">
         <p>You replay the conversation from this afternoon. You remember the email you forgot to send. Tomorrow's list starts writing itself behind your eyes.</p>
-        <p>You reach for your phone "just to switch off" — and an hour later your mind is more awake than before.</p>
-        <p>You finally drift off near dawn, and wake up feeling like you never slept at all. And the worst part: you've started to believe this is just how you are now.</p>
+        <p>You reach for your phone "just to switch off" — and an hour later your mind is louder than before.</p>
+        <p>You drift off near dawn, and wake up as if you never slept. And the worst part: you've started to believe this is simply who you are now.</p>
         <p class="text-cream font-500">It isn't. Something was taken from your nights — and it can be given back.</p>
       </div>
     </div>
@@ -86,7 +84,7 @@
       <div class="space-y-5 text-cream-soft text-lg leading-relaxed text-left">
         <p>For thousands of years, every culture on earth <span class="text-gold-light">closed the day with a ritual</span> — a fire tended, a chant, water poured, a single gesture before rest.</p>
         <p>It was never superstition. It was a <span class="text-cream font-500">signal to the body</span>: the day is over. You are safe. You may let go.</p>
-        <p>Modern life erased that hour. We replaced it with screens, news and noise — and your nervous system <span class="text-gold-light">never receives the signal to power down.</span> So the mind keeps running long after your head hits the pillow.</p>
+        <p>Modern life erased that hour. We replaced it with screens, news and noise — so your nervous system <span class="text-gold-light">never receives the signal to power down.</span> The mind keeps running long after your head hits the pillow.</p>
         <p class="text-cream font-500 text-xl">Your racing thoughts aren't a disorder. They're an unfinished day.</p>
       </div>
     </div>
@@ -98,9 +96,9 @@
     <div class="max-w-2xl mx-auto px-6 py-16 sm:py-20">
       <h2 class="font-serif text-3xl sm:text-4xl text-cream mb-6 text-balance">The practices that end the day — gathered from the monasteries</h2>
       <div class="space-y-4 text-cream-soft text-lg leading-relaxed">
-        <p>Master Mei spent decades inside the monastic traditions of the East, collecting the rituals that humans used for generations to quiet the mind and reclaim deep sleep.</p>
-        <p>The result is <span class="text-gold-light font-500">The 500 Ancestral Rituals</span> — simple physical practices done with what you already have at home: a candle, a glass of water, your breath, a single gesture.</p>
-        <p>Nothing to learn by heart. Nothing to force. These are rituals <span class="text-cream font-500">your body responds to on its own</span> — calm that arrives, instead of calm you have to chase.</p>
+        <p>Master Mei spent decades inside the monastic traditions of the East, collecting the rituals humans used for generations to quiet the mind and reclaim deep sleep.</p>
+        <p>The result is <span class="text-gold-light font-500">The Forgotten Hour</span> — a collection of <span class="text-cream font-500">500 ancestral rituals</span> done with what you already have at home: a candle, a glass of water, your breath, a single gesture.</p>
+        <p>Nothing to memorize. Nothing to force. These are rituals <span class="text-cream font-500">your body responds to on its own</span> — calm that arrives, instead of calm you have to chase.</p>
       </div>
     </div>
   </section>
@@ -114,33 +112,72 @@
         <li class="flex gap-4"><span class="text-gold text-xl">✦</span><p class="text-cream-soft text-lg leading-relaxed">The bedside gesture that tells your nervous system <span class="text-cream font-500">it's safe to switch off.</span></p></li>
         <li class="flex gap-4"><span class="text-gold text-xl">✦</span><p class="text-cream-soft text-lg leading-relaxed">Why your racing mind is an <span class="text-cream font-500">unfinished day</span> — and the ritual that finishes it.</p></li>
         <li class="flex gap-4"><span class="text-gold text-xl">✦</span><p class="text-cream-soft text-lg leading-relaxed">Rituals to <span class="text-cream font-500">fall asleep faster, wake rested, calm a restless heart and let go of a heavy day.</span></p></li>
-        <li class="flex gap-4"><span class="text-gold text-xl">✦</span><p class="text-cream-soft text-lg leading-relaxed">And the full <span class="text-cream font-500">500 rituals</span> for the rest of your life — calm, focus, energy, connection — organized by what you need, when you need it.</p></li>
+        <li class="flex gap-4"><span class="text-gold text-xl">✦</span><p class="text-cream-soft text-lg leading-relaxed">The full <span class="text-cream font-500">500 rituals</span> for the rest of your life — calm, focus, energy, connection — organized by what you need, when you need it.</p></li>
       </ul>
     </div>
     <div class="hairline max-w-md mx-auto"></div>
   </section>
 
-  <!-- DIFFERENT -->
+  <!-- TESTIMONIALS (replace with REAL ones) -->
   <section class="bg-night-soft">
-    <div class="max-w-2xl mx-auto px-6 py-16 sm:py-20 text-center">
-      <h2 class="font-serif text-3xl sm:text-4xl text-cream mb-6 text-balance">Not another app asking you to focus</h2>
-      <p class="text-cream-soft text-lg leading-relaxed">You've tried the meditation apps. They ask you to concentrate — exactly when your mind is too tired to. These rituals ask <span class="text-cream font-500">nothing of your mind.</span> No screen. No effort. You do a small physical act, and the body quiets itself — the way it was always meant to.</p>
+    <div class="max-w-3xl mx-auto px-6 py-16 sm:py-20">
+      <h2 class="font-serif text-3xl sm:text-4xl text-cream mb-9 text-center">What people are saying</h2>
+      <div class="grid sm:grid-cols-2 gap-5">
+        <figure class="bg-night-panel border border-night-line rounded-2xl p-6">
+          <p class="text-gold mb-2">★★★★★</p>
+          <blockquote class="text-cream-soft leading-relaxed">"For the first time in years my mind went quiet. I did the evening ritual and was asleep before I knew it."</blockquote>
+          <figcaption class="text-cream-mute text-sm mt-3">— Replace with a real customer</figcaption>
+        </figure>
+        <figure class="bg-night-panel border border-night-line rounded-2xl p-6">
+          <p class="text-gold mb-2">★★★★★</p>
+          <blockquote class="text-cream-soft leading-relaxed">"I stopped reaching for my phone at night. Three minutes, and the day finally closes. I wake up rested."</blockquote>
+          <figcaption class="text-cream-mute text-sm mt-3">— Replace with a real customer</figcaption>
+        </figure>
+      </div>
+      <p class="text-cream-mute text-xs text-center mt-4">↑ Examples only — swap for real testimonials before going live.</p>
     </div>
   </section>
 
-  <!-- OFFER -->
+  <!-- DIFFERENT -->
   <section class="bg-night">
+    <div class="max-w-2xl mx-auto px-6 py-16 sm:py-20 text-center">
+      <h2 class="font-serif text-3xl sm:text-4xl text-cream mb-6 text-balance">Not another app asking you to focus</h2>
+      <p class="text-cream-soft text-lg leading-relaxed">You've tried the meditation apps. They ask you to concentrate — exactly when your mind is too tired to. These rituals ask <span class="text-cream font-500">nothing of your mind.</span> No screen. No effort. You do one small physical act, and the body quiets itself — the way it always knew how.</p>
+    </div>
+    <div class="hairline max-w-md mx-auto"></div>
+  </section>
+
+  <!-- OFFER -->
+  <section id="offer" class="bg-night-soft">
     <div class="max-w-xl mx-auto px-6 py-16 sm:py-20">
-      <div class="bg-night-panel border border-night-line rounded-3xl p-8 sm:p-10 text-center glow">
-        <h2 class="font-serif text-3xl sm:text-4xl text-cream mb-3">The 500 Ancestral Rituals</h2>
-        <p class="text-cream-mute mb-6">Lifetime access · Instant on your phone · Any belief, any age</p>
-        <p class="text-cream-mute text-sm">Today, instead of <span class="line-through" data-price-old>$97</span></p>
-        <p class="font-serif text-6xl text-gold font-600 my-1"><span data-price-new>$27</span></p>
-        <p class="text-cream-mute text-sm mb-7">One-time payment. No subscription.</p>
-        <a href="#" data-checkout class="inline-block w-full bg-gold hover:bg-gold-dark text-night font-semibold text-lg px-10 py-4 rounded-full transition-transform hover:scale-[1.02] active:scale-95">Begin tonight →</a>
-        <p class="mt-6 text-cream-soft text-sm leading-relaxed">🌙 <span class="font-500 text-cream">7-day guarantee.</span> Try the rituals tonight. If your nights don't change, write to us within 7 days and we return every cent — no questions.</p>
+      <div class="bg-night-panel border border-night-line rounded-3xl p-8 sm:p-10 glow">
+        <h2 class="font-serif text-3xl sm:text-4xl text-cream mb-1 text-center">The Forgotten Hour</h2>
+        <p class="text-cream-mute text-center mb-7">500 ancestral rituals · lifetime access · instant on your phone</p>
+
+        <div class="space-y-3 text-sm border-t border-b border-night-line py-5 mb-6">
+          <div class="flex justify-between text-cream-soft"><span>✦ The Forgotten Hour evening method</span><span class="text-cream-mute">$47</span></div>
+          <div class="flex justify-between text-cream-soft"><span>✦ The 500 Ancestral Rituals library</span><span class="text-cream-mute">$97</span></div>
+          <div class="flex justify-between text-cream-soft"><span>★ Bonus: The 7-Night Reset</span><span class="text-cream-mute">$27</span></div>
+          <div class="flex justify-between text-cream-soft"><span>★ Bonus: The Morning Light Ritual</span><span class="text-cream-mute">$19</span></div>
+          <div class="flex justify-between text-cream font-500 pt-2"><span>Total value</span><span class="line-through text-cream-mute">$190</span></div>
+        </div>
+
+        <p class="text-cream-mute text-sm text-center">Today, only</p>
+        <p class="font-serif text-6xl text-gold font-600 my-1 text-center"><span data-price-new>$27</span></p>
+        <p class="text-cream-mute text-sm mb-7 text-center">One-time payment. No subscription.</p>
+
+        <a href="#" data-checkout class="inline-block w-full bg-gold hover:bg-gold-dark text-night font-semibold text-lg px-10 py-4 rounded-full transition-transform hover:scale-[1.02] active:scale-95 text-center">Begin tonight →</a>
+        <p class="mt-6 text-cream-soft text-sm leading-relaxed text-center">🌙 <span class="font-500 text-cream">30-night guarantee.</span> Try the rituals for 30 nights. If your sleep doesn't change, write to us and we return every cent — no questions.</p>
       </div>
     </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="bg-night">
+    <div class="max-w-2xl mx-auto px-6 py-14 text-center">
+      <p class="text-cream-soft text-lg leading-relaxed">This is for you if your body is tired but your mind won't stop — if you've tried the apps, the teas, the scrolling, and still lie awake. You don't need more discipline. You need the hour you lost. 🌙</p>
+    </div>
+    <div class="hairline max-w-md mx-auto"></div>
   </section>
 
   <!-- FAQ -->
@@ -151,8 +188,8 @@
         <details class="bg-night-panel border border-night-line rounded-2xl p-5"><summary class="font-500 text-cream flex justify-between items-center">Do I need anything special?<span class="text-gold">+</span></summary><p class="text-cream-soft mt-3 leading-relaxed">No. Every ritual uses things you already have at home — a candle, water, your own breath.</p></details>
         <details class="bg-night-panel border border-night-line rounded-2xl p-5"><summary class="font-500 text-cream flex justify-between items-center">How fast will I feel it?<span class="text-gold">+</span></summary><p class="text-cream-soft mt-3 leading-relaxed">Most people feel calmer on the very first night. The deeper change in sleep builds over the first week.</p></details>
         <details class="bg-night-panel border border-night-line rounded-2xl p-5"><summary class="font-500 text-cream flex justify-between items-center">Is this religious?<span class="text-gold">+</span></summary><p class="text-cream-soft mt-3 leading-relaxed">No. These are ancestral human practices for the body and mind. They sit alongside any belief — or none.</p></details>
-        <details class="bg-night-panel border border-night-line rounded-2xl p-5"><summary class="font-500 text-cream flex justify-between items-center">How do I get it?<span class="text-gold">+</span></summary><p class="text-cream-soft mt-3 leading-relaxed">Instantly. The moment you complete your order, it opens on your phone — read it tonight.</p></details>
-        <details class="bg-night-panel border border-night-line rounded-2xl p-5"><summary class="font-500 text-cream flex justify-between items-center">What if it doesn't work for me?<span class="text-gold">+</span></summary><p class="text-cream-soft mt-3 leading-relaxed">Then you pay nothing. You have 7 full days. If your nights don't change, we refund every cent.</p></details>
+        <details class="bg-night-panel border border-night-line rounded-2xl p-5"><summary class="font-500 text-cream flex justify-between items-center">How do I get it?<span class="text-gold">+</span></summary><p class="text-cream-soft mt-3 leading-relaxed">Instantly. The moment you complete your order it opens on your phone — read it tonight.</p></details>
+        <details class="bg-night-panel border border-night-line rounded-2xl p-5"><summary class="font-500 text-cream flex justify-between items-center">What if it doesn't work for me?<span class="text-gold">+</span></summary><p class="text-cream-soft mt-3 leading-relaxed">Then you pay nothing. You have 30 full nights. If your sleep doesn't change, we refund every cent.</p></details>
       </div>
     </div>
   </section>
@@ -163,40 +200,40 @@
       <h2 class="font-serif text-3xl sm:text-5xl text-cream mb-6 text-balance">Tonight can end differently.</h2>
       <p class="text-cream-soft text-lg leading-relaxed mb-9 max-w-xl mx-auto">You've carried these nights long enough. Give your mind back the hour it lost — and let sleep find you again.</p>
       <a href="#" data-checkout class="inline-block w-full sm:w-auto bg-gold hover:bg-gold-dark text-night font-semibold text-lg px-12 py-4 rounded-full glow transition-transform hover:scale-[1.02] active:scale-95">Begin tonight →</a>
-      <p class="mt-6 text-cream-mute text-sm"><span data-price-new>$27</span> · one-time · 7-day guarantee</p>
+      <p class="mt-6 text-cream-mute text-sm"><span data-price-new>$27</span> · one-time · 30-night guarantee</p>
     </div>
   </section>
 
   <footer class="bg-night-soft border-t border-night-line">
     <div class="max-w-2xl mx-auto px-6 py-10 text-center text-cream-mute text-sm">
-      <p class="font-serif text-gold-light text-lg mb-2">The 500 Ancestral Rituals</p>
+      <p class="font-serif text-gold-light text-lg mb-2">The Forgotten Hour</p>
       <p>© <span id="year"></span> · with Master Mei. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- STICKY MOBILE CTA -->
+  <div class="stick bg-night-panel/95 border-t border-night-line px-4 py-3 backdrop-blur">
+    <a href="#" data-checkout class="flex items-center justify-center gap-2 w-full bg-gold text-night font-semibold py-3 rounded-full">Begin tonight — <span data-price-new>$27</span></a>
+  </div>
 
   <script>
     /* ===========================================================
        CONFIG — EDIT HERE
        =========================================================== */
-    // 🔗 Your checkout link (Stripe / etc.) for this offer:
     const CHECKOUT_URL = "REPLACE_WITH_YOUR_CHECKOUT_LINK";
     const PRICE_NEW = "$27";
-    const PRICE_OLD = "$97";
-    const VIDEO_TAG = "sleep-en"; // tracking tag (?v=)
+    const VIDEO_TAG = "sleep-en";
     /* =========================================================== */
 
     document.querySelectorAll('[data-checkout]').forEach(function (el) {
-      el.setAttribute('href', CHECKOUT_URL);
+      if (CHECKOUT_URL.indexOf('REPLACE') === -1) el.setAttribute('href', CHECKOUT_URL);
       el.setAttribute('rel', 'noopener');
       el.addEventListener('click', function () {
         try { navigator.sendBeacon('/api/track?type=checkout&p=' + encodeURIComponent(location.pathname) + '&v=' + encodeURIComponent(VIDEO_TAG)); } catch (e) {}
       });
     });
     document.querySelectorAll('[data-price-new]').forEach(function (el) { el.textContent = PRICE_NEW; });
-    document.querySelectorAll('[data-price-old]').forEach(function (el) { el.textContent = PRICE_OLD; });
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // count the visit (once per session)
     try {
       if (!sessionStorage.getItem('v_sent_sleep')) {
         sessionStorage.setItem('v_sent_sleep', '1');
