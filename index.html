@@ -3,1068 +3,284 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>500 Rituais Ancestrais — Saúde, Relações, Energia e Prosperidade</title>
-
-  <!-- ===================== SEO ===================== -->
-  <meta name="description" content="500 Rituais Ancestrais: sabedoria oriental para restaurar sua saúde, suas relações, sua energia e sua prosperidade. Guia digital com acesso imediato no celular." />
-  <meta name="keywords" content="rituais ancestrais, saúde, relações, energia, prosperidade, abundância, equilíbrio, autocuidado, sabedoria oriental, meditação" />
-  <meta name="author" content="Mestra Lian" />
-  <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#2E3A2C" />
-  <link rel="canonical" href="https://seusite.com.br/" />
-
-  <!-- ===================== Open Graph ===================== -->
+  <title>A Hora Esquecida — Acalme a Mente e Durma Profundamente</title>
+  <meta name="description" content="Sua mente não desliga à noite porque você parou de fazer o que a humanidade fez por milhares de anos antes de dormir. A Hora Esquecida: 500 rituais ancestrais para acalmar a mente e dormir profundamente — 10 minutos por noite, sem apps." />
+  <meta name="theme-color" content="#0d1117" />
+  <meta property="og:title" content="A Hora Esquecida — acalme a mente, durma profundamente" />
   <meta property="og:type" content="website" />
-  <meta property="og:locale" content="pt_BR" />
-  <meta property="og:title" content="500 Rituais Ancestrais — saúde, relações, energia e prosperidade" />
-  <meta property="og:description" content="Sabedoria oriental para restaurar sua saúde, suas relações, sua energia e sua prosperidade. Acesso imediato no celular." />
-  <meta property="og:image" content="https://placehold.co/1200x630/FAF5EA/2E3A2C?text=500+Rituais+Ancestrais" />
-  <meta property="og:url" content="https://seusite.com.br/" />
-  <meta property="og:site_name" content="500 Rituais Ancestrais" />
 
-  <!-- ===================== Twitter ===================== -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="500 Rituais Ancestrais — saúde, relações, energia e prosperidade" />
-  <meta name="twitter:description" content="Sabedoria oriental para restaurar sua saúde, suas relações, sua energia e sua prosperidade. Acesso imediato no celular." />
-  <meta name="twitter:image" content="https://placehold.co/1200x630/FAF5EA/2E3A2C?text=500+Rituais+Ancestrais" />
-
-  <!-- ===================== Fontes ===================== -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-  <!-- ===================== Tailwind ===================== -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            // Fundos claros e quentes
-            cream:    { DEFAULT: '#FAF5EA', soft: '#F6F1E6', deep: '#EFE7D5' },
-            // Verde musgo profundo (seções de destaque)
-            musgo:    { DEFAULT: '#2E3A2C', light: '#3A4A36', deep: '#26301F' },
-            // Texto escuro quente / grafite
-            ink:      { DEFAULT: '#2A2520', soft: '#4a4239' },
-            // Dourado âmbar / terracota (destaque, botões, ícones)
-            gold:     { DEFAULT: '#C08A3E', dark: '#B8862F', light: '#D8A85A' },
-            terracota:{ DEFAULT: '#B8632F' },
-            // Verde sálvia suave (detalhes secundários)
-            salvia:   { DEFAULT: '#7C8A66', light: '#9aa885' },
-          },
-          fontFamily: {
-            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-            sans:  ['Inter', 'system-ui', 'sans-serif'],
-          },
-        },
+    tailwind.config = { theme: { extend: {
+      colors: {
+        night:  { DEFAULT: '#0d1117', soft: '#131b27', panel: '#172131', line: '#26324a' },
+        gold:   { DEFAULT: '#d8b36a', dark: '#c49a4f', light: '#e8cd8d' },
+        cream:  { DEFAULT: '#ece6d8', soft: '#cfc7b4', mute: '#9a937f' },
       },
-    };
+      fontFamily: { serif: ['"Cormorant Garamond"','Georgia','serif'], sans: ['Inter','system-ui','sans-serif'] },
+    } } };
   </script>
-
   <style>
     html { scroll-behavior: smooth; }
-    body { background-color: #FAF5EA; }
+    body { background-color: #0d1117; color: #ece6d8; }
     .text-balance { text-wrap: balance; }
-    /* Acordeão FAQ */
+    .glow { box-shadow: 0 0 40px rgba(216,179,106,.25); }
+    .hairline { background: linear-gradient(90deg, transparent, #d8b36a, transparent); height: 1px; }
     details > summary { list-style: none; cursor: pointer; }
     details > summary::-webkit-details-marker { display: none; }
-    details[open] .faq-icon { transform: rotate(45deg); }
-    .faq-icon { transition: transform .25s ease; }
-    /* Animação suave de entrada */
-    @media (prefers-reduced-motion: no-preference) {
-      .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
-      .reveal.is-visible { opacity: 1; transform: none; }
-    }
-    /* Sombras suaves e naturais */
-    .shadow-soft { box-shadow: 0 16px 44px -18px rgba(58,74,54,.28); }
-    .shadow-card { box-shadow: 0 8px 26px -14px rgba(42,37,32,.20); }
-    .glow-gold   { box-shadow: 0 0 0 1px rgba(192,138,62,.20), 0 16px 42px -20px rgba(192,138,62,.35); }
-    /* Linha dourada decorativa */
-    .hr-gold { height: 1px; background: linear-gradient(90deg, transparent, rgba(192,138,62,.6), transparent); }
-    /* Texto dourado com leve brilho (sobre fundos escuros/verdes) */
-    .text-gold-glow { color: #E0C894; text-shadow: 0 0 24px rgba(192,138,62,.28); }
-
-    /* ===== Mockup do e-book em CSS ===== */
-    .book-scene {
-      width: 100%; max-width: 24rem;
-      display: flex; flex-direction: column; align-items: center;
-      perspective: 1600px;
-    }
-    .book {
-      position: relative;
-      transform: rotateY(-22deg) rotateX(4deg);
-      transform-style: preserve-3d;
-      transition: transform .6s cubic-bezier(.2,.7,.2,1);
-    }
-    .book:hover { transform: rotateY(-10deg) rotateX(2deg); }
-    .book-cover {
-      position: relative;
-      width: 17rem; aspect-ratio: 5 / 7;
-      border-radius: 6px 12px 12px 6px;
-      background:
-        radial-gradient(120% 90% at 75% 10%, #3A4A36 0%, #2E3A2C 45%, #26301F 100%);
-      box-shadow:
-        0 1px 0 rgba(255,255,255,.06) inset,
-        0 30px 60px -24px rgba(38,48,31,.7),
-        0 10px 24px -14px rgba(42,37,32,.5);
-      overflow: hidden;
-    }
-    /* Lombada do livro */
-    .book-spine {
-      position: absolute; top: 0; left: 0; bottom: 0; width: 16px;
-      background: linear-gradient(90deg, rgba(0,0,0,.38), rgba(0,0,0,.06) 60%, rgba(255,255,255,.05));
-    }
-    .book-face {
-      position: relative; height: 100%;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; padding: 2rem 1.6rem; gap: .35rem;
-      border: 1px solid rgba(192,138,62,.28);
-      border-radius: inherit;
-      margin: 10px 10px 10px 16px;
-    }
-    .book-eyebrow {
-      font-size: .58rem; letter-spacing: .28em; text-transform: uppercase;
-      color: #D8A85A; font-weight: 600;
-    }
-    .book-emblem {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.4rem; line-height: 1; color: #E0C894;
-      width: 3.2rem; height: 3.2rem; margin: .4rem 0 .2rem;
-      display: flex; align-items: center; justify-content: center;
-      border: 1px solid rgba(192,138,62,.5); border-radius: 999px;
-      box-shadow: 0 0 26px rgba(192,138,62,.25) inset;
-    }
-    .book-title {
-      font-family: 'Cormorant Garamond', serif;
-      color: #FAF5EA; font-weight: 600; line-height: 1.04;
-      font-size: 2rem; letter-spacing: .01em;
-      text-shadow: 0 1px 18px rgba(0,0,0,.35);
-    }
-    .book-title span { font-size: 1.55rem; }
-    .book-rule {
-      width: 3.5rem; height: 1px; margin: .55rem 0;
-      background: linear-gradient(90deg, transparent, rgba(216,168,90,.9), transparent);
-    }
-    .book-sub {
-      font-size: .62rem; letter-spacing: .14em; text-transform: uppercase;
-      color: rgba(250,245,234,.72);
-    }
-    .book-author {
-      font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: 1rem; color: #D8A85A; margin-top: .35rem;
-    }
-    /* Brilho/fólio de páginas na borda direita */
-    .book-cover::after {
-      content: ""; position: absolute; top: 6px; bottom: 6px; right: 0; width: 8px;
-      background: repeating-linear-gradient(180deg,#EFE7D5 0 2px,#cdbf9f 2px 3px);
-      border-radius: 0 6px 6px 0;
-    }
-    .book-shadow {
-      width: 14rem; height: 1.6rem; margin-top: -.4rem;
-      background: radial-gradient(closest-side, rgba(38,48,31,.4), transparent 75%);
-      filter: blur(2px);
-    }
-    @media (max-width: 480px) {
-      .book-cover { width: 14rem; }
-      .book { transform: rotateY(-14deg) rotateX(3deg); }
-    }
-
-    /* ===== Capas de livro dos bônus (CSS) ===== */
-    .bonus-book {
-      position: relative; width: 7.75rem; aspect-ratio: 5 / 7;
-      margin-bottom: 1.5rem;
-      border-radius: 4px 9px 9px 4px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; padding: 1rem .8rem; gap: .4rem; color: #FAF5EA;
-      box-shadow: 0 16px 32px -16px rgba(38,48,31,.55), 0 6px 14px -8px rgba(42,37,32,.4);
-      transform: rotate(-2deg); transition: transform .45s cubic-bezier(.2,.7,.2,1);
-    }
-    /* lombada */
-    .bonus-book::before {
-      content:""; position:absolute; left:0; top:0; bottom:0; width:9px;
-      background: linear-gradient(90deg, rgba(0,0,0,.34), rgba(255,255,255,.06));
-      border-radius: 4px 0 0 4px;
-    }
-    /* fólio de páginas */
-    .bonus-book::after {
-      content:""; position:absolute; right:-3px; top:6px; bottom:6px; width:5px;
-      background: repeating-linear-gradient(180deg,#EFE7D5 0 2px,#cdbf9f 2px 3px);
-      border-radius:0 4px 4px 0;
-    }
-    .reveal:hover .bonus-book { transform: rotate(0deg) translateY(-3px); }
-    .bonus-book .bb-frame {
-      position:absolute; inset:8px 8px 8px 14px; border:1px solid rgba(216,168,90,.4);
-      border-radius: 3px 6px 6px 3px; pointer-events:none;
-    }
-    .bonus-book .bb-icon { font-size: 1.7rem; line-height: 1; }
-    .bonus-book .bb-label {
-      font-size: .5rem; letter-spacing:.2em; text-transform:uppercase;
-      color: rgba(250,245,234,.72); font-weight:600;
-    }
-    .bonus-book .bb-title {
-      font-family: 'Cormorant Garamond', serif; font-weight:600;
-      font-size: 1rem; line-height:1.04; text-shadow: 0 1px 10px rgba(0,0,0,.3);
-    }
-    .bonus-book .bb-rule { width: 1.7rem; height:1px; background: rgba(216,168,90,.85); }
-    .bb-1 { background: radial-gradient(120% 90% at 75% 12%, #3A4A36, #26301F); }
-    .bb-2 { background: radial-gradient(120% 90% at 75% 12%, #C2702F, #8f4a22); }
-    .bb-3 { background: radial-gradient(120% 90% at 75% 12%, #7C8A66, #56643f); }
+    .bg-stars { background:
+      radial-gradient(1px 1px at 20% 30%, rgba(236,230,216,.5), transparent),
+      radial-gradient(1px 1px at 70% 20%, rgba(236,230,216,.4), transparent),
+      radial-gradient(1px 1px at 85% 60%, rgba(236,230,216,.3), transparent),
+      radial-gradient(1px 1px at 40% 80%, rgba(236,230,216,.35), transparent); }
+    .floatcta { position: fixed; left: 0; right: 0; bottom: 16px; z-index: 60; display: flex; justify-content: center; padding: 0 16px; pointer-events: none; opacity: 0; transform: translateY(18px); transition: opacity .35s ease, transform .35s ease; }
+    .floatcta.show { opacity: 1; transform: translateY(0); }
+    .floatcta a { pointer-events: auto; }
   </style>
-  <!-- VTurb: pre-carregamento (velocidade) -->
-  <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
-  <link rel="preload" href="https://scripts.converteai.net/c368f599-b51e-48b5-ab09-bdf942240f7c/players/6a3485b68a324fd18f7dc021/v4/player.js" as="script">
-  <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
-  <link rel="dns-prefetch" href="https://cdn.converteai.net">
-  <link rel="dns-prefetch" href="https://scripts.converteai.net">
-  <link rel="dns-prefetch" href="https://images.converteai.net">
-  <link rel="dns-prefetch" href="https://license.vturb.com">
-  <!-- =====================  METRICAS  ===================== -->
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF88GLDWV3"></script>
-  <script>
-    window.dataLayer=window.dataLayer||[];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    (function(){
-      var cfg={};
-      try{
-        var p=new URLSearchParams(location.search);
-        var v=p.get('utm_content')||p.get('v');
-        if(v){
-          cfg.campaign_source=p.get('utm_source')||'facebook';
-          cfg.campaign_medium=p.get('utm_medium')||'reels';
-          cfg.campaign_name=p.get('utm_campaign')||'reels';
-          cfg.campaign_content=v;
-        }
-      }catch(e){}
-      gtag('config','G-JF88GLDWV3',cfg);
-    })();
-  </script>
-  <!-- Vercel Web Analytics -->
-  <script defer src="/_vercel/insights/script.js"></script>
-  <!-- Rastreamento de cliques + atribuicao por video (UTM -> Stripe) -->
-  <script>
-    (function(){
-      function getRef(){
-        try{
-          var p = new URLSearchParams(location.search);
-          var r = p.get('utm_content') || p.get('v') || p.get('utm_campaign') || p.get('utm_source');
-          if(r){ try{ localStorage.setItem('attrib_ref', r); }catch(e){} return r; }
-          try{ return localStorage.getItem('attrib_ref') || ''; }catch(e){ return ''; }
-        }catch(e){ return ''; }
-      }
-      getRef();
-      try{ if(!sessionStorage.getItem('v_sent')){ sessionStorage.setItem('v_sent','1'); navigator.sendBeacon('/api/track?p='+encodeURIComponent(location.pathname)+'&v='+encodeURIComponent(getRef())); } }catch(e){}
-      function track(name, data){
-        try{ if(typeof window.gtag==='function'){ window.gtag('event', name, data); } }catch(e){}
-        try{ if(window.va){ window.va('event', { name: name, data: data }); } }catch(e){}
-      }
-      document.addEventListener('click', function(e){
-        var t = e.target; if(!t || !t.closest) return;
-        var a = t.closest('[data-checkout], a[href*="stripe.com"]');
-        if(!a) return;
-        var ref = getRef();
-        var href = a.getAttribute('href') || '';
-        if(ref && href.indexOf('stripe.com') > -1 && href.indexOf('client_reference_id=') === -1){
-          var safe = String(ref).replace(/[^a-zA-Z0-9_-]/g,'_').slice(0,180);
-          href += (href.indexOf('?') > -1 ? '&' : '?') + 'client_reference_id=' + safe;
-          a.setAttribute('href', href);
-        }
-        if(ref && href.indexOf('kiwify') > -1 && href.indexOf('utm_content=') === -1){
-          var safek = String(ref).replace(/[^a-zA-Z0-9_-]/g,'_').slice(0,180);
-          href += (href.indexOf('?') > -1 ? '&' : '?') + 'utm_source=facebook&utm_medium=reels&utm_content=' + safek;
-          a.setAttribute('href', href);
-        }
-        try{ navigator.sendBeacon('/api/track?type=checkout&p='+encodeURIComponent(location.pathname)+'&v='+encodeURIComponent(ref||'')); }catch(e){}
-        track('begin_checkout', {
-          page_path: location.pathname,
-          video_ref: ref || 'direto',
-          link_url: href,
-          button_text: (a.textContent||'').trim().slice(0,80)
-        });
-      }, true);
-    })();
-  </script>
 </head>
+<body class="font-sans antialiased">
 
-<body class="font-sans text-ink antialiased bg-cream selection:bg-gold/40 selection:text-ink">
-
-
-  <!-- =======================================================
-       1. HERO
-  ======================================================== -->
-  <header class="relative overflow-hidden">
-    <!-- Imagem de fundo: paisagem de lago e montanhas -->
-    <div class="absolute inset-0">
-      <img src="hero-paisagem.png"
-           alt="Lago sereno refletindo as montanhas ao amanhecer"
-           class="w-full h-full object-cover object-center" loading="eager" />
-      <div class="absolute inset-0 bg-gradient-to-b from-musgo-deep/85 via-musgo-deep/55 to-musgo-deep/90"></div>
-    </div>
-
-    <div class="relative max-w-3xl mx-auto px-6 pt-14 pb-20 sm:pt-20 sm:pb-28 text-center">
-      <p class="font-serif italic text-gold-light text-lg sm:text-xl mb-4">com a Mestra Lian</p>
-
-      <h1 class="font-serif font-600 text-4xl sm:text-6xl leading-tight text-balance mb-5 text-cream-soft">
-        500 Rituais Ancestrais
+  <header class="relative overflow-hidden bg-night bg-stars">
+    <div class="max-w-3xl mx-auto px-6 pt-14 pb-18 sm:pt-24 sm:pb-24 text-center">
+      <p class="font-serif italic text-gold-light text-lg mb-2">A Hora Esquecida</p>
+      <p class="text-cream-mute text-xs tracking-widest uppercase mb-6">Das tradições monásticas do Oriente</p>
+      <h1 class="font-serif font-600 text-4xl sm:text-6xl leading-tight text-balance mb-5 text-cream">
+        Sua mente a mil à noite não é quem você é — é um ritual que você parou de fazer.
       </h1>
-      <!-- Player de video (VSL) -->
-      <div class="mb-7 max-w-2xl mx-auto">
-        <vturb-smartplayer id="vid-6a3485b68a324fd18f7dc021" style="display: block; margin: 0 auto; width: 100%;"></vturb-smartplayer>
-        <script type="text/javascript">var s=document.createElement("script");s.src="https://scripts.converteai.net/c368f599-b51e-48b5-ab09-bdf942240f7c/players/6a3485b68a324fd18f7dc021/v4/player.js",s.async=!0,document.head.appendChild(s);</script>
-      </div>
-      <!-- Botao de compra abaixo do video (aparece aos 3:05) -->
-      <div class="mb-2">
-        <a id="cta-video" href="#" rel="noopener" style="display:none;" class="inline-block w-full sm:w-auto bg-gold hover:bg-gold-dark text-ink font-semibold text-lg px-10 py-4 rounded-full glow-gold transition-transform hover:scale-[1.02] active:scale-95">Quero os 500 Rituais por R$ 19 →</a>
-      </div>
-
-      <!-- Selos de confianca -->
-      <p class="mt-4 text-cream/75 text-xs sm:text-sm flex items-center justify-center gap-x-4 gap-y-1 flex-wrap">
-        <span>🛡️ 7 dias de garantia</span>
-        <span>🔒 Pagamento seguro</span>
-        <span>📱 Acesso imediato</span>
-        <span>🌍 Praticado no mundo todo</span>
+      <p class="text-cream-soft text-lg sm:text-xl leading-relaxed max-w-xl mx-auto mb-9">
+        O ritual esquecido de 10 minutos que acalma a mente e traz um sono profundo. <span class="text-cream">Sem apps. Sem esforço.</span>
       </p>
-
-    </div>
-  </header>
-
-  <main>
-
-  <!-- =======================================================
-       2. DOR + PROMESSA
-  ======================================================== -->
-  <section class="py-16 sm:py-24 px-6 bg-cream">
-    <div class="max-w-2xl mx-auto text-center reveal">
-      <p class="font-serif italic text-terracota text-xl mb-4">Minha amiga,</p>
-      <h2 class="font-serif font-bold text-3xl sm:text-4xl text-musgo leading-tight text-balance mb-8">
-        Você sente que a vida pede equilíbrio em mais de uma área?
-      </h2>
-      <div class="mb-10 flex justify-center">
-        <img src="mestra-templo.png"
-             alt="Mestra Lian sentada em serenidade no jardim do templo"
-             class="w-full max-w-md rounded-2xl object-cover shadow-soft border border-salvia/25" loading="lazy" />
-      </div>
-      <div class="space-y-5 text-lg text-ink/90 font-medium leading-relaxed text-balance">
-        <p>
-          A <strong class="text-ink">saúde</strong> que pede atenção: o sono que não vem,
-          o corpo cansado, a mente que não desliga.
-        </p>
-        <p>
-          As <strong class="text-ink">relações</strong> desgastadas pela pressa — conversas
-          que viram ruído, afetos que se distanciam sem que a gente perceba.
-        </p>
-        <p>
-          A <strong class="text-ink">energia</strong> que some no meio do dia, deixando você
-          arrastando os pés mesmo nas tarefas mais simples.
-        </p>
-        <p>
-          E a <strong class="text-ink">prosperidade</strong> que não flui — a sensação de
-          esforço sem colheita, de portas que custam a se abrir.
-        </p>
-        <p class="text-musgo font-medium">
-          Eu já estive aí. E foi no silêncio dos templos que aprendi uma verdade simples:
-          quando cuidamos da vida por inteiro, cada área começa a sustentar a outra.
-          A paz não está em fazer <em>mais</em> — está em retornar aos pequenos rituais.
-        </p>
-      </div>
-
-      <!-- Os quatro pilares -->
-      <div class="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div class="bg-cream-soft rounded-2xl p-5 border border-salvia/25 shadow-card">
-          <div class="text-3xl mb-2">🌿</div>
-          <p class="font-serif text-xl text-musgo">Saúde</p>
-          <p class="text-ink/80 text-sm font-medium mt-1">corpo sereno, sono profundo</p>
-        </div>
-        <div class="bg-cream-soft rounded-2xl p-5 border border-salvia/25 shadow-card">
-          <div class="text-3xl mb-2">💞</div>
-          <p class="font-serif text-xl text-musgo">Relações</p>
-          <p class="text-ink/80 text-sm font-medium mt-1">vínculos mais leves e amorosos</p>
-        </div>
-        <div class="bg-cream-soft rounded-2xl p-5 border border-salvia/25 shadow-card">
-          <div class="text-3xl mb-2">☀️</div>
-          <p class="font-serif text-xl text-musgo">Energia</p>
-          <p class="text-ink/80 text-sm font-medium mt-1">ânimo e vitalidade renovados</p>
-        </div>
-        <div class="bg-cream-soft rounded-2xl p-5 border border-salvia/25 shadow-card">
-          <div class="text-3xl mb-2">🪙</div>
-          <p class="font-serif text-xl text-musgo">Prosperidade</p>
-          <p class="text-ink/80 text-sm font-medium mt-1">abundância que flui com leveza</p>
-        </div>
-      </div>
-
-      <div class="mt-12 mx-auto max-w-xl bg-musgo border-l-4 border-gold rounded-r-xl p-6 text-left shadow-card">
-        <p class="font-serif text-2xl text-cream-soft leading-snug">
-          “Não precisamos de mais horas no dia. Precisamos de mais presença em cada área da vida.”
-        </p>
-        <p class="mt-3 text-gold-light text-sm">— Mestra Lian</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- =======================================================
-       3. O QUE É O PRODUTO
-  ======================================================== -->
-  <section class="py-16 sm:py-24 px-6 bg-cream-soft">
-    <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-      <div class="reveal order-2 md:order-1">
-        <p class="uppercase tracking-[0.2em] text-terracota text-xs font-semibold mb-3">O que você vai receber</p>
-        <h2 class="font-serif font-bold text-3xl sm:text-4xl text-musgo leading-tight mb-6">
-          Um guia digital com 500 rituais para a vida por inteiro
-        </h2>
-        <div class="space-y-4 text-lg text-ink/90 font-medium leading-relaxed">
-          <p>
-            <strong class="text-ink">500 Rituais Ancestrais</strong> não é mais um livro
-            para acumular na estante. É um companheiro de bolso — rituais curtos, simples e
-            profundos, organizados por área da vida e por intenção: saúde, relações,
-            energia e prosperidade.
-          </p>
-          <p>
-            Você recebe tudo em <strong class="text-ink">PDF</strong>, com
-            <strong class="text-ink">acesso imediato</strong> logo após a compra.
-            Abre no celular, no tablet ou no computador. Lê onde quiser, imprime se
-            preferir, e leva a serenidade no bolso.
-          </p>
-          <p class="text-musgo font-medium">
-            Sem complicação. Sem incenso caro. Sem precisar de horas livres.
-            Apenas você, alguns minutos e a sabedoria de gerações.
-          </p>
-        </div>
-      </div>
-      <div class="reveal order-1 md:order-2 flex justify-center">
-        <!-- Mockup do e-book em CSS -->
-        <div class="book-scene">
-          <div class="book">
-            <div class="book-cover">
-              <div class="book-spine"></div>
-              <div class="book-face">
-                <span class="book-eyebrow">Guia Digital • PDF</span>
-                <div class="book-emblem">禅</div>
-                <h3 class="book-title">500<br><span>Rituais</span><br><span>Ancestrais</span></h3>
-                <div class="book-rule"></div>
-                <p class="book-sub">Saúde · Relações · Energia · Prosperidade</p>
-                <p class="book-author">por Mestra Lian</p>
+      <div class="flex justify-center mb-10" style="perspective:1500px;">
+        <div style="position:relative;transform:rotateY(-17deg) rotateX(3deg);">
+          <div style="position:absolute;top:9px;right:-9px;bottom:9px;width:10px;background:linear-gradient(90deg,#cfc7b4,#efe9db);border-radius:2px;box-shadow:inset -1px 0 #b9b09a;"></div>
+          <div class="bg-stars" style="position:relative;width:230px;height:324px;border-radius:4px 9px 9px 4px;background:linear-gradient(150deg,#16244180 0%,#0b1220 65%);background-color:#0e1726;border:1px solid #2b3852;box-shadow:24px 30px 55px rgba(0,0,0,.55), 0 0 55px rgba(216,179,106,.12);overflow:hidden;">
+            <div style="position:absolute;left:0;top:0;bottom:0;width:28px;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,0));"></div>
+            <div style="position:absolute;left:10px;top:0;bottom:0;width:1px;background:#d8b36a;opacity:.45;"></div>
+            <div class="h-full flex flex-col items-center justify-between text-center" style="padding:30px 24px 24px 34px;">
+              <p class="text-gold-light uppercase" style="font-size:9px;letter-spacing:.2em;">500 Rituais Ancestrais</p>
+              <div>
+                <svg width="44" height="44" viewBox="0 0 46 46" class="mx-auto mb-4">
+                  <circle cx="23" cy="23" r="20" fill="none" stroke="#d8b36a" stroke-width="1" opacity=".55"/>
+                  <path d="M23 12 C26.5 18.5 28 21.5 23 27 C18 21.5 19.5 18.5 23 12 Z" fill="#f6d488"/>
+                  <path d="M23 17 C25 21.5 26 23.5 23 27 C20 23.5 21 21.5 23 17 Z" fill="#fff4d8"/>
+                </svg>
+                <h3 class="font-serif text-cream leading-tight" style="font-size:29px;">A Hora Esquecida</h3>
+                <p class="font-serif italic text-cream-soft mt-3" style="font-size:12px;">Acalme a mente. Durma profundamente.</p>
               </div>
+              <p class="font-serif text-gold-light" style="font-size:11px;">com a Mestra Mei</p>
             </div>
           </div>
-          <div class="book-shadow"></div>
         </div>
+      </div>
+      <a href="#offer" data-checkout class="inline-block w-full sm:w-auto bg-gold hover:bg-gold-dark text-night font-semibold text-lg px-12 py-4 rounded-full glow transition-transform hover:scale-[1.02] active:scale-95">Comece esta noite →</a>
+      <p class="mt-6 text-cream-mute text-sm flex items-center justify-center gap-x-5 gap-y-1 flex-wrap">
+        <span>🌙 Garantia de 30 noites</span><span>📱 Acesso imediato</span><span>⏱️ 10 minutos por noite</span>
+      </p>
+    </div>
+    <div class="hairline max-w-md mx-auto"></div>
+  </header>
+
+  <section class="bg-night-soft">
+    <div class="max-w-2xl mx-auto px-6 py-16 sm:py-20">
+      <h2 class="font-serif text-3xl sm:text-4xl text-cream mb-6 text-balance">É 1 da manhã. Seu corpo está exausto — mas sua mente não para.</h2>
+      <div class="space-y-4 text-cream-soft text-lg leading-relaxed">
+        <p>Você revive a conversa da tarde. Lembra do recado que esqueceu de mandar. A lista de amanhã começa a se escrever atrás dos seus olhos.</p>
+        <p>Você pega o celular "só pra desligar" — e uma hora depois sua mente está mais barulhenta que antes.</p>
+        <p>Você adormece perto do amanhecer e acorda como se não tivesse dormido. E o pior: você começou a acreditar que é simplesmente assim que você é.</p>
+        <p class="text-cream font-500">Não é. Algo foi tirado das suas noites — e pode ser devolvido.</p>
       </div>
     </div>
   </section>
 
-  <!-- =======================================================
-       4. OS RITUAIS EM MÓDULOS (GRADE DE CARDS)
-  ======================================================== -->
-  <section class="py-16 sm:py-24 px-6 bg-cream">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center max-w-2xl mx-auto mb-12 reveal">
-        <p class="uppercase tracking-[0.2em] text-terracota text-xs font-semibold mb-3">Dentro do guia</p>
-        <h2 class="font-serif font-bold text-3xl sm:text-4xl text-musgo leading-tight text-balance">
-          Rituais para cada área da sua vida
-        </h2>
-        <p class="mt-4 text-ink/85 text-lg font-medium">
-          Organizados em capítulos, para você encontrar exatamente o que precisa — quando precisa.
-        </p>
+  <section class="bg-night">
+    <div class="max-w-2xl mx-auto px-6 py-16 sm:py-20 text-center">
+      <img src="/img/ritual-calm.jpg" alt="Figura monástica ao pôr do sol sobre águas calmas" class="w-full rounded-2xl mb-8 border border-night-line" loading="lazy" />
+      <p class="font-serif italic text-gold-light text-xl mb-3">A Hora Esquecida</p>
+      <h2 class="font-serif text-3xl sm:text-4xl text-cream mb-7 text-balance">Por que a sua mente nunca desliga</h2>
+      <div class="space-y-5 text-cream-soft text-lg leading-relaxed text-left">
+        <p>Por milhares de anos, toda cultura da Terra <span class="text-gold-light">encerrava o dia com um ritual</span> — um fogo cuidado, um cântico, água derramada, um único gesto antes do descanso.</p>
+        <p>Nunca foi superstição. Era um <span class="text-cream font-500">sinal para o corpo</span>: o dia acabou. Você está seguro. Pode soltar.</p>
+        <p>A vida moderna apagou essa hora. Trocamos por telas, notícias e ruído — então seu sistema nervoso <span class="text-gold-light">nunca recebe o sinal de desligar.</span> A mente continua girando muito depois de você deitar.</p>
+        <p class="text-cream font-500 text-xl">Seus pensamentos a mil não são um defeito. São um dia inacabado.</p>
       </div>
+    </div>
+    <div class="hairline max-w-md mx-auto"></div>
+  </section>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- NOVO PILAR: RELAÇÕES -->
-        <article class="bg-cream-soft rounded-2xl p-7 shadow-card hover:glow-gold transition-shadow reveal border border-gold/40 relative">
-          <span class="absolute -top-3 right-5 bg-gold text-ink text-xs font-semibold px-3 py-1 rounded-full">Relações</span>
-          <div class="text-4xl mb-4">💞</div>
-          <h3 class="font-serif text-2xl text-musgo mb-2">Harmonizar as Relações</h3>
-          <p class="text-ink/90 font-medium leading-relaxed">
-            Rituais para suavizar conversas difíceis, reaproximar quem ama e cultivar
-            vínculos mais leves — em casa, no amor e na família.
-          </p>
-        </article>
-
-        <!-- NOVO PILAR: PROSPERIDADE -->
-        <article class="bg-cream-soft rounded-2xl p-7 shadow-card hover:glow-gold transition-shadow reveal border border-gold/40 relative">
-          <span class="absolute -top-3 right-5 bg-gold text-ink text-xs font-semibold px-3 py-1 rounded-full">Prosperidade</span>
-          <div class="text-4xl mb-4">🪙</div>
-          <h3 class="font-serif text-2xl text-musgo mb-2">Prosperidade &amp; Abundância</h3>
-          <p class="text-ink/90 font-medium leading-relaxed">
-            Gestos ancestrais para abrir caminhos, atrair oportunidades e cultivar
-            uma relação leve e próspera com o dinheiro e o trabalho.
-          </p>
-        </article>
-
-        <!-- NOVO PILAR: ENERGIA -->
-        <article class="bg-cream-soft rounded-2xl p-7 shadow-card hover:glow-gold transition-shadow reveal border border-gold/40 relative">
-          <span class="absolute -top-3 right-5 bg-gold text-ink text-xs font-semibold px-3 py-1 rounded-full">Energia</span>
-          <div class="text-4xl mb-4">☀️</div>
-          <h3 class="font-serif text-2xl text-musgo mb-2">Elevar a Energia e o Ânimo</h3>
-          <p class="text-ink/90 font-medium leading-relaxed">
-            Práticas para reacender a vitalidade, espantar o desânimo e recuperar
-            a disposição quando o dia parece pesado demais.
-          </p>
-        </article>
-
-        <!-- Card -->
-        <article class="bg-cream-soft rounded-2xl p-7 shadow-card hover:glow-gold transition-shadow reveal border border-salvia/25">
-          <div class="text-4xl mb-4">🌅</div>
-          <h3 class="font-serif text-2xl text-musgo mb-2">Rituais da Manhã</h3>
-          <p class="text-ink/90 font-medium leading-relaxed">
-            Comece o dia com energia e clareza. Pequenos gestos ao despertar para
-            firmar a intenção e nutrir o corpo antes da correria.
-          </p>
-        </article>
-
-        <article class="bg-cream-soft rounded-2xl p-7 shadow-card hover:glow-gold transition-shadow reveal border border-salvia/25">
-          <div class="text-4xl mb-4">🌙</div>
-          <h3 class="font-serif text-2xl text-musgo mb-2">Rituais da Noite</h3>
-          <p class="text-ink/90 font-medium leading-relaxed">
-            Desligue a mente e prepare o corpo para um sono profundo.
-            Rituais para encerrar o dia em paz e dormir como há muito não dormia.
-          </p>
-        </article>
-
-        <article class="bg-cream-soft rounded-2xl p-7 shadow-card hover:glow-gold transition-shadow reveal border border-salvia/25">
-          <div class="text-4xl mb-4">🍃</div>
-          <h3 class="font-serif text-2xl text-musgo mb-2">Limpeza Energética</h3>
-          <p class="text-ink/90 font-medium leading-relaxed">
-            Renove o ambiente e o seu interior. Práticas simples para liberar o que
-            pesa e abrir espaço para o leve.
-          </p>
-        </article>
-
-        <article class="bg-cream-soft rounded-2xl p-7 shadow-card hover:glow-gold transition-shadow reveal border border-salvia/25">
-          <div class="text-4xl mb-4">🛁</div>
-          <h3 class="font-serif text-2xl text-musgo mb-2">Banhos Ancestrais</h3>
-          <p class="text-ink/90 font-medium leading-relaxed">
-            Transforme o banho num momento sagrado de cuidado. Receitas de ervas e
-            intenções para lavar o cansaço do corpo e da alma.
-          </p>
-        </article>
-
-        <article class="bg-cream-soft rounded-2xl p-7 shadow-card hover:glow-gold transition-shadow reveal border border-salvia/25">
-          <div class="text-4xl mb-4">🌬️</div>
-          <h3 class="font-serif text-2xl text-musgo mb-2">Respiração &amp; Calma</h3>
-          <p class="text-ink/90 font-medium leading-relaxed">
-            Técnicas de respiração orientais para acalmar a ansiedade em minutos,
-            em qualquer lugar — no trânsito, no trabalho ou antes de dormir.
-          </p>
-        </article>
-
-        <article class="bg-cream-soft rounded-2xl p-7 shadow-card hover:glow-gold transition-shadow reveal border border-salvia/25">
-          <div class="text-4xl mb-4">🍵</div>
-          <h3 class="font-serif text-2xl text-musgo mb-2">Rituais de Chá &amp; Pausa</h3>
-          <p class="text-ink/90 font-medium leading-relaxed">
-            A arte de fazer uma pausa de verdade. Pequenas cerimônias para
-            transformar minutos comuns em momentos de presença.
-          </p>
-        </article>
-
-        <article class="bg-cream-soft rounded-2xl p-7 shadow-card hover:glow-gold transition-shadow reveal border border-salvia/25">
-          <div class="text-4xl mb-4">🌸</div>
-          <h3 class="font-serif text-2xl text-musgo mb-2">Rituais de Gratidão</h3>
-          <p class="text-ink/90 font-medium leading-relaxed">
-            Cultive o coração agradecido. Práticas diárias para enxergar a
-            abundância que já existe na sua vida.
-          </p>
-        </article>
-
-        <article class="bg-cream-soft rounded-2xl p-7 shadow-card hover:glow-gold transition-shadow reveal border border-salvia/25">
-          <div class="text-4xl mb-4">🌿</div>
-          <h3 class="font-serif text-2xl text-musgo mb-2">Rituais de Proteção</h3>
-          <p class="text-ink/90 font-medium leading-relaxed">
-            Sinta-se segura e centrada. Gestos ancestrais para firmar a sua energia
-            e proteger a sua paz diante do mundo.
-          </p>
-        </article>
-
-        <article class="bg-cream-soft rounded-2xl p-7 shadow-card hover:glow-gold transition-shadow reveal border border-salvia/25">
-          <div class="text-4xl mb-4">✨</div>
-          <h3 class="font-serif text-2xl text-musgo mb-2">E muito mais…</h3>
-          <p class="text-ink/90 font-medium leading-relaxed">
-            Rituais para o amor-próprio, para momentos difíceis e para celebrar as
-            pequenas alegrias da vida. São 500 ao todo, para cada área da sua jornada.
-          </p>
-        </article>
+  <section class="bg-night-soft">
+    <div class="max-w-2xl mx-auto px-6 py-16 sm:py-20">
+      <img src="/img/master-mei.jpg" alt="Mestra Mei em meditação à beira de um lago de montanha" class="w-full rounded-2xl mb-4 border border-night-line" loading="lazy" />
+      <p class="font-serif italic text-gold-light text-center mb-8">Mestra Mei</p>
+      <h2 class="font-serif text-3xl sm:text-4xl text-cream mb-6 text-balance">As práticas que encerram o dia — reunidas nos monastérios</h2>
+      <div class="space-y-4 text-cream-soft text-lg leading-relaxed">
+        <p>A Mestra Mei passou décadas dentro das tradições monásticas do Oriente, reunindo os rituais que os humanos usavam por gerações para acalmar a mente e recuperar o sono profundo.</p>
+        <p>O resultado é <span class="text-gold-light font-500">A Hora Esquecida</span> — uma coleção de <span class="text-cream font-500">500 rituais ancestrais</span> feitos com o que você já tem em casa: uma vela, um copo de água, sua respiração, um único gesto.</p>
+        <p>Nada para decorar. Nada para forçar. São rituais que o seu corpo <span class="text-cream font-500">responde sozinho</span> — calma que chega, em vez de calma que você precisa perseguir.</p>
       </div>
     </div>
   </section>
 
-  <!-- =======================================================
-       5. COMO FUNCIONA NA PRÁTICA
-  ======================================================== -->
-  <section class="py-16 sm:py-24 px-6 bg-musgo text-cream border-y border-gold/20">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center max-w-2xl mx-auto mb-12 reveal">
-        <p class="uppercase tracking-[0.2em] text-gold-light text-xs font-semibold mb-3">Simples assim</p>
-        <h2 class="font-serif text-3xl sm:text-4xl text-cream-soft leading-tight text-balance">
-          Como funciona na prática
-        </h2>
-      </div>
+  <section class="bg-night">
+    <div class="max-w-2xl mx-auto px-6 py-16 sm:py-20">
+      <h2 class="font-serif text-3xl sm:text-4xl text-cream mb-9 text-center text-balance">O que você vai começar esta noite</h2>
+      <ul class="space-y-5">
+        <li class="flex gap-4"><span class="text-gold text-xl">✦</span><p class="text-cream-soft text-lg leading-relaxed">O <span class="text-cream font-500">ritual de 3 minutos de "encerrar o dia"</span> que os monges usavam para entrar numa calma profunda antes de dormir.</p></li>
+        <li class="flex gap-4"><span class="text-gold text-xl">✦</span><p class="text-cream-soft text-lg leading-relaxed">O gesto à beira da cama que avisa seu sistema nervoso que <span class="text-cream font-500">é seguro desligar.</span></p></li>
+        <li class="flex gap-4"><span class="text-gold text-xl">✦</span><p class="text-cream-soft text-lg leading-relaxed">Por que sua mente a mil é um <span class="text-cream font-500">dia inacabado</span> — e o ritual que o encerra.</p></li>
+        <li class="flex gap-4"><span class="text-gold text-xl">✦</span><p class="text-cream-soft text-lg leading-relaxed">Rituais para <span class="text-cream font-500">adormecer mais rápido, acordar descansado, acalmar um coração inquieto e soltar um dia pesado.</span></p></li>
+        <li class="flex gap-4"><span class="text-gold text-xl">✦</span><p class="text-cream-soft text-lg leading-relaxed">Os <span class="text-cream font-500">500 rituais completos</span> para o resto da sua vida — calma, foco, energia, conexão — organizados pelo que você precisa, quando precisa.</p></li>
+      </ul>
 
-      <div class="grid sm:grid-cols-3 gap-8">
-        <div class="text-center reveal">
-          <div class="w-16 h-16 mx-auto rounded-full bg-cream/10 border border-gold/40 text-gold-light flex items-center justify-center text-3xl mb-4 font-serif">1</div>
-          <h3 class="font-serif text-2xl text-cream-soft mb-2">Você compra</h3>
-          <p class="text-cream/75 leading-relaxed">
-            Pagamento único e seguro. Em poucos segundos, o acesso chega no seu e-mail.
-          </p>
-        </div>
-        <div class="text-center reveal">
-          <div class="w-16 h-16 mx-auto rounded-full bg-cream/10 border border-gold/40 text-gold-light flex items-center justify-center text-3xl mb-4 font-serif">2</div>
-          <h3 class="font-serif text-2xl text-cream-soft mb-2">Acessa no celular</h3>
-          <p class="text-cream/75 leading-relaxed">
-            Receba o PDF e abra direto no celular. Leia onde estiver, imprima se quiser.
-          </p>
-        </div>
-        <div class="text-center reveal">
-          <div class="w-16 h-16 mx-auto rounded-full bg-cream/10 border border-gold/40 text-gold-light flex items-center justify-center text-3xl mb-4 font-serif">3</div>
-          <h3 class="font-serif text-2xl text-cream-soft mb-2">Pratica no seu ritmo</h3>
-          <p class="text-cream/75 leading-relaxed">
-            Escolha um ritual por vez. Bastam alguns minutos por dia para sentir a diferença.
-          </p>
-        </div>
-      </div>
-
-      <div class="mt-12 text-center reveal">
-        <a href="#" data-checkout
-           class="inline-block w-full sm:w-auto bg-gold hover:bg-gold-dark text-ink font-semibold text-lg px-10 py-4 rounded-full glow-gold transition-transform hover:scale-[1.02] active:scale-95">
-          Começar agora por <span data-price-new>R$ 49,90</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- =======================================================
-       6. BÔNUS INCLUSOS
-  ======================================================== -->
-  <section class="py-16 sm:py-24 px-6 bg-cream">
-    <div class="max-w-5xl mx-auto">
-      <div class="text-center max-w-2xl mx-auto mb-12 reveal">
-        <p class="uppercase tracking-[0.2em] text-terracota text-xs font-semibold mb-3">Presentes para você</p>
-        <h2 class="font-serif font-bold text-3xl sm:text-4xl text-musgo leading-tight text-balance">
-          Bônus exclusivos inclusos
-        </h2>
-        <p class="mt-4 text-ink/85 text-lg font-medium">Ao adquirir hoje, você leva também:</p>
-      </div>
-
-      <div class="grid sm:grid-cols-3 gap-6">
-        <div class="bg-cream-soft rounded-2xl p-7 shadow-card border border-salvia/25 reveal relative">
-          <span class="absolute -top-3 right-5 bg-gold text-ink text-xs font-semibold px-3 py-1 rounded-full">Bônus 1</span>
-          <div class="bonus-book bb-1">
-            <span class="bb-frame"></span>
-            <span class="bb-icon">🗓️</span>
-            <span class="bb-label">Bônus</span>
-            <span class="bb-title">Calendário<br>dos 4 Pilares</span>
-            <span class="bb-rule"></span>
+      <div class="flex justify-center mt-16 mb-2" style="perspective:1500px;">
+        <div style="position:relative;transform:rotateY(-17deg) rotateX(3deg);">
+          <div style="position:absolute;top:9px;right:-9px;bottom:9px;width:10px;background:linear-gradient(90deg,#cfc7b4,#efe9db);border-radius:2px;box-shadow:inset -1px 0 #b9b09a;"></div>
+          <div class="bg-stars" style="position:relative;width:244px;height:344px;border-radius:4px 9px 9px 4px;background:linear-gradient(150deg,#16244180 0%,#0b1220 65%);background-color:#0e1726;border:1px solid #2b3852;box-shadow:24px 30px 55px rgba(0,0,0,.55), 0 0 55px rgba(216,179,106,.12);overflow:hidden;">
+            <div style="position:absolute;left:0;top:0;bottom:0;width:28px;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,0));"></div>
+            <div style="position:absolute;left:10px;top:0;bottom:0;width:1px;background:#d8b36a;opacity:.45;"></div>
+            <div class="h-full flex flex-col items-center justify-between text-center" style="padding:34px 26px 26px 36px;">
+              <p class="text-gold-light uppercase" style="font-size:9px;letter-spacing:.2em;">500 Rituais Ancestrais</p>
+              <div>
+                <svg width="46" height="46" viewBox="0 0 46 46" class="mx-auto mb-5">
+                  <circle cx="23" cy="23" r="20" fill="none" stroke="#d8b36a" stroke-width="1" opacity=".55"/>
+                  <path d="M23 12 C26.5 18.5 28 21.5 23 27 C18 21.5 19.5 18.5 23 12 Z" fill="#f6d488"/>
+                  <path d="M23 17 C25 21.5 26 23.5 23 27 C20 23.5 21 21.5 23 17 Z" fill="#fff4d8"/>
+                </svg>
+                <h3 class="font-serif text-cream leading-tight" style="font-size:31px;">A Hora Esquecida</h3>
+                <p class="font-serif italic text-cream-soft mt-3" style="font-size:13px;">Acalme a mente. Durma profundamente.</p>
+              </div>
+              <p class="font-serif text-gold-light" style="font-size:12px;">com a Mestra Mei</p>
+            </div>
           </div>
-          <h3 class="font-serif text-2xl text-musgo mb-2">Calendário dos 4 Pilares</h3>
-          <p class="text-ink/90 font-medium leading-relaxed">
-            Um guia mês a mês que equilibra saúde, relações, energia e prosperidade —
-            um ritual sugerido para cada dia, sem esforço.
-          </p>
         </div>
+      </div>
+      <p class="text-cream-mute text-xs text-center mt-5">📖 Acesso imediato — leia esta noite no seu celular</p>
+    </div>
+    <div class="hairline max-w-md mx-auto"></div>
+  </section>
 
-        <div class="bg-cream-soft rounded-2xl p-7 shadow-card border border-salvia/25 reveal relative">
-          <span class="absolute -top-3 right-5 bg-gold text-ink text-xs font-semibold px-3 py-1 rounded-full">Bônus 2</span>
-          <div class="bonus-book bb-2">
-            <span class="bb-frame"></span>
-            <span class="bb-icon">🎧</span>
-            <span class="bb-label">Bônus</span>
-            <span class="bb-title">Áudios de<br>Respiração</span>
-            <span class="bb-rule"></span>
-          </div>
-          <h3 class="font-serif text-2xl text-musgo mb-2">Áudios de Respiração</h3>
-          <p class="text-ink/90 font-medium leading-relaxed">
-            Práticas guiadas pela voz da Mestra Lian para acalmar a mente e renovar
-            a energia em qualquer momento.
-          </p>
-        </div>
-
-        <div class="bg-cream-soft rounded-2xl p-7 shadow-card border border-salvia/25 reveal relative">
-          <span class="absolute -top-3 right-5 bg-gold text-ink text-xs font-semibold px-3 py-1 rounded-full">Bônus 3</span>
-          <div class="bonus-book bb-3">
-            <span class="bb-frame"></span>
-            <span class="bb-icon">🌼</span>
-            <span class="bb-label">Bônus</span>
-            <span class="bb-title">Guia de<br>Ervas Sagradas</span>
-            <span class="bb-rule"></span>
-          </div>
-          <h3 class="font-serif text-2xl text-musgo mb-2">Guia de Ervas Sagradas</h3>
-          <p class="text-ink/90 font-medium leading-relaxed">
-            As ervas e seus significados ancestrais para enriquecer seus banhos,
-            rituais de limpeza e de prosperidade.
-          </p>
-        </div>
+  <section class="bg-night-soft">
+    <div class="max-w-3xl mx-auto px-6 py-16 sm:py-20">
+      <h2 class="font-serif text-3xl sm:text-4xl text-cream mb-9 text-center">O que estão dizendo</h2>
+      <div class="grid sm:grid-cols-2 gap-5">
+        <figure class="bg-night-panel border border-night-line rounded-2xl p-6">
+          <p class="text-gold mb-2">★★★★★</p>
+          <blockquote class="text-cream-soft leading-relaxed">"Por anos achei que uma mente a mil à meia-noite era simplesmente quem eu era. O ritual da vela mudou isso já na primeira noite. Eu encerro o dia, e o sono simplesmente me encontra."</blockquote>
+          <figcaption class="text-cream-mute text-sm mt-3">— Eleanor Hughes, 52</figcaption>
+        </figure>
+        <figure class="bg-night-panel border border-night-line rounded-2xl p-6">
+          <p class="text-gold mb-2">★★★★★</p>
+          <blockquote class="text-cream-soft leading-relaxed">"Eu rolava o celular até as 2 da manhã, exausto mas ligado. Agora faço um pequeno gesto ao lado da cama e meu corpo inteiro relaxa. Acordo descansado pela primeira vez em uma década."</blockquote>
+          <figcaption class="text-cream-mute text-sm mt-3">— Julien Moreau, 38</figcaption>
+        </figure>
+        <figure class="bg-night-panel border border-night-line rounded-2xl p-6">
+          <p class="text-gold mb-2">★★★★★</p>
+          <blockquote class="text-cream-soft leading-relaxed">"Sem app, sem esforço, nada para decorar — foi isso que finalmente funcionou para mim. Três respirações lentas, e o dia acabou. Meu sono nunca foi tão profundo."</blockquote>
+          <figcaption class="text-cream-mute text-sm mt-3">— Lena Schäfer, 45</figcaption>
+        </figure>
+        <figure class="bg-night-panel border border-night-line rounded-2xl p-6">
+          <p class="text-gold mb-2">★★★★★</p>
+          <blockquote class="text-cream-soft leading-relaxed">"Eu estava cético de que algo tão simples pudesse acalmar minha mente. No fim da primeira semana eu adormecia em minutos. Isso me devolveu as minhas noites."</blockquote>
+          <figcaption class="text-cream-mute text-sm mt-3">— Marco Rossi, 41</figcaption>
+        </figure>
       </div>
     </div>
   </section>
 
-  <!-- =======================================================
-       7. TUDO O QUE VOCÊ VAI RECEBER + PREÇO + CTA
-  ======================================================== -->
-  <section class="py-16 sm:py-24 px-6 bg-cream-soft">
-    <div class="max-w-2xl mx-auto">
-      <div class="text-center mb-10 reveal">
-        <h2 class="font-serif font-bold text-3xl sm:text-4xl text-musgo leading-tight text-balance">
-          Tudo o que você vai receber
-        </h2>
-      </div>
+  <section class="bg-night">
+    <div class="max-w-2xl mx-auto px-6 py-16 sm:py-20 text-center">
+      <h2 class="font-serif text-3xl sm:text-4xl text-cream mb-6 text-balance">Não é mais um app pedindo foco</h2>
+      <p class="text-cream-soft text-lg leading-relaxed">Você já tentou os apps de meditação. Eles pedem concentração — justo quando sua mente está cansada demais. Esses rituais <span class="text-cream font-500">não pedem nada da sua mente.</span> Sem tela. Sem esforço. Você faz um pequeno ato físico, e o corpo se acalma sozinho — do jeito que sempre soube.</p>
+    </div>
+    <div class="hairline max-w-md mx-auto"></div>
+  </section>
 
-      <div class="bg-cream rounded-3xl shadow-soft border border-salvia/30 overflow-hidden reveal">
-        <ul class="p-7 sm:p-9 space-y-4 text-lg text-ink/90">
-          <li class="flex gap-3"><span class="text-musgo flex-none mt-1">✓</span> <span><strong class="text-ink">500 Rituais Ancestrais</strong> em PDF para a vida por inteiro: saúde, relações, energia e prosperidade</span></li>
-          <li class="flex gap-3"><span class="text-musgo flex-none mt-1">✓</span> <span>Capítulos de manhã, noite, limpeza, banhos e respiração</span></li>
-          <li class="flex gap-3"><span class="text-musgo flex-none mt-1">✓</span> <span>Módulos de relações, prosperidade e elevação da energia</span></li>
-          <li class="flex gap-3"><span class="text-musgo flex-none mt-1">✓</span> <span><strong class="text-ink">Bônus 1:</strong> Calendário dos 4 Pilares, mês a mês</span></li>
-          <li class="flex gap-3"><span class="text-musgo flex-none mt-1">✓</span> <span><strong class="text-ink">Bônus 2:</strong> Áudios de respiração guiada</span></li>
-          <li class="flex gap-3"><span class="text-musgo flex-none mt-1">✓</span> <span><strong class="text-ink">Bônus 3:</strong> Guia de Ervas Sagradas</span></li>
-          <li class="flex gap-3"><span class="text-musgo flex-none mt-1">✓</span> <span>Acesso imediato e vitalício — leia no celular ou imprima</span></li>
-          <li class="flex gap-3"><span class="text-musgo flex-none mt-1">✓</span> <span>Garantia incondicional de 7 dias</span></li>
-        </ul>
-
-        <!-- Caixa de preço -->
-        <div class="bg-musgo text-center p-8 border-t border-gold/20">
-          <p class="text-cream/60 text-sm">De <span class="line-through" data-price-old>R$ 97,00</span> por apenas</p>
-          <p class="font-serif text-6xl text-gold-glow font-600 my-1"><span data-price-new>R$ 49,90</span></p>
-          <p class="text-cream/70 text-sm mb-6">pagamento único · sem mensalidade</p>
-          <a href="#" data-checkout
-             class="inline-block w-full bg-gold hover:bg-gold-dark text-ink font-semibold text-lg px-8 py-4 rounded-full glow-gold transition-transform hover:scale-[1.02] active:scale-95">
-            Quero meu acesso agora →
-          </a>
-          <p class="mt-4 text-cream/60 text-xs">🔒 Pagamento 100% seguro · 🛡️ 7 dias de garantia</p>
+  <section id="offer" class="bg-night-soft">
+    <div class="max-w-xl mx-auto px-6 py-16 sm:py-20">
+      <div class="bg-night-panel border border-night-line rounded-3xl p-8 sm:p-10 glow">
+        <h2 class="font-serif text-3xl sm:text-4xl text-cream mb-1 text-center">A Hora Esquecida</h2>
+        <p class="text-cream-mute text-center mb-7">500 rituais ancestrais · acesso vitalício · imediato no celular</p>
+        <div class="space-y-3 text-sm border-t border-b border-night-line py-5 mb-6">
+          <div class="flex justify-between text-cream-soft"><span>✦ O método A Hora Esquecida</span><span class="text-cream-mute">R$39</span></div>
+          <div class="flex justify-between text-cream-soft"><span>✦ A biblioteca dos 500 Rituais</span><span class="text-cream-mute">R$39</span></div>
+          <div class="flex justify-between text-cream-soft"><span>★ Bônus: O Reset de 7 Noites</span><span class="text-cream-mute">R$12</span></div>
+          <div class="flex justify-between text-cream-soft"><span>★ Bônus: O Ritual da Luz da Manhã</span><span class="text-cream-mute">R$7</span></div>
+          <div class="flex justify-between text-cream font-500 pt-2"><span>Valor total</span><span class="line-through text-cream-mute">R$97</span></div>
         </div>
+        <p class="text-cream-mute text-sm text-center">Hoje, apenas</p>
+        <p class="font-serif text-6xl text-gold font-600 my-1 text-center"><span data-price-new>R$ 19,00</span></p>
+        <p class="text-cream-mute text-sm mb-7 text-center">Pagamento único. Sem assinatura.</p>
+        <a href="#" data-checkout class="inline-block w-full bg-gold hover:bg-gold-dark text-night font-semibold text-lg px-10 py-4 rounded-full transition-transform hover:scale-[1.02] active:scale-95 text-center">Comece esta noite →</a>
+        <p class="mt-6 text-cream-soft text-sm leading-relaxed text-center">🌙 <span class="font-500 text-cream">Garantia de 30 noites.</span> Faça os rituais por 30 noites. Se o seu sono não mudar, escreva pra gente e devolvemos cada centavo — sem perguntas.</p>
       </div>
     </div>
   </section>
 
-  <!-- =======================================================
-       8. O QUE ESTE GUIA NÃO É
-  ======================================================== -->
-  <section class="py-16 sm:py-24 px-6 bg-cream">
-    <div class="max-w-2xl mx-auto reveal">
-      <div class="text-center mb-10">
-        <p class="uppercase tracking-[0.2em] text-terracota text-xs font-semibold mb-3">Honestidade antes de tudo</p>
-        <h2 class="font-serif font-bold text-3xl sm:text-4xl text-musgo leading-tight text-balance">
-          O que este guia <em>não</em> é
-        </h2>
-      </div>
+  <section class="bg-night">
+    <div class="max-w-2xl mx-auto px-6 py-14 text-center">
+      <p class="text-cream-soft text-lg leading-relaxed">Isto é para você se o corpo está cansado mas a mente não para — se já tentou os apps, os chás, o celular, e ainda fica acordado. Você não precisa de mais disciplina. Você precisa da hora que perdeu. 🌙</p>
+    </div>
+    <div class="hairline max-w-md mx-auto"></div>
+  </section>
 
-      <div class="space-y-4">
-        <div class="flex gap-4 bg-cream-soft rounded-xl p-5 border border-salvia/25">
-          <span class="text-terracota text-xl flex-none">✕</span>
-          <p class="text-ink/80 leading-relaxed"><strong class="text-ink">Não é um livro de receitas</strong> ou de culinária. São rituais de presença e bem-estar para todas as áreas da sua vida.</p>
-        </div>
-        <div class="flex gap-4 bg-cream-soft rounded-xl p-5 border border-salvia/25">
-          <span class="text-terracota text-xl flex-none">✕</span>
-          <p class="text-ink/80 leading-relaxed"><strong class="text-ink">Não é uma promessa milagrosa.</strong> Não substitui acompanhamento médico, psicológico ou financeiro. É um caminho de autocuidado, não um remédio.</p>
-        </div>
-        <div class="flex gap-4 bg-cream-soft rounded-xl p-5 border border-salvia/25">
-          <span class="text-terracota text-xl flex-none">✕</span>
-          <p class="text-ink/80 leading-relaxed"><strong class="text-ink">Não exige horas livres</strong> nem materiais caros. A maioria dos rituais leva poucos minutos e usa o que você já tem em casa.</p>
-        </div>
-        <div class="flex gap-4 bg-cream-soft rounded-xl p-5 border border-salvia/25">
-          <span class="text-terracota text-xl flex-none">✕</span>
-          <p class="text-ink/80 leading-relaxed"><strong class="text-ink">Não é religião.</strong> É sabedoria ancestral acessível a qualquer pessoa, qualquer que seja a sua fé.</p>
-        </div>
+  <section class="bg-night-soft">
+    <div class="max-w-2xl mx-auto px-6 py-16 sm:py-20">
+      <h2 class="font-serif text-3xl sm:text-4xl text-cream mb-8 text-center">Perguntas</h2>
+      <div class="space-y-3">
+        <details class="bg-night-panel border border-night-line rounded-2xl p-5"><summary class="font-500 text-cream flex justify-between items-center">Preciso de algo especial?<span class="text-gold">+</span></summary><p class="text-cream-soft mt-3 leading-relaxed">Não. Todo ritual usa coisas que você já tem em casa — uma vela, água, sua própria respiração.</p></details>
+        <details class="bg-night-panel border border-night-line rounded-2xl p-5"><summary class="font-500 text-cream flex justify-between items-center">Em quanto tempo vou sentir?<span class="text-gold">+</span></summary><p class="text-cream-soft mt-3 leading-relaxed">A maioria já se sente mais calma na primeira noite. A mudança mais profunda no sono vem ao longo da primeira semana.</p></details>
+        <details class="bg-night-panel border border-night-line rounded-2xl p-5"><summary class="font-500 text-cream flex justify-between items-center">Isso é religioso?<span class="text-gold">+</span></summary><p class="text-cream-soft mt-3 leading-relaxed">Não. São práticas ancestrais para o corpo e a mente. Combinam com qualquer crença — ou nenhuma.</p></details>
+        <details class="bg-night-panel border border-night-line rounded-2xl p-5"><summary class="font-500 text-cream flex justify-between items-center">Como recebo?<span class="text-gold">+</span></summary><p class="text-cream-soft mt-3 leading-relaxed">Na hora. Assim que você conclui a compra, abre no seu celular — leia esta noite.</p></details>
+        <details class="bg-night-panel border border-night-line rounded-2xl p-5"><summary class="font-500 text-cream flex justify-between items-center">E se não funcionar pra mim?<span class="text-gold">+</span></summary><p class="text-cream-soft mt-3 leading-relaxed">Então você não paga nada. Você tem 30 noites. Se o seu sono não mudar, devolvemos cada centavo.</p></details>
       </div>
     </div>
   </section>
 
-
-  <!-- =======================================================
-       10. FAQ (ACORDEÃO)
-  ======================================================== -->
-  <section class="py-16 sm:py-24 px-6 bg-cream">
-    <div class="max-w-2xl mx-auto">
-      <div class="text-center mb-12 reveal">
-        <p class="uppercase tracking-[0.2em] text-terracota text-xs font-semibold mb-3">Dúvidas frequentes</p>
-        <h2 class="font-serif font-bold text-3xl sm:text-4xl text-musgo leading-tight text-balance">
-          Perguntas que talvez você tenha
-        </h2>
-      </div>
-
-      <div class="space-y-4">
-        <details class="bg-cream-soft rounded-xl border border-salvia/25 p-5 reveal">
-          <summary class="flex justify-between items-center gap-4 font-medium text-lg text-musgo">
-            O guia cuida só da saúde ou de outras áreas também? <span class="faq-icon text-gold-dark text-2xl flex-none">+</span>
-          </summary>
-          <p class="mt-4 text-ink/90 font-medium leading-relaxed">
-            Da vida por inteiro, minha amiga. São quatro pilares: saúde, relações,
-            energia e prosperidade. Você encontra rituais para cada um deles e pode
-            começar pela área que mais pede atenção agora.
-          </p>
-        </details>
-
-        <details class="bg-cream-soft rounded-xl border border-salvia/25 p-5 reveal">
-          <summary class="flex justify-between items-center gap-4 font-medium text-lg text-musgo">
-            Como eu recebo o material? <span class="faq-icon text-gold-dark text-2xl flex-none">+</span>
-          </summary>
-          <p class="mt-4 text-ink/90 font-medium leading-relaxed">
-            Assim que o pagamento é confirmado, você recebe um e-mail com o link de
-            acesso ao guia em PDF. É imediato — em poucos minutos já está nas suas mãos.
-          </p>
-        </details>
-
-        <details class="bg-cream-soft rounded-xl border border-salvia/25 p-5 reveal">
-          <summary class="flex justify-between items-center gap-4 font-medium text-lg text-musgo">
-            Funciona no celular? <span class="faq-icon text-gold-dark text-2xl flex-none">+</span>
-          </summary>
-          <p class="mt-4 text-ink/90 font-medium leading-relaxed">
-            Sim! O guia foi pensado para ser lido no celular com conforto. Você também
-            pode abrir no tablet, no computador ou imprimir, se preferir o papel.
-          </p>
-        </details>
-
-        <details class="bg-cream-soft rounded-xl border border-salvia/25 p-5 reveal">
-          <summary class="flex justify-between items-center gap-4 font-medium text-lg text-musgo">
-            Preciso ter experiência com meditação? <span class="faq-icon text-gold-dark text-2xl flex-none">+</span>
-          </summary>
-          <p class="mt-4 text-ink/90 font-medium leading-relaxed">
-            De forma alguma. Os rituais foram criados para serem simples e acolhedores,
-            mesmo para quem está começando agora. A Mestra Lian conduz você passo a passo.
-          </p>
-        </details>
-
-        <details class="bg-cream-soft rounded-xl border border-salvia/25 p-5 reveal">
-          <summary class="flex justify-between items-center gap-4 font-medium text-lg text-musgo">
-            Quanto tempo leva cada ritual? <span class="faq-icon text-gold-dark text-2xl flex-none">+</span>
-          </summary>
-          <p class="mt-4 text-ink/90 font-medium leading-relaxed">
-            A maioria leva de 2 a 10 minutos. A proposta é caber na sua rotina, e não
-            o contrário. Você escolhe um ritual por vez, no seu ritmo.
-          </p>
-        </details>
-
-        <details class="bg-cream-soft rounded-xl border border-salvia/25 p-5 reveal">
-          <summary class="flex justify-between items-center gap-4 font-medium text-lg text-musgo">
-            E se eu não gostar? <span class="faq-icon text-gold-dark text-2xl flex-none">+</span>
-          </summary>
-          <p class="mt-4 text-ink/90 font-medium leading-relaxed">
-            Você tem 7 dias de garantia incondicional. Se sentir que não é para você,
-            basta enviar um e-mail e devolvemos 100% do valor, sem perguntas.
-          </p>
-        </details>
-
-        <details class="bg-cream-soft rounded-xl border border-salvia/25 p-5 reveal">
-          <summary class="flex justify-between items-center gap-4 font-medium text-lg text-musgo">
-            O pagamento é seguro? <span class="faq-icon text-gold-dark text-2xl flex-none">+</span>
-          </summary>
-          <p class="mt-4 text-ink/90 font-medium leading-relaxed">
-            Totalmente. O pagamento é processado em ambiente criptografado e seguro.
-            Seus dados ficam protegidos do início ao fim.
-          </p>
-        </details>
-      </div>
+  <section class="bg-night bg-stars">
+    <div class="max-w-2xl mx-auto px-6 py-20 text-center">
+      <h2 class="font-serif text-3xl sm:text-5xl text-cream mb-6 text-balance">Esta noite pode terminar diferente.</h2>
+      <p class="text-cream-soft text-lg leading-relaxed mb-9 max-w-xl mx-auto">Você já carregou essas noites por tempo demais. Devolva à sua mente a hora que ela perdeu — e deixe o sono te encontrar de novo.</p>
+      <a href="#" data-checkout class="inline-block w-full sm:w-auto bg-gold hover:bg-gold-dark text-night font-semibold text-lg px-12 py-4 rounded-full glow transition-transform hover:scale-[1.02] active:scale-95">Comece esta noite →</a>
+      <p class="mt-6 text-cream-mute text-sm"><span data-price-new>R$ 19,00</span> · pagamento único · garantia de 30 noites</p>
     </div>
   </section>
 
-  <!-- =======================================================
-       11. CTA FINAL + GARANTIA
-  ======================================================== -->
-  <section class="relative py-16 sm:py-24 px-6 bg-musgo text-cream border-t border-gold/25">
-    <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-      <!-- Imagem da Mestra Lian junto ao lago -->
-      <div class="reveal flex justify-center order-1">
-        <img src="mestra-lago.png"
-             alt="Mestra Lian junto ao lago ao entardecer"
-             class="w-full max-w-sm rounded-3xl object-cover border-4 border-gold/30 glow-gold" loading="lazy" />
-      </div>
-
-      <!-- Conteúdo -->
-      <div class="text-center reveal order-2">
-      <!-- Selo de garantia -->
-      <div class="inline-flex items-center gap-3 bg-cream/10 border border-gold/40 rounded-full px-6 py-3 mb-8">
-        <span class="text-3xl">🛡️</span>
-        <span class="text-left text-sm sm:text-base">
-          <strong class="text-gold-light">Garantia de 7 dias</strong><br/>
-          <span class="text-cream/65">risco zero — ou seu dinheiro de volta</span>
-        </span>
-      </div>
-
-      <h2 class="font-serif text-3xl sm:text-5xl text-cream-soft leading-tight text-balance mb-5">
-        O seu equilíbrio começa com um único ritual
-      </h2>
-
-      <!-- Posicionamento principal repetido no fechamento -->
-      <p class="font-serif text-xl sm:text-2xl text-gold-glow leading-snug text-balance mb-6 max-w-xl mx-auto">
-        Sabedoria oriental para restaurar sua saúde, suas relações, sua energia
-        e sua prosperidade.
-      </p>
-
-      <p class="text-lg text-cream/80 leading-relaxed text-balance mb-8 max-w-xl mx-auto">
-        Não deixe mais um dia passar no piloto automático, minha amiga. Permita-se
-        cuidar da vida por inteiro. Tudo o que você precisa cabe na palma da sua mão.
-      </p>
-
-      <div class="mb-7">
-        <p class="text-cream/60 text-sm">De <span class="line-through" data-price-old>R$ 97,00</span> por</p>
-        <p class="font-serif text-6xl text-gold-glow font-600"><span data-price-new>R$ 49,90</span></p>
-        <p class="text-cream/70 text-sm mt-1">pagamento único · acesso imediato</p>
-      </div>
-
-      <a href="#" data-checkout
-         class="inline-block w-full sm:w-auto bg-gold hover:bg-gold-dark text-ink font-semibold text-lg px-12 py-5 rounded-full glow-gold transition-transform hover:scale-[1.02] active:scale-95">
-        Sim, quero começar agora →
-      </a>
-
-      <p class="mt-6 font-serif italic text-gold-light/90 text-lg">
-        “A jornada de mil passos começa com um único gesto.” — Mestra Lian
-      </p>
-      </div>
-    </div>
-  </section>
-
-  </main>
-
-  <!-- =======================================================
-       12. RODAPÉ
-  ======================================================== -->
-  <footer class="bg-musgo-deep text-cream/60 py-12 px-6 border-t border-gold/15">
-    <div class="max-w-3xl mx-auto text-center">
-      <p class="font-serif text-2xl text-cream-soft mb-2">500 Rituais Ancestrais</p>
-      <p class="text-sm mb-6">com a Mestra Lian · sabedoria oriental para saúde, relações, energia e prosperidade</p>
-
-      <div class="hr-gold max-w-xs mx-auto mb-6"></div>
-
-      <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm mb-8">
-        <a href="#" class="hover:text-gold-light transition-colors">Termos de Uso</a>
-        <a href="#" class="hover:text-gold-light transition-colors">Política de Privacidade</a>
-        <a href="mailto:contato@seusite.com.br" class="hover:text-gold-light transition-colors">Contato</a>
-      </nav>
-
-      <p class="text-xs text-cream/45 max-w-xl mx-auto leading-relaxed">
-        Este produto é um material de autocuidado e bem-estar. Não substitui
-        acompanhamento médico, psicológico, terapêutico ou financeiro. Resultados
-        podem variar de pessoa para pessoa.
-      </p>
-      <p class="text-xs text-cream/45 mt-4">
-        © <span id="year"></span> 500 Rituais Ancestrais. Todos os direitos reservados.
-      </p>
+  <footer class="bg-night-soft border-t border-night-line">
+    <div class="max-w-2xl mx-auto px-6 py-10 text-center text-cream-mute text-sm">
+      <p class="font-serif text-gold-light text-lg mb-2">A Hora Esquecida</p>
+      <p>© <span id="year"></span> · com a Mestra Mei. Todos os direitos reservados.</p>
     </div>
   </footer>
 
-  <!-- =======================================================
-       CTA FLUTUANTE (mobile) — aparece ao rolar
-  ======================================================== -->
-  <div id="sticky-cta" class="fixed bottom-0 inset-x-0 z-40 p-3 bg-cream/95 backdrop-blur border-t border-salvia/30 shadow-[0_-8px_30px_-10px_rgba(58,74,54,.35)] transition-transform duration-300">
-    <a href="#" data-checkout
-       class="flex items-center justify-between gap-3 bg-gold hover:bg-gold-dark text-ink font-semibold px-5 py-3.5 rounded-full">
-      <span>Garantir meu acesso</span>
-      <span class="font-serif text-lg" data-price-new>R$ 49,90</span>
-    </a>
+  <div id="floatCta" class="floatcta">
+    <a href="#offer" data-checkout class="inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold-dark text-night font-semibold px-9 py-3.5 rounded-full" style="box-shadow:0 12px 32px rgba(0,0,0,.55), 0 0 30px rgba(216,179,106,.25);">Comece esta noite →</a>
   </div>
 
-  <!-- =======================================================
-       POP-UP DE SAÍDA (exit-intent)
-  ======================================================== -->
-  <div id="exit-popup" class="fixed inset-0 z-[60] hidden items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-    <div class="relative w-full max-w-sm reveal-pop">
-      <button id="exit-close" aria-label="Fechar"
-        class="absolute -top-4 -right-4 z-10 w-11 h-11 rounded-full bg-white text-ink text-2xl leading-none font-bold shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition">×</button>
-      <a href="desconto.html" id="exit-cta" class="block rounded-2xl overflow-hidden shadow-2xl ring-4 ring-white/15">
-        <img src="popup-presente.jpeg"
-             alt="Temos um presente exclusivo para você — clique para saber mais"
-             class="w-full h-auto block" />
-      </a>
-    </div>
-  </div>
-
-  <!-- =======================================================
-       JAVASCRIPT MÍNIMO
-  ======================================================== -->
   <script>
-    /* ===========================================================
-       CONFIGURAÇÃO — EDITE AQUI
-       =========================================================== */
-    // 🔗 Link do checkout de R$ 19 (PIX/ParadisePags). Usado no botão que aparece abaixo do vídeo aos 3:05.
-    const STRIPE_CHECKOUT_URL_PT = "https://compraonlinesegurada.org.ua/c/9b8d718275";
+    const CHECKOUT_URL = "https://compraonlinesegurada.org.ua/c/9b8d718275";
+    const PRICE_NEW = "R$ 19,00";
+    const VIDEO_TAG = new URLSearchParams(location.search).get("v") || "sleep-pt";
 
-    // 💰 Preços (troque facilmente aqui)
-    const PRECO_DE  = "R$ 47,00";
-    const PRECO_POR = "R$ 19,00";
-    /* =========================================================== */
-
-    // Botões de compra espalhados pela página ficam ocultos — a compra é pelo botão abaixo do vídeo.
+    var finalUrl = CHECKOUT_URL;
+    if (finalUrl.indexOf('stripe.com') > -1) { finalUrl += (finalUrl.indexOf('?') > -1 ? '&' : '?') + 'client_reference_id=' + encodeURIComponent(VIDEO_TAG); }
     document.querySelectorAll('[data-checkout]').forEach(function (el) {
-      el.style.display = 'none';
+      el.setAttribute('href', finalUrl); el.setAttribute('rel', 'noopener');
+      el.addEventListener('click', function () { try { navigator.sendBeacon('/api/track?type=checkout&p=' + encodeURIComponent(location.pathname) + '&v=' + encodeURIComponent(VIDEO_TAG)); } catch (e) {} });
     });
-
-    // Botão abaixo do vídeo: recebe o link e aparece aos 3:05 (185s do carregamento; vídeo em autoplay).
-    var ctaVideo = document.getElementById('cta-video');
-    if (ctaVideo) {
-      ctaVideo.setAttribute('href', STRIPE_CHECKOUT_URL_PT);
-      setTimeout(function () {
-        ctaVideo.style.opacity = '0';
-        ctaVideo.style.transition = 'opacity .6s ease';
-        ctaVideo.style.display = '';
-        requestAnimationFrame(function () { ctaVideo.style.opacity = '1'; });
-      }, 185000);
-    }
-
-    // Aplica os preços em todos os pontos da página
-    document.querySelectorAll('[data-price-old]').forEach(function (el) { el.textContent = PRECO_DE; });
-    document.querySelectorAll('[data-price-new]').forEach(function (el) { el.textContent = PRECO_POR; });
-
-    // Ano no rodapé
+    document.querySelectorAll('[data-price-new]').forEach(function (el) { el.textContent = PRICE_NEW; });
     document.getElementById('year').textContent = new Date().getFullYear();
+    try { if (!sessionStorage.getItem('v_sent_sleep')) { sessionStorage.setItem('v_sent_sleep', '1'); navigator.sendBeacon('/api/track?type=visit&p=' + encodeURIComponent(location.pathname) + '&v=' + encodeURIComponent(VIDEO_TAG)); } } catch (e) {}
 
-    // Animação de entrada (reveal on scroll)
     (function () {
-      var els = document.querySelectorAll('.reveal');
-      if (!('IntersectionObserver' in window)) {
-        els.forEach(function (e) { e.classList.add('is-visible'); });
-        return;
-      }
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            io.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12 });
-      els.forEach(function (e) { io.observe(e); });
-    })();
-
-
-    // Pop-up de saída (exit-intent) — aparece uma vez por sessão
-    (function () {
-      var popup = document.getElementById('exit-popup');
-      var closeBtn = document.getElementById('exit-close');
-      if (!popup) return;
-
-      function jaMostrado() { return sessionStorage.getItem('exitPopupMostrado') === '1'; }
-
-      function abrir() {
-        if (jaMostrado()) return;
-        sessionStorage.setItem('exitPopupMostrado', '1');
-        popup.classList.remove('hidden');
-        popup.classList.add('flex');
-        document.body.style.overflow = 'hidden';
-      }
-      function fechar() {
-        popup.classList.add('hidden');
-        popup.classList.remove('flex');
-        document.body.style.overflow = '';
-      }
-
-      closeBtn.addEventListener('click', fechar);
-      popup.addEventListener('click', function (e) { if (e.target === popup) fechar(); });
-      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') fechar(); });
-
-      // Desktop: o cursor sai pela parte de cima da janela
-      document.addEventListener('mouseout', function (e) {
-        if (!e.relatedTarget && e.clientY <= 0) abrir();
-      });
-
-      // Mobile: intercepta o botão "voltar"
-      if (window.history && history.pushState) {
-        history.pushState(null, document.title, location.href);
-        window.addEventListener('popstate', function () {
-          if (!jaMostrado()) {
-            history.pushState(null, document.title, location.href);
-            abrir();
-          }
-        });
-      }
+      var floatCta = document.getElementById('floatCta'); if (!floatCta) return;
+      var watched = Array.prototype.slice.call(document.querySelectorAll('[data-checkout]')).filter(function (el) { return !floatCta.contains(el); });
+      var visible = new Set();
+      function update() { if (visible.size === 0 && window.scrollY > 450) floatCta.classList.add('show'); else floatCta.classList.remove('show'); }
+      if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting) visible.add(e.target); else visible.delete(e.target); }); update(); }, { threshold: 0.2 }); watched.forEach(function (el) { io.observe(el); }); }
+      window.addEventListener('scroll', update, { passive: true }); update();
     })();
   </script>
 </body>
