@@ -38,11 +38,12 @@
       radial-gradient(1px 1px at 70% 20%, rgba(236,230,216,.4), transparent),
       radial-gradient(1px 1px at 85% 60%, rgba(236,230,216,.3), transparent),
       radial-gradient(1px 1px at 40% 80%, rgba(236,230,216,.35), transparent); }
-    .stick { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; }
-    @media (min-width: 640px) { .stick { display: none; } }
+    .floatcta { position: fixed; left: 0; right: 0; bottom: 16px; z-index: 60; display: flex; justify-content: center; padding: 0 16px; pointer-events: none; opacity: 0; transform: translateY(18px); transition: opacity .35s ease, transform .35s ease; }
+    .floatcta.show { opacity: 1; transform: translateY(0); }
+    .floatcta a { pointer-events: auto; }
   </style>
 </head>
-<body class="font-sans antialiased pb-20 sm:pb-0">
+<body class="font-sans antialiased">
 
   <!-- HERO -->
   <header class="relative overflow-hidden bg-night bg-stars">
@@ -269,9 +270,9 @@
     </div>
   </footer>
 
-  <!-- STICKY MOBILE CTA -->
-  <div class="stick bg-night-panel/95 border-t border-night-line px-4 py-3 backdrop-blur">
-    <a href="#" data-checkout class="flex items-center justify-center gap-2 w-full bg-gold text-night font-semibold py-3 rounded-full">Begin tonight — <span data-price-new>$27</span></a>
+  <!-- FLOATING CTA — appears while scrolling only when no other button is on screen -->
+  <div id="floatCta" class="floatcta">
+    <a href="#offer" data-checkout class="inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold-dark text-night font-semibold px-9 py-3.5 rounded-full" style="box-shadow:0 12px 32px rgba(0,0,0,.55), 0 0 30px rgba(216,179,106,.25);">Begin tonight — <span data-price-new>$33.90</span> →</a>
   </div>
 
   <script>
@@ -302,6 +303,27 @@
         navigator.sendBeacon('/api/track?type=visit&p=' + encodeURIComponent(location.pathname) + '&v=' + encodeURIComponent(VIDEO_TAG));
       }
     } catch (e) {}
+
+    // Botao flutuante: aparece so quando NENHUM outro botao esta visivel na tela
+    (function () {
+      var floatCta = document.getElementById('floatCta');
+      if (!floatCta) return;
+      var watched = Array.prototype.slice.call(document.querySelectorAll('[data-checkout]')).filter(function (el) { return !floatCta.contains(el); });
+      var visible = new Set();
+      function update() {
+        if (visible.size === 0 && window.scrollY > 450) floatCta.classList.add('show');
+        else floatCta.classList.remove('show');
+      }
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) visible.add(e.target); else visible.delete(e.target); });
+          update();
+        }, { threshold: 0.2 });
+        watched.forEach(function (el) { io.observe(el); });
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    })();
   </script>
 </body>
 </html>
