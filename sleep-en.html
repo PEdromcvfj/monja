@@ -220,13 +220,17 @@
     /* ===========================================================
        CONFIG — EDIT HERE
        =========================================================== */
-    const CHECKOUT_URL = "REPLACE_WITH_YOUR_CHECKOUT_LINK";
-    const PRICE_NEW = "$27";
+    const CHECKOUT_URL = "https://buy.stripe.com/aFabIT1Pwc7A2nSbUq4gg0m"; // mesmo link da pagina EN atual
+    const PRICE_NEW = "$ 33.90";
     const VIDEO_TAG = "sleep-en";
     /* =========================================================== */
 
+    var finalUrl = CHECKOUT_URL;
+    if (finalUrl.indexOf('stripe.com') > -1) {
+      finalUrl += (finalUrl.indexOf('?') > -1 ? '&' : '?') + 'client_reference_id=' + encodeURIComponent(VIDEO_TAG);
+    }
     document.querySelectorAll('[data-checkout]').forEach(function (el) {
-      if (CHECKOUT_URL.indexOf('REPLACE') === -1) el.setAttribute('href', CHECKOUT_URL);
+      el.setAttribute('href', finalUrl);
       el.setAttribute('rel', 'noopener');
       el.addEventListener('click', function () {
         try { navigator.sendBeacon('/api/track?type=checkout&p=' + encodeURIComponent(location.pathname) + '&v=' + encodeURIComponent(VIDEO_TAG)); } catch (e) {}
