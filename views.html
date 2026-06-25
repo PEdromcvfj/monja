@@ -19,40 +19,44 @@
     *{box-sizing:border-box}
     body{margin:0;background:radial-gradient(1200px 600px at 80% -10%,#1a2030 0%,var(--bg) 55%);
          color:var(--txt);font-family:Inter,system-ui,sans-serif;min-height:100vh}
-    .wrap{max-width:1100px;margin:0 auto;padding:22px 18px 60px}
-    header.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+    .wrap{max-width:1000px;margin:0 auto;padding:22px 18px 60px}
+    header.top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:14px;flex-wrap:wrap}
     .brand h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.9rem;margin:0}
     .brand p{margin:2px 0 0;color:var(--mut);font-size:.82rem}
     .controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-    select,button{font-family:inherit;font-size:.85rem;color:var(--txt);background:var(--card);
-      border:1px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer}
+    select,button,input{font-family:inherit;font-size:.85rem;color:var(--txt);background:var(--card);
+      border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+    select,button{cursor:pointer}
     button:hover,select:hover{border-color:#3a4256}
-    .totals{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:8px}
-    .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+    #custom{display:none;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 6px}
+    #custom.show{display:flex}
+    #custom input[type=date]{color-scheme:dark}
+    .totals{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0 6px}
+    .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+    .kpi.money{border-color:#3a4a36;background:linear-gradient(180deg,#16241b,#161a23)}
     .kpi .lab{color:var(--mut);font-size:.74rem;text-transform:uppercase;letter-spacing:.5px}
-    .kpi .val{font-size:1.5rem;font-weight:800;margin-top:4px}
-    .sec-title{display:flex;align-items:center;gap:10px;margin:26px 2px 12px;font-weight:700;font-size:1.1rem}
-    .sec-title .tag{font-size:.72rem;color:var(--mut);font-weight:600;background:var(--card);
-      border:1px solid var(--line);padding:3px 9px;border-radius:999px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px}
+    .kpi .val{font-size:1.9rem;font-weight:800;margin-top:4px}
+    .kpi.money .val{color:var(--green)}
+    .periodlab{color:var(--mut);font-size:.78rem;margin:2px 2px 14px}
+    .grid{display:grid;grid-template-columns:1fr;gap:12px}
     .pcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
-    .pcard .ph{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
-    .pcard .pn{font-weight:700;font-size:1.02rem}
-    .pcard .lang{font-size:.68rem;font-weight:700;color:#0d0f14;background:var(--gold);
+    .pcard .ph{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .pcard .pn{font-weight:700;font-size:1.05rem}
+    .pcard .lang{font-size:.66rem;font-weight:700;color:#0d0f14;background:var(--gold);
       padding:2px 7px;border-radius:6px;margin-left:7px}
+    .pcard .persona{font-size:.7rem;color:var(--mut);margin-left:6px}
     .pcard .fans{color:var(--mut);font-size:.78rem}
-    .stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:8px 0}
-    .stats .s{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;text-align:center}
-    .stats .s .l{color:var(--mut);font-size:.66rem;text-transform:uppercase}
-    .stats .s .v{font-weight:700;font-size:1.02rem;margin-top:2px}
-    .stats .s.hi .v{color:var(--green)}
-    .top{font-size:.8rem;color:var(--mut);margin-top:6px}
-    .top a{color:var(--blue);text-decoration:none}
-    .top a:hover{text-decoration:underline}
-    .err{color:var(--red);font-size:.78rem;margin-top:6px}
-    .muted{color:var(--mut)}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;flex-wrap:wrap}
+    .metric .l{color:var(--mut);font-size:.68rem;text-transform:uppercase}
+    .metric .v{font-weight:800;font-size:1.5rem;margin-top:1px}
+    .metric .v.green{color:var(--green)}
+    .rpm{display:flex;align-items:center;gap:6px}
+    .rpm label{color:var(--mut);font-size:.72rem}
+    .rpm input{width:78px;text-align:right;padding:6px 8px}
+    .reelcount{color:var(--mut);font-size:.74rem;margin-top:8px}
+    .err{color:var(--red);font-size:.8rem;margin-top:6px}
     .loading{text-align:center;color:var(--mut);padding:60px 0}
-    .bar{height:5px;border-radius:3px;background:linear-gradient(90deg,var(--gold),var(--pink));margin-top:8px;opacity:.85}
+    .note{color:var(--mut);font-size:.72rem;margin-top:18px;line-height:1.5;border-top:1px solid var(--line);padding-top:12px}
   </style>
 </head>
 <body>
@@ -64,16 +68,32 @@
       </div>
       <div class="controls">
         <select id="win">
-          <option value="total">Views totais</option>
-          <option value="v7">Últimos 7 dias</option>
-          <option value="v30">Últimos 30 dias</option>
+          <option value="yesterday">Ontem</option>
+          <option value="7">Últimos 7 dias</option>
+          <option value="30">Últimos 30 dias</option>
+          <option value="total" selected>Total</option>
+          <option value="custom">Personalizado…</option>
         </select>
         <button id="reload">↻ Atualizar</button>
       </div>
     </header>
 
+    <div id="custom">
+      <span style="color:var(--mut);font-size:.8rem">De</span>
+      <input type="date" id="d1" />
+      <span style="color:var(--mut);font-size:.8rem">até</span>
+      <input type="date" id="d2" />
+      <button id="apply">Aplicar</button>
+    </div>
+
     <div class="totals" id="kpis"></div>
-    <div id="content"><div class="loading">Puxando as views das páginas… isso pode levar alguns segundos.</div></div>
+    <div class="periodlab" id="plab"></div>
+    <div id="content"><div class="loading">Puxando as views… alguns segundos.</div></div>
+
+    <div class="note">
+      💡 As views por período contam os <b>reels publicados</b> naquele intervalo (o Facebook não expõe "views por dia" na API).
+      O <b>valor de monetização é estimado</b>: views ÷ 1000 × RPM. Informe o <b>RPM real de cada página</b> (do seu painel de monetização) nos campos acima — fica salvo no navegador.
+    </div>
   </div>
 
   <script>
@@ -81,80 +101,103 @@
     if (!KEY) { KEY = prompt('Senha do painel:') || ''; }
     if (KEY) sessionStorage.setItem('pk', KEY);
     var DATA = null;
+    var OFF = 3*3600; // BR UTC-3
+    var DEFAULT_RPM = 0.06;
 
-    function nf(n){ return (n||0).toLocaleString('pt-BR'); }
-    function compact(n){
-      n = n||0;
-      if (n >= 1e6) return (n/1e6).toFixed(n>=1e7?0:1).replace('.',',')+' mi';
-      if (n >= 1e3) return (n/1e3).toFixed(0)+'k';
-      return ''+n;
+    function nf(n){ return Math.round(n||0).toLocaleString('pt-BR'); }
+    function compact(n){ n=n||0;
+      if (n>=1e6) return (n/1e6).toFixed(n>=1e7?1:2).replace('.',',')+' mi';
+      if (n>=1e3) return (n/1e3).toFixed(1).replace('.',',')+'k';
+      return ''+Math.round(n);
     }
-    function field(){ return document.getElementById('win').value; }
+    function money(n){ return '$ ' + (n||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+    function rpmOf(id){ var v=parseFloat(localStorage.getItem('rpm_'+id)); return isNaN(v)?DEFAULT_RPM:v; }
+    function setRpm(id,v){ localStorage.setItem('rpm_'+id, v); }
+
+    // ---- janelas de tempo (BR) ----
+    function brTodayStart(){ var now=Math.floor(Date.now()/1000); return Math.floor((now-OFF)/86400)*86400 + OFF; }
+    function dateToUnix(str){ // 'yyyy-mm-dd' -> BR midnight unix
+      var p=str.split('-'); return Math.floor(Date.UTC(+p[0],+p[1]-1,+p[2])/1000) + OFF;
+    }
+    function windowFor(mode){
+      var todayStart=brTodayStart(), now=Math.floor(Date.now()/1000);
+      if (mode==='yesterday') return [todayStart-86400, todayStart, 'Ontem'];
+      if (mode==='7') return [now-7*86400, now+60, 'Últimos 7 dias'];
+      if (mode==='30') return [now-30*86400, now+60, 'Últimos 30 dias'];
+      if (mode==='custom'){
+        var d1=document.getElementById('d1').value, d2=document.getElementById('d2').value;
+        if(!d1||!d2) return null;
+        return [dateToUnix(d1), dateToUnix(d2)+86400, 'De '+d1.split('-').reverse().join('/')+' até '+d2.split('-').reverse().join('/')];
+      }
+      return [0, now+60, 'Total (todos os reels)'];
+    }
+
+    function sumPage(p, since, until){
+      var views=0, count=0;
+      for (var i=0;i<p.reels.length;i++){ var r=p.reels[i]; if(r.t>=since && r.t<until){ views+=r.v; count++; } }
+      return { views:views, count:count };
+    }
 
     function render(){
-      if (!DATA) return;
-      var f = field();
-      var pages = DATA.pages.slice().sort(function(a,b){ return (b[f]||0)-(a[f]||0); });
+      if(!DATA) return;
+      var w = windowFor(document.getElementById('win').value);
+      if(!w){ document.getElementById('plab').textContent='Escolha as duas datas e clique Aplicar.'; return; }
+      var since=w[0], until=w[1];
+      document.getElementById('plab').textContent = '📅 ' + w[2];
 
-      // KPIs gerais
-      var tot=0, t7=0, t30=0, fans=0;
-      pages.forEach(function(p){ tot+=p.total; t7+=p.v7; t30+=p.v30; fans+=p.fans; });
-      document.getElementById('kpis').innerHTML =
-        kpi('Views totais', compact(tot)) +
-        kpi('Views 7 dias', compact(t7)) +
-        kpi('Views 30 dias', compact(t30)) +
-        kpi('Seguidores', compact(fans));
-
-      // Agrupar por persona
-      var groups = { 'Monja':[], 'Monge':[], 'Outros':[] };
-      pages.forEach(function(p){ (groups[p.persona]||groups['Outros']).push(p); });
-
-      var html = '';
-      ['Monja','Monge','Outros'].forEach(function(g){
-        var arr = groups[g]; if (!arr || !arr.length) return;
-        var gtot = arr.reduce(function(s,p){ return s+(p[f]||0); },0);
-        html += '<div class="sec-title">'+g+' <span class="tag">'+arr.length+' páginas · '+compact(gtot)+' views</span></div>';
-        html += '<div class="grid">';
-        arr.forEach(function(p){ html += card(p,f); });
-        html += '</div>';
+      var totViews=0, totMoney=0;
+      var html='<div class="grid">';
+      DATA.pages.forEach(function(p){
+        var s = sumPage(p, since, until);
+        var rpm = rpmOf(p.id);
+        var val = s.views/1000*rpm;
+        totViews += s.views; totMoney += val;
+        var lang = p.lang ? '<span class="lang">'+p.lang+'</span>' : '';
+        html += '<div class="pcard">'
+          + '<div class="ph"><div class="pn">'+(p.label||p.name)+lang+'<span class="persona">'+p.persona+'</span></div>'
+          + '<div class="fans">'+nf(p.fans)+' seg.</div></div>'
+          + '<div class="row">'
+          +   '<div class="metric"><div class="l">Views ('+w[2]+')</div><div class="v">'+compact(s.views)+'</div></div>'
+          +   '<div class="metric"><div class="l">Monetização estimada</div><div class="v green">'+money(val)+'</div></div>'
+          +   '<div class="rpm"><label>RPM $</label><input type="number" step="0.01" min="0" value="'+rpm+'" data-id="'+p.id+'" /></div>'
+          + '</div>'
+          + '<div class="reelcount">'+s.count+' reels no período · '+nf(p.fans)+' seguidores · total geral '+compact(p.total)+' views</div>'
+          + (p.err?'<div class="err">⚠ '+p.err+'</div>':'')
+          + '</div>';
       });
+      html += '</div>';
+
+      document.getElementById('kpis').innerHTML =
+        '<div class="kpi"><div class="lab">Views totais ('+w[2]+')</div><div class="val">'+compact(totViews)+'</div></div>'
+        + '<div class="kpi money"><div class="lab">Monetização estimada (somada)</div><div class="val">'+money(totMoney)+'</div></div>';
+
       document.getElementById('content').innerHTML = html;
 
-      var d = new Date(DATA.updatedAt*1000);
-      document.getElementById('sub').textContent = 'Atualizado ' + d.toLocaleString('pt-BR') + ' · ' + pages.length + ' páginas';
-    }
+      // ligar inputs de RPM
+      document.querySelectorAll('.rpm input').forEach(function(inp){
+        inp.addEventListener('change', function(){
+          var v=parseFloat(this.value); if(isNaN(v)||v<0) v=0;
+          setRpm(this.getAttribute('data-id'), v); render();
+        });
+      });
 
-    function kpi(l,v){ return '<div class="kpi"><div class="lab">'+l+'</div><div class="val">'+v+'</div></div>'; }
-
-    function card(p,f){
-      var lang = p.lang ? '<span class="lang">'+p.lang+'</span>' : '';
-      var top = p.top ? '<div class="top">🏆 Maior reel: <a href="https://facebook.com'+(p.top.url||'')+'" target="_blank">'+nf(p.top.views)+' views</a></div>' : '';
-      var err = p.err ? '<div class="err">⚠ '+p.err+'</div>' : '';
-      var hi = f;
-      return '<div class="pcard">'
-        + '<div class="ph"><div class="pn">'+p.name+lang+'</div><div class="fans">'+nf(p.fans)+' seg.</div></div>'
-        + '<div class="stats">'
-        +   '<div class="s'+(hi==='total'?' hi':'')+'"><div class="l">Total</div><div class="v">'+compact(p.total)+'</div></div>'
-        +   '<div class="s'+(hi==='v7'?' hi':'')+'"><div class="l">7 dias</div><div class="v">'+compact(p.v7)+'</div></div>'
-        +   '<div class="s'+(hi==='v30'?' hi':'')+'"><div class="l">30 dias</div><div class="v">'+compact(p.v30)+'</div></div>'
-        + '</div>'
-        + '<div class="muted" style="font-size:.76rem">'+nf(p.reels)+' reels analisados</div>'
-        + top + err
-        + '</div>';
+      var d=new Date(DATA.updatedAt*1000);
+      document.getElementById('sub').textContent='Dados de '+d.toLocaleString('pt-BR')+' · '+DATA.pages.length+' páginas';
     }
 
     function load(){
-      document.getElementById('content').innerHTML = '<div class="loading">Puxando as views das páginas… isso pode levar alguns segundos.</div>';
-      fetch('/api/fb-views?key=' + encodeURIComponent(KEY))
+      document.getElementById('content').innerHTML='<div class="loading">Puxando as views… alguns segundos.</div>';
+      fetch('/api/fb-views?key='+encodeURIComponent(KEY))
         .then(function(r){ if(r.status===401){ sessionStorage.removeItem('pk'); throw new Error('Senha incorreta'); } return r.json(); })
-        .then(function(j){
-          if (j.error){ document.getElementById('content').innerHTML = '<div class="err" style="padding:20px">Erro: '+j.error+'</div>'; return; }
-          DATA = j; render();
-        })
-        .catch(function(e){ document.getElementById('content').innerHTML = '<div class="err" style="padding:20px">'+e.message+'</div>'; });
+        .then(function(j){ if(j.error){ document.getElementById('content').innerHTML='<div class="err" style="padding:20px">Erro: '+j.error+'</div>'; return; } DATA=j; render(); })
+        .catch(function(e){ document.getElementById('content').innerHTML='<div class="err" style="padding:20px">'+e.message+'</div>'; });
     }
 
-    document.getElementById('win').addEventListener('change', render);
+    document.getElementById('win').addEventListener('change', function(){
+      document.getElementById('custom').classList.toggle('show', this.value==='custom');
+      render();
+    });
+    document.getElementById('apply').addEventListener('click', render);
     document.getElementById('reload').addEventListener('click', load);
     load();
   </script>
