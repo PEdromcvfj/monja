@@ -27,7 +27,6 @@
 
     { "source": "/obrigado", "destination": "/obrigado.html" },
     { "source": "/painel", "destination": "/painel.html" },
-    { "source": "/views", "destination": "/views.html" },
     { "source": "/renova", "destination": "/renova-memorias.html" }
   ]
 }
