@@ -298,7 +298,7 @@
             <li class="flex gap-2"><span class="text-gold-light">✓</span> Entrega em alta resolução</li>
             <li class="flex gap-2"><span class="text-gold-light">✓</span> Prazo de 3 a 5 dias</li>
           </ul>
-          <a href="#" data-checkout class="mt-7 block text-center rounded-full bg-cream text-ink font-semibold px-6 py-3.5 hover:bg-gold-light transition">
+          <a href="https://pay.disruptybr.app/c/lIWU?of=NEd" class="mt-7 block text-center rounded-full bg-cream text-ink font-semibold px-6 py-3.5 hover:bg-gold-light transition">
             Pagar com PIX
           </a>
         </div>
@@ -318,7 +318,7 @@
             <li class="flex gap-2"><span>✓</span> Prioridade na fila</li>
             <li class="flex gap-2"><span>✓</span> Entrega em alta resolução</li>
           </ul>
-          <a href="#" data-checkout class="mt-7 block text-center rounded-full bg-ink text-cream font-semibold px-6 py-3.5 hover:bg-ink-soft transition">
+          <a href="https://pay.disruptybr.app/c/lIWU?of=MpG" class="mt-7 block text-center rounded-full bg-ink text-cream font-semibold px-6 py-3.5 hover:bg-ink-soft transition">
             Pagar com PIX
           </a>
         </div>
@@ -467,14 +467,7 @@
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
 
-    // Checkout (plugue seu link de PIX aqui)
-    var CHECKOUT_URL = ''; // ex.: 'https://seucheckout-pix.com/...'
-    document.querySelectorAll('[data-checkout]').forEach(function (btn) {
-      btn.addEventListener('click', function (ev) {
-        if (CHECKOUT_URL) { ev.preventDefault(); window.location.href = CHECKOUT_URL; }
-        else { ev.preventDefault(); alert('Configure o link de checkout PIX na variável CHECKOUT_URL (no final do arquivo).'); }
-      });
-    });
+    // Checkout: botoes "Pagar com PIX" levam direto aos links da Disrupty (no href).
   </script>
 </body>
 </html>
