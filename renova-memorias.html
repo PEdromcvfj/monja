@@ -554,10 +554,7 @@
 
       document.querySelectorAll('.open-upload').forEach(function (b) {
         b.addEventListener('click', function () {
-          var checkout = b.dataset.checkout;
-          // Fallback: sem Cloudinary configurado, vai direto pro checkout (não quebra).
-          if (!configured) { window.location.href = checkout; return; }
-          openModal(b.dataset.offer, parseInt(b.dataset.max, 10) || 1, checkout);
+          openModal(b.dataset.offer, parseInt(b.dataset.max, 10) || 1, b.dataset.checkout);
         });
       });
       document.querySelectorAll('[data-close-modal]').forEach(function (x) { x.addEventListener('click', closeModal); });
@@ -590,6 +587,13 @@
         if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { showErr('Digite um e-mail válido.'); return; }
         submitBtn.disabled = true;
         var orderId = 'rm' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+        function goCheckout() {
+          submitBtn.textContent = 'Redirecionando...';
+          var url = cfg.checkout + (cfg.checkout.indexOf('?') > -1 ? '&' : '?') + 'utm_content=' + encodeURIComponent(orderId);
+          window.location.href = url;
+        }
+        // Cloudinary ainda não configurado: segue pro checkout (upload real ativa depois).
+        if (!configured) { goCheckout(); return; }
         var chain = Promise.resolve();
         chosen.forEach(function (file, i) {
           chain = chain.then(function () {
@@ -598,9 +602,7 @@
           });
         });
         chain.then(function () {
-          submitBtn.textContent = 'Redirecionando...';
-          var url = cfg.checkout + (cfg.checkout.indexOf('?') > -1 ? '&' : '?') + 'utm_content=' + encodeURIComponent(orderId);
-          window.location.href = url;
+          goCheckout();
         }).catch(function () {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Continuar para o pagamento →';
