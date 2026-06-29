@@ -1,5 +1,6 @@
 {
   "rewrites": [
+    { "source": "/", "has": [{ "type": "host", "value": "renova.seuguiadoc.com" }], "destination": "/renova-memorias.html" },
     { "source": "/en", "destination": "/index-en.html" },
     { "source": "/es", "destination": "/index-es.html" },
     { "source": "/fr", "destination": "/index-fr.html" },
