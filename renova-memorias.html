@@ -11,13 +11,15 @@
   <meta name="author" content="Renova Memórias" />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#1C1714" />
+  <link rel="icon" type="image/jpeg" href="logo.jpg" />
+  <link rel="apple-touch-icon" href="logo.jpg" />
 
   <!-- ===================== Open Graph ===================== -->
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:title" content="Renova Memórias — restaure e colorize suas fotos antigas" />
   <meta property="og:description" content="Restauramos rasgos, manchas e desbotamento e colorizamos fotos P&B. Suas memórias de volta à vida." />
-  <meta property="og:image" content="https://placehold.co/1200x630/1C1714/E7C77B?text=Renova+Mem%C3%B3rias" />
+  <meta property="og:image" content="https://monja-iota.vercel.app/logo.jpg" />
 
   <!-- ===================== Fontes ===================== -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -48,6 +50,9 @@
   <style>
     html { scroll-behavior: smooth; }
     body { background-color: #FAF6EF; color: #1C1714; }
+    /* Emblema da logo (recorta so o circulo do arquivo logo.jpg) */
+    .emblem { position: relative; width: 2.25rem; height: 2.25rem; border-radius: 9999px; overflow: hidden; display: block; flex: none; background: #FAF6EF; }
+    .emblem img { position: absolute; left: 50%; top: 50%; width: 181%; height: auto; max-width: none; transform: translate(-50%, -44.8%); }
     .text-balance { text-wrap: balance; }
 
     /* FAQ */
@@ -98,7 +103,7 @@
   <header class="sticky top-0 z-40 bg-cream/85 backdrop-blur border-b border-ink/5">
     <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
       <a href="#topo" class="flex items-center gap-2.5">
-        <span class="grid place-items-center w-9 h-9 rounded-full bg-ink text-gold-light font-serif text-lg">R</span>
+        <span class="emblem"><img src="logo.jpg" alt="Renova Memórias" /></span>
         <span class="font-serif text-xl tracking-tight">Renova <span class="text-gold-dark">Memórias</span></span>
       </a>
       <nav class="hidden md:flex items-center gap-7 text-sm text-ink-mute">
@@ -408,7 +413,7 @@
     <div class="max-w-6xl mx-auto px-5 py-12 grid md:grid-cols-3 gap-8">
       <div>
         <div class="flex items-center gap-2.5">
-          <span class="grid place-items-center w-9 h-9 rounded-full bg-cream text-ink font-serif text-lg">R</span>
+          <span class="emblem"><img src="logo.jpg" alt="Renova Memórias" /></span>
           <span class="font-serif text-xl text-cream">Renova Memórias</span>
         </div>
         <p class="text-sm mt-4 leading-relaxed">Especialistas em restauração de fotos antigas e históricas. Suas memórias de volta à vida, com cuidado e dedicação.</p>
