@@ -298,9 +298,10 @@
             <li class="flex gap-2"><span class="text-gold-light">✓</span> Entrega em alta resolução</li>
             <li class="flex gap-2"><span class="text-gold-light">✓</span> Prazo de 3 a 5 dias</li>
           </ul>
-          <a href="https://pay.disruptybr.app/c/lIWU?of=NEd" class="mt-7 block text-center rounded-full bg-cream text-ink font-semibold px-6 py-3.5 hover:bg-gold-light transition">
-            Pagar com PIX
-          </a>
+          <button type="button" class="open-upload mt-7 block w-full text-center rounded-full bg-cream text-ink font-semibold px-6 py-3.5 hover:bg-gold-light transition"
+            data-offer="1 Foto" data-max="1" data-checkout="https://pay.disruptybr.app/c/lIWU?of=NEd">
+            Enviar foto e pagar
+          </button>
         </div>
 
         <!-- Plano 2 destaque -->
@@ -318,9 +319,10 @@
             <li class="flex gap-2"><span>✓</span> Prioridade na fila</li>
             <li class="flex gap-2"><span>✓</span> Entrega em alta resolução</li>
           </ul>
-          <a href="https://pay.disruptybr.app/c/lIWU?of=MpG" class="mt-7 block text-center rounded-full bg-ink text-cream font-semibold px-6 py-3.5 hover:bg-ink-soft transition">
-            Pagar com PIX
-          </a>
+          <button type="button" class="open-upload mt-7 block w-full text-center rounded-full bg-ink text-cream font-semibold px-6 py-3.5 hover:bg-ink-soft transition"
+            data-offer="Combo 3 Fotos" data-max="3" data-checkout="https://pay.disruptybr.app/c/lIWU?of=MpG">
+            Enviar fotos e pagar
+          </button>
         </div>
       </div>
       <p class="text-center text-xs text-cream/40 mt-8">🔒 Pagamento 100% seguro via PIX • Garantia de satisfação</p>
@@ -444,6 +446,54 @@
     </div>
   </footer>
 
+  <!-- ===================== MODAL DE UPLOAD ===================== -->
+  <div id="upload-modal" class="fixed inset-0 z-[60] hidden items-center justify-center p-4" aria-modal="true" role="dialog">
+    <div class="absolute inset-0 bg-ink/70 backdrop-blur-sm" data-close-modal></div>
+    <div class="relative bg-cream rounded-2xl shadow-soft w-full max-w-md max-h-[92vh] overflow-y-auto p-6 sm:p-7">
+      <button type="button" data-close-modal aria-label="Fechar" class="absolute top-3 right-3 w-9 h-9 grid place-items-center rounded-full hover:bg-ink/10 text-ink-mute text-2xl leading-none">×</button>
+
+      <div class="flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-gold-dark">
+        <span class="grid place-items-center w-6 h-6 rounded-full bg-gold-light/40">1</span> Envie sua foto
+        <span class="text-ink/20">→</span>
+        <span class="grid place-items-center w-6 h-6 rounded-full bg-ink/10 text-ink-mute">2</span> Pagamento
+      </div>
+
+      <h3 class="font-serif text-2xl text-ink mt-3" id="um-title">Envie sua foto</h3>
+      <p class="text-sm text-ink-mute mt-1" id="um-sub">Faça o upload da foto que deseja restaurar. O pagamento é a próxima etapa.</p>
+
+      <form id="um-form" class="mt-5 space-y-4">
+        <label id="um-drop" class="flex flex-col items-center justify-center gap-1.5 border-2 border-dashed border-gold/50 rounded-xl bg-white/60 px-4 py-7 cursor-pointer hover:border-gold transition text-center">
+          <span class="text-3xl">📷</span>
+          <span class="text-sm font-medium text-ink">Toque para escolher <span id="um-filehint">a foto</span></span>
+          <span class="text-xs text-ink-mute">JPG ou PNG · até 10MB cada</span>
+          <input id="um-files" type="file" accept="image/*" class="hidden" />
+        </label>
+        <div id="um-list" class="space-y-1 text-sm text-ink-soft"></div>
+
+        <div>
+          <label class="block text-sm font-medium text-ink mb-1">Seu e-mail <span class="text-red-600">*</span></label>
+          <input id="um-email" type="email" required placeholder="voce@email.com" class="w-full rounded-lg border border-ink/15 bg-white px-3 py-2.5 text-ink outline-none focus:border-gold" />
+          <p class="text-xs text-ink-mute mt-1">É para onde enviaremos sua foto restaurada. Use o mesmo no pagamento.</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-ink mb-1">WhatsApp (opcional)</label>
+          <input id="um-whats" type="tel" placeholder="(00) 00000-0000" class="w-full rounded-lg border border-ink/15 bg-white px-3 py-2.5 text-ink outline-none focus:border-gold" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-ink mb-1">Observações (opcional)</label>
+          <textarea id="um-notes" rows="2" placeholder="Ex: quero colorida, focar no rosto..." class="w-full rounded-lg border border-ink/15 bg-white px-3 py-2.5 text-ink outline-none focus:border-gold resize-none"></textarea>
+        </div>
+
+        <p id="um-error" class="text-sm text-red-600 hidden"></p>
+
+        <button type="submit" id="um-submit" class="w-full rounded-full bg-ink text-cream font-semibold px-6 py-3.5 hover:bg-ink-soft transition disabled:opacity-60">
+          Continuar para o pagamento →
+        </button>
+        <p class="text-center text-xs text-ink-mute">🔒 Sua foto fica segura. Pagamento via PIX na próxima etapa.</p>
+      </form>
+    </div>
+  </div>
+
   <!-- ===================== SCRIPTS ===================== -->
   <script>
     // Slider antes/depois
@@ -467,7 +517,97 @@
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
 
-    // Checkout: botoes "Pagar com PIX" levam direto aos links da Disrupty (no href).
+    // ===== Etapa de upload (Cloudinary) antes do checkout =====
+    (function () {
+      // >>> PREENCHA com os 2 valores do seu Cloudinary (instruções com a IA):
+      var CLOUD_NAME = 'SEU_CLOUD_NAME';
+      var UPLOAD_PRESET = 'SEU_UPLOAD_PRESET';
+
+      var modal = document.getElementById('upload-modal');
+      var form = document.getElementById('um-form');
+      var filesInput = document.getElementById('um-files');
+      var listEl = document.getElementById('um-list');
+      var errEl = document.getElementById('um-error');
+      var submitBtn = document.getElementById('um-submit');
+      var titleEl = document.getElementById('um-title');
+      var fileHint = document.getElementById('um-filehint');
+      var cfg = { checkout: '', max: 1, offer: '' };
+      var chosen = [];
+      var configured = CLOUD_NAME !== 'SEU_CLOUD_NAME' && UPLOAD_PRESET !== 'SEU_UPLOAD_PRESET';
+
+      function openModal(offer, max, checkout) {
+        cfg = { offer: offer, max: max, checkout: checkout };
+        chosen = []; filesInput.value = ''; listEl.innerHTML = '';
+        errEl.classList.add('hidden');
+        filesInput.multiple = max > 1;
+        titleEl.textContent = max > 1 ? ('Envie suas fotos (até ' + max + ')') : 'Envie sua foto';
+        fileHint.textContent = max > 1 ? ('as fotos (até ' + max + ')') : 'a foto';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Continuar para o pagamento →';
+        modal.classList.remove('hidden'); modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal() {
+        modal.classList.add('hidden'); modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.open-upload').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var checkout = b.dataset.checkout;
+          // Fallback: sem Cloudinary configurado, vai direto pro checkout (não quebra).
+          if (!configured) { window.location.href = checkout; return; }
+          openModal(b.dataset.offer, parseInt(b.dataset.max, 10) || 1, checkout);
+        });
+      });
+      document.querySelectorAll('[data-close-modal]').forEach(function (x) { x.addEventListener('click', closeModal); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal(); });
+
+      filesInput.addEventListener('change', function () {
+        chosen = [].slice.call(filesInput.files).slice(0, cfg.max);
+        listEl.innerHTML = chosen.map(function (f) { return '✓ ' + f.name; }).join('<br>');
+        errEl.classList.add('hidden');
+      });
+
+      function showErr(m) { errEl.textContent = m; errEl.classList.remove('hidden'); }
+
+      function uploadOne(file, orderId, email, notes) {
+        var fd = new FormData();
+        fd.append('file', file);
+        fd.append('upload_preset', UPLOAD_PRESET);
+        fd.append('folder', 'renova');
+        fd.append('tags', 'renova,' + orderId);
+        fd.append('context', 'email=' + email + '|offer=' + cfg.offer + '|order=' + orderId + '|notes=' + (notes || '').slice(0, 120));
+        return fetch('https://api.cloudinary.com/v1_1/' + CLOUD_NAME + '/image/upload', { method: 'POST', body: fd })
+          .then(function (r) { if (!r.ok) throw new Error('upload'); return r.json(); });
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var email = document.getElementById('um-email').value.trim();
+        var notes = document.getElementById('um-notes').value.trim();
+        if (!chosen.length) { showErr('Escolha ' + (cfg.max > 1 ? 'pelo menos 1 foto' : 'sua foto') + '.'); return; }
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { showErr('Digite um e-mail válido.'); return; }
+        submitBtn.disabled = true;
+        var orderId = 'rm' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+        var chain = Promise.resolve();
+        chosen.forEach(function (file, i) {
+          chain = chain.then(function () {
+            submitBtn.textContent = 'Enviando foto ' + (i + 1) + '/' + chosen.length + '...';
+            return uploadOne(file, orderId, email, notes);
+          });
+        });
+        chain.then(function () {
+          submitBtn.textContent = 'Redirecionando...';
+          var url = cfg.checkout + (cfg.checkout.indexOf('?') > -1 ? '&' : '?') + 'utm_content=' + encodeURIComponent(orderId);
+          window.location.href = url;
+        }).catch(function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Continuar para o pagamento →';
+          showErr('Não foi possível enviar a foto. Verifique a conexão e tente de novo.');
+        });
+      });
+    })();
   </script>
 </body>
 </html>
