@@ -61,7 +61,7 @@ module.exports = async (req, res) => {
   const supaKey = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_KEY || '';
   if (supaUrl && supaKey) {
     try {
-      const r = await fetch(supaUrl.replace(/\/$/, '') + '/rest/v1/pedidos', {
+      const r = await fetch(supaUrl.replace(/\/$/, '') + '/rest/v1/renova_pedidos', {
         method: 'POST',
         headers: { apikey: supaKey, Authorization: 'Bearer ' + supaKey, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
         body: JSON.stringify({ order_id: row.order_id, offer: row.offer, notes: row.notes, photos: row.photos, status: row.status })
