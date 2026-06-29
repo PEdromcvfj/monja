@@ -471,15 +471,6 @@
         <div id="um-list" class="space-y-1 text-sm text-ink-soft"></div>
 
         <div>
-          <label class="block text-sm font-medium text-ink mb-1">Seu e-mail <span class="text-red-600">*</span></label>
-          <input id="um-email" type="email" required placeholder="voce@email.com" class="w-full rounded-lg border border-ink/15 bg-white px-3 py-2.5 text-ink outline-none focus:border-gold" />
-          <p class="text-xs text-ink-mute mt-1">É para onde enviaremos sua foto restaurada. Use o mesmo no pagamento.</p>
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-ink mb-1">WhatsApp (opcional)</label>
-          <input id="um-whats" type="tel" placeholder="(00) 00000-0000" class="w-full rounded-lg border border-ink/15 bg-white px-3 py-2.5 text-ink outline-none focus:border-gold" />
-        </div>
-        <div>
           <label class="block text-sm font-medium text-ink mb-1">Observações (opcional)</label>
           <textarea id="um-notes" rows="2" placeholder="Ex: quero colorida, focar no rosto..." class="w-full rounded-lg border border-ink/15 bg-white px-3 py-2.5 text-ink outline-none focus:border-gold resize-none"></textarea>
         </div>
@@ -568,13 +559,13 @@
 
       function showErr(m) { errEl.textContent = m; errEl.classList.remove('hidden'); }
 
-      function uploadOne(file, orderId, email, whats, notes) {
+      function uploadOne(file, orderId, notes) {
         var fd = new FormData();
         fd.append('file', file);
         fd.append('upload_preset', UPLOAD_PRESET);
         fd.append('folder', 'renova');
         fd.append('tags', 'renova,' + orderId);
-        fd.append('context', 'email=' + email + '|whatsapp=' + (whats || '') + '|offer=' + cfg.offer + '|order=' + orderId + '|notes=' + (notes || ''));
+        fd.append('context', 'offer=' + cfg.offer + '|order=' + orderId + '|notes=' + (notes || ''));
         return fetch('https://api.cloudinary.com/v1_1/' + CLOUD_NAME + '/image/upload', { method: 'POST', body: fd })
           .then(function (r) { if (!r.ok) throw new Error('upload'); return r.json(); });
       }
@@ -582,11 +573,8 @@
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var clean = function (s) { return (s || '').replace(/[|=]/g, ' ').replace(/\s+/g, ' ').trim(); };
-        var email = document.getElementById('um-email').value.trim();
-        var whats = clean(document.getElementById('um-whats').value);
-        var notes = clean(document.getElementById('um-notes').value).slice(0, 120);
+        var notes = clean(document.getElementById('um-notes').value).slice(0, 200);
         if (!chosen.length) { showErr('Escolha ' + (cfg.max > 1 ? 'pelo menos 1 foto' : 'sua foto') + '.'); return; }
-        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { showErr('Digite um e-mail válido.'); return; }
         submitBtn.disabled = true;
         var orderId = 'rm' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
         function goCheckout() {
@@ -596,14 +584,21 @@
         }
         // Cloudinary ainda não configurado: segue pro checkout (upload real ativa depois).
         if (!configured) { goCheckout(); return; }
+        var urls = [];
         var chain = Promise.resolve();
         chosen.forEach(function (file, i) {
           chain = chain.then(function () {
             submitBtn.textContent = 'Enviando foto ' + (i + 1) + '/' + chosen.length + '...';
-            return uploadOne(file, orderId, email, whats, notes);
+            return uploadOne(file, orderId, notes).then(function (j) { if (j && j.secure_url) urls.push(j.secure_url); });
           });
         });
         chain.then(function () {
+          submitBtn.textContent = 'Salvando...';
+          return fetch('/api/pedido', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ order: orderId, offer: cfg.offer, notes: notes, photos: urls })
+          }).catch(function () {});
+        }).then(function () {
           goCheckout();
         }).catch(function () {
           submitBtn.disabled = false;
