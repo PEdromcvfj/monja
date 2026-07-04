@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Rotina do dia</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0d0f14" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Rotina" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230d0f14'/%3E%3Cpath d='M28 52l14 14 30-32' stroke='%235fd29a' stroke-width='9' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <style>
+    :root{
+      --bg:#0d0f14; --card:#161a23; --card2:#1b2130; --line:#262c3a;
+      --txt:#eef1f7; --mut:#8b93a7; --green:#5fd29a; --gold:#d8a85a; --blue:#6aa3ff;
+    }
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    body{margin:0;background:var(--bg);color:var(--txt);
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sans-serif;
+      min-height:100vh;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+    .wrap{max-width:560px;margin:0 auto;padding:18px 16px 90px}
+    header{position:sticky;top:0;background:linear-gradient(180deg,var(--bg) 70%,transparent);
+      padding:12px 0 10px;z-index:5}
+    h1{font-size:1.5rem;margin:0 0 2px;font-weight:800}
+    .date{color:var(--mut);font-size:.82rem}
+    .prog{margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+    .prog .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+    .prog .count{font-weight:800;font-size:1.05rem}
+    .prog .count b{color:var(--green)}
+    .prog .pct{color:var(--mut);font-size:.82rem}
+    .bar{height:9px;background:#0d0f14;border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+    .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),#7ee3b0);
+      border-radius:6px;transition:width .35s ease}
+    .item{display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--line);
+      border-radius:14px;padding:15px 15px;margin-bottom:9px;cursor:pointer;user-select:none;
+      transition:background .15s,border-color .15s,opacity .15s}
+    .item:active{background:var(--card2)}
+    .item.done{opacity:.55;border-color:#2a4a3a}
+    .box{flex:0 0 26px;width:26px;height:26px;border-radius:8px;border:2px solid #3a4256;
+      display:flex;align-items:center;justify-content:center;transition:.15s}
+    .item.done .box{background:var(--green);border-color:var(--green)}
+    .box svg{width:16px;height:16px;opacity:0;transition:.15s}
+    .item.done .box svg{opacity:1}
+    .ico{flex:0 0 auto;font-size:1.25rem;width:26px;text-align:center}
+    .nm{flex:1;font-weight:600;font-size:1.02rem}
+    .item.done .nm{text-decoration:line-through;text-decoration-color:var(--mut)}
+    .num{font-size:.72rem;font-weight:700;color:var(--mut);background:var(--card2);
+      border:1px solid var(--line);width:22px;height:22px;border-radius:999px;
+      display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+    .footbtns{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+      background:linear-gradient(0deg,var(--bg) 70%,transparent);display:flex;gap:10px;max-width:560px;margin:0 auto}
+    button{flex:1;font-family:inherit;font-size:.92rem;font-weight:700;color:var(--txt);
+      background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;cursor:pointer}
+    button:active{background:var(--card2)}
+    button.done-all{color:#0d0f14;background:var(--green);border-color:var(--green)}
+    .cel{text-align:center;color:var(--green);font-weight:700;padding:10px;font-size:.95rem;display:none}
+    .cel.show{display:block}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>🌅 Rotina do dia</h1>
+      <div class="date" id="date"></div>
+      <div class="prog">
+        <div class="top">
+          <div class="count"><b id="cdone">0</b> / <span id="ctot">0</span> feitos</div>
+          <div class="pct" id="pct">0%</div>
+        </div>
+        <div class="bar"><i id="barfill"></i></div>
+        <div class="cel" id="cel">🎉 Dia completo! Missão cumprida.</div>
+      </div>
+    </header>
+    <div id="list"></div>
+  </div>
+  <div class="footbtns">
+    <button id="reset">↺ Zerar o dia</button>
+    <button id="markall" class="done-all">✓ Marcar tudo</button>
+  </div>
+
+  <script>
+    var ITEMS = [
+      {ico:'🙏', n:'Oração'},
+      {ico:'💪', n:'Flexão'},
+      {ico:'🙌', n:'Gratidão'},
+      {ico:'🛏️', n:'Arrumar'},
+      {ico:'🧼', n:'Higiene'},
+      {ico:'💧', n:'Água 5L'},
+      {ico:'💼', n:'Trabalhar'},
+      {ico:'🏃', n:'Correr'},
+      {ico:'🏋️', n:'Treinar'},
+      {ico:'📖', n:'Ler'}
+    ];
+    function today(){ var d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+    function prettyDate(){ try{ return new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'});}catch(e){return today();} }
+
+    var state = load();
+    function load(){
+      var raw = localStorage.getItem('rotinalist');
+      var s = raw ? JSON.parse(raw) : null;
+      if(!s || s.date !== today()){ s = { date: today(), checked: {} }; save(s); }
+      return s;
+    }
+    function save(s){ localStorage.setItem('rotinalist', JSON.stringify(s||state)); }
+
+    function total(){ return ITEMS.length; }
+    function doneCount(){ var c=0; for(var k in state.checked){ if(state.checked[k]) c++; } return c; }
+
+    function render(){
+      document.getElementById('date').textContent = prettyDate();
+      var html='';
+      ITEMS.forEach(function(it,i){
+        var k=''+i, done=!!state.checked[k];
+        html += '<div class="item'+(done?' done':'')+'" data-k="'+k+'">'
+              +   '<div class="num">'+(i+1)+'</div>'
+              +   '<div class="ico">'+it.ico+'</div>'
+              +   '<div class="box"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#0d0f14" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
+              +   '<div class="nm">'+it.n+'</div>'
+              + '</div>';
+      });
+      document.getElementById('list').innerHTML = html;
+      document.querySelectorAll('.item').forEach(function(el){
+        el.addEventListener('click', function(){ toggle(el.getAttribute('data-k')); });
+      });
+      updateProg();
+    }
+    function toggle(k){
+      state.checked[k] = !state.checked[k];
+      save();
+      var el=document.querySelector('[data-k="'+k+'"]');
+      if(el) el.classList.toggle('done', !!state.checked[k]);
+      updateProg();
+    }
+    function updateProg(){
+      var d=doneCount(), t=total(), p=t?Math.round(d/t*100):0;
+      document.getElementById('cdone').textContent=d;
+      document.getElementById('ctot').textContent=t;
+      document.getElementById('pct').textContent=p+'%';
+      document.getElementById('barfill').style.width=p+'%';
+      document.getElementById('cel').classList.toggle('show', d===t && t>0);
+    }
+    document.getElementById('reset').addEventListener('click', function(){
+      if(confirm('Zerar toda a rotina do dia?')){ state={date:today(),checked:{}}; save(); render(); }
+    });
+    document.getElementById('markall').addEventListener('click', function(){
+      ITEMS.forEach(function(it,i){ state.checked[''+i]=true; });
+      save(); render();
+    });
+    document.addEventListener('visibilitychange', function(){ if(!document.hidden){ state=load(); render(); } });
+    render();
+  </script>
+</body>
+</html>
